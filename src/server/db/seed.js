@@ -3,34 +3,52 @@ const { createUser } = require('./users');
 
 const users = [
   {
-    name: 'Emily',
+    userName: 'Xpre55 Ranger',
+    fName: 'Emily',
+    lName: 'Matherson',
+    isAdmin: false,
     email: 'Xpre55@aol.com',
     password: 'securepass',
   },
   {
-    name: 'Roger',
+    userName: 'React Ranger',
+    fName: 'Roger',
+    lName: 'Blackwood',
+    isAdmin: false,
     email: 'React23@yahoo.com',
-    password: 'strongpass',
+    password: 'securepass',
   },
   {
-    name: 'Patrick',
+    userName: 'HTML Ranger',
+    fName: 'Patrick',
+    lName: 'Whitestone',
+    isAdmin: false,
     email: 'HTML@gmail.com',
-    password: 'pass1234',
+    password: 'securepass',
   },
   {
-    name: 'Fred',
+    userName: 'xXnode_rangerXx.js',
+    fName: 'Fred',
+    lName: 'Ravenscroft',
+    isAdmin: false,
     email: 'xXnode_rangerXx@gmail.com',
-    password: 'mysecretpassword',
+    password: 'securepass',
   },
   {
-    name: 'admin',
-    email: 'admin123@gmail.com',
-    password: 'password123',
+    userName: '4dmin_ranger',
+    fName: 'admin',
+    lName: 'Greenfield',
+    isAdmin: true,
+    email: 'admin123@aol.com',
+    password: 'securepass',
   },
   {
-    name: 'Bobby',
+    userName: 'backend_ranger',
+    fName: 'Bobby',
+    lName: 'Goldwater',
+    isAdmin: false,
     email: 'backend_ranger@gmail.com',
-    password: 'password123',
+    password: 'securepass',
   },
   // Add more user objects as needed
 ];  
@@ -176,7 +194,7 @@ async function createInitialOrderItems() {
 const insertUsers = async () => {
   try {
     for (const user of users) {
-      await createUser({name: user.name, email: user.email, password: user.password});
+      await createUser({userName: user.userName, fname: user.fname, lName: user.lName, isAdmin: user.isAdmin, email: user.email, password: user.password});
     }
     console.log('Seed data inserted successfully.');
   } catch (error) {
