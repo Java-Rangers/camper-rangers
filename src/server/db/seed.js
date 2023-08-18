@@ -3,28 +3,33 @@ const { createUser } = require('./users');
 
 const users = [
   {
-    name: 'Emily Johnson',
-    email: 'emily@example.com',
+    name: 'Emily',
+    email: 'Xpre55@aol.com',
     password: 'securepass',
   },
   {
-    name: 'Liu Wei',
-    email: 'liu@example.com',
+    name: 'Roger',
+    email: 'React23@yahoo.com',
     password: 'strongpass',
   },
   {
-    name: 'Isabella García',
-    email: 'bella@example.com',
+    name: 'Patrick',
+    email: 'HTML@gmail.com',
     password: 'pass1234',
   },
   {
-    name: 'Mohammed Ahmed',
-    email: 'mohammed@example.com',
+    name: 'Fred',
+    email: 'xXnode_rangerXx@gmail.com',
     password: 'mysecretpassword',
   },
   {
-    name: 'John Smith',
-    email: 'john@example.com',
+    name: 'admin',
+    email: 'admin123@gmail.com',
+    password: 'password123',
+  },
+  {
+    name: 'Bobby',
+    email: 'backend_ranger@gmail.com',
     password: 'password123',
   },
   // Add more user objects as needed
