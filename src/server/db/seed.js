@@ -592,6 +592,7 @@ const seedDatabse = async () => {
         await dropTables();
         await createTables();
         await insertUsers();
+        await insertProducts();
     }
     catch (err) {
         throw err;
