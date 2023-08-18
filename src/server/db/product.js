@@ -14,3 +14,7 @@ const createProduct = async({title, Description, brand, availability, image, cat
     console.log('error creating products', err)
   }
 }
+
+module.exports = {
+  createProduct
+}
