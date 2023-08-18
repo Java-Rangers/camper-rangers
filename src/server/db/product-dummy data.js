@@ -1,222 +1,3 @@
-const db = require('./client');
-const { createUser } = require('./users');
-
-const users = [
-  {
-    userName: 'Xpre55 Ranger',
-    fName: 'Emily',
-    lName: 'Matherson',
-    isAdmin: false,
-    email: 'Xpre55@aol.com',
-    password: 'securepass',
-  },
-  {
-    userName: 'React Ranger',
-    fName: 'Roger',
-    lName: 'Blackwood',
-    isAdmin: false,
-    email: 'React23@yahoo.com',
-    password: 'securepass',
-  },
-  {
-    userName: 'HTML Ranger',
-    fName: 'Patrick',
-    lName: 'Whitestone',
-    isAdmin: false,
-    email: 'HTML@gmail.com',
-    password: 'securepass',
-  },
-  {
-    userName: 'xXnode_rangerXx.js',
-    fName: 'Fred',
-    lName: 'Ravenscroft',
-    isAdmin: false,
-    email: 'xXnode_rangerXx@gmail.com',
-    password: 'securepass',
-  },
-  {
-    userName: '4dmin_ranger',
-    fName: 'admin',
-    lName: 'Greenfield',
-    isAdmin: true,
-    email: 'admin123@aol.com',
-    password: 'securepass',
-  },
-  {
-    userName: 'backend_ranger',
-    fName: 'Bobby',
-    lName: 'Goldwater',
-    isAdmin: false,
-    email: 'backend_ranger@gmail.com',
-    password: 'securepass',
-  },
-  // Add more user objects as needed
-];  
-
-const dropTables = async () => {
-    console.log('---Dropping Tables---')  
-    try {
-        await db.query(`
-        DROP TABLE IF EXISTS users;
-        DROP TABLE IF EXISTS orderItems;
-        DROP TABLE IF EXISTS orders;
-        DROP TABLE IF EXISTS address;
-        DROP TABLE IF EXISTS billing;
-        `)
-    }
-    catch(err) {
-        throw err;
-    }
-    console.log('---Finished Dropping Tables---')
-}
-
-const createTables = async () => {
-    console.log('---Creating Tables---')
-    try{
-        await db.query(`
-        CREATE TABLE users(
-            id SERIAL PRIMARY KEY,
-            name VARCHAR(255) DEFAULT 'name',
-            email VARCHAR(255) UNIQUE NOT NULL,
-            password VARCHAR(255) NOT NULL
-        );
-        CREATE TABLE billing (
-            id SERIAL PRIMARY KEY,
-            "userId" INTEGER REFERENCES users(id),
-            paymentType VARCHAR(255),
-            cardNumber VARCHAR(255),
-            createdAt TIMESTAMP,
-            modifiedAt TIMESTAMP
-        );  
-        CREATE TABLE address (
-            id SERIAL PRIMARY KEY,
-            "userId" INTEGER REFERENCES users(id),
-            address VARCHAR(255),
-            state VARCHAR(255),
-            zip VARCHAR(255)
-        );
-        CREATE TABLE orders (
-            id SERIAL PRIMARY KEY,
-            "userId" INTEGER REFERENCES users(id),
-            total INTEGER,
-            createdAt TIMESTAMP,
-            modifiedAt TIMESTAMP,
-            fullfilled BOOLEAN
-        );
-        CREATE TABLE orderItems (
-            id SERIAL PRIMARY KEY,
-            "orderId" INTEGER REFERENCES orders(id),
-            "productId" INTEGER REFERENCES products(id),
-            createdAt TIMESTAMP,
-            modifiedAt TIMESTAMP,
-            quantity INTEGER
-        );
-        CREATE TABLE products (
-          id SERIAL PRIMARY KEY,
-          title TEXT,
-          "Description" TEXT,
-          brand TEXT,
-          availability BOOLEAN,
-          image TEXT,
-          category TEXT,
-          price DECIMAL,
-          quantity INTEGER
-        );  
-        `)
-    }
-    catch(err) {
-        throw err;
-    }
-    console.log('---Finished Creating Tables---')
-}
-
-// POPULATES ADDRESS TABLE
-async function createInitialAddress() {
-  try{
-    console.log('---Creating Initial Address Data---')
-    await client.query(`
-    INSERT INTO address ("userId", address, state, zip)
-    VALUES
-      (1, '123 Applewood Lane, Evergreen', 'OH', '43210'),
-      (2, '456 Birch Street, Sunnyville', 'CA', '98765'),
-      (3, '789 Cedar Drive, Maple Ridge', 'IL', '60606'),
-      (4, '321 Dogwood Avenue, Starlight', 'TX', '75001'),
-      (5, '654 Elm Place, Rivertown', 'PA', '19191'),
-      (6, '987 Fir Blvd, Stone Creek', 'NY', '11223'),
-      (7, '257 Maple Avenue, Suncrest', 'CA', '91025'),
-      (8, '482 Oak Lane, Misty Meadows', 'TX', '77544'),
-      (9, '109 Pine Circle, Blue Harbor', 'NY', '11492'),
-      (10, '604 Birch Drive, Silver Peak', 'FL', '33981')
-    `);
-  }catch(err){
-    console.error(err)
-    throw err
-  }
-}
-
-// POPULATES BILLING TABLE
-async function createInitialBilling() {
-  try {
-    console.log('---Creating Initial Billing Data---');
-    await client.query(`
-      INSERT INTO billing ("userId", paymentType, cardNumber, createdAt, modifiedAt)
-      VALUES
-        (1, 'Credit', '1111-2222-3333-4444', CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP()),
-        (2, 'Debit', '1111-2222-3333-4444', CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP())
-    `);
-  } catch(err) {
-    console.error(err);
-    throw err;
-  }
-}
-
-// POPULATES ORDERS TABLE
-async function createInitialOrders() {
-  try {
-    console.log('---Creating Initial Orders Data---');
-    await client.query(`
-      INSERT INTO orders ("userId", total, fullfilled, createdAt, modifiedAt)
-      VALUES
-        (1, REPLACE_WITH_VARIABLE_OF_PRODUCT_PRICE_SUM, false, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP()),
-        (2, REPLACE_WITH_VARIABLE_OF_PRODUCT_PRICE_SUM, false, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP())
-    `);
-  } catch(err) {
-    console.error(err);
-    throw err;
-  }
-}
-
-// POPULATES ORDERITEMS TABLE
-async function createInitialOrderItems() {
-  try {
-    console.log('---Creating Initial Order Items Data---');
-    await client.query(`
-      INSERT INTO orderItems ("orderId", "productId", quantity, createdAt, modifiedAt)
-      VALUES
-        (1, 1, 3, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP()),
-        (2, 4, 3, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP())
-    `);
-  } catch(err) {
-    console.error(err);
-    throw err;
-  }
-}
-
-const insertUsers = async () => {
-  try {
-    for (const user of users) {
-      await createUser({userName: user.userName, fname: user.fname, lName: user.lName, isAdmin: user.isAdmin, email: user.email, password: user.password});
-    }
-    console.log('Seed data inserted successfully.');
-  } catch (error) {
-    console.error('Error inserting seed data:', error);
-  }
-};
-
-
-
-
-//-----------------Dummy product data--------------------------------------------
 const products = [
   {
     title:'Super Tent',
@@ -561,62 +342,369 @@ const products = [
 
 ];
 
-const insertProducts = async () => {
-  try{
-  for (const product of products) {
-    await createProduct ({title: product.title, Description: product.Description, brand: product.brand, 
-      availability: product.availability, image: product.image, category: product.category,
-       price: product.price, quantity: product.quantity});
-  }
-  console.log('Product Data insertion successful');
+async function createInitialProducts() {
+  try {
+      console.log('posting products...') 
+    await client.query(`
+    INSERT INTO 
+    `)
+      console.log('products posted!');
   } catch(error) {
-  console.log('Error inserting products', error);
+      console.error(error)
+      throw error;
   }
 }
 
-// ----------------------- Product table data ---------------------------------------------------------
+async function createInitialProducts() {
+  try {
+      console.log('posting products...') 
+    await client.query(`
+    INSERT INTO products ("title", "description", "brand", "availability", "image", "category", "quantity", "price")
+    VALUES
+    (1, 
+    'Super Tent',
+    'Keeps you dry',
+    'Alpine Echo Outfitters',
+    true,
+    'https://cdn11.bigcommerce.com/s-yaxmx/images/stencil/1280x1280/products/239/744/6173_Back_and_Side_W__16921.1641589161.jpg?c=2',
+    'camping',
+    12,
+    150),
 
-// async function createProductTables() {
-//     try {
-//         console.log('creating product tables...')
+    (2,
+    'All-Weather Tent',
+    'Rugged and wind proof',
+    'Alpine Echo Outfitters',
+    true,
+    'https://m.media-amazon.com/images/I/61YYm19tLKL._AC_UF1000,1000_QL80_.jpg',
+    'camping',
+    10,
+    200
+  ),
 
-//         await client.query(`
-//             CREATE TABLE products (
-//                 id SERIAL PRIMARY KEY,
-//                 title TEXT UNIQUE NOT NULL,
-//                 Description TEXT NOT NULL,
-//                 brand varchar(225) NOT NULL,
-//                 availability boolean DEFAULT true,
-//                 image varchar(225) NOT NULL,
-//                 category TEXT NOT NULL,
-//                 quantity INTEGER NOT NULL
-//                 price INTEGER NOT NULL
-//             );
-//         `)
+  ( 3,
+    'Survivalist Tent',
+    'its just a tent',
+    'Alpine Echo Outfitters',
+    true,
+    'https://www.ferrino.it/k-components/resize/w_2000-h_2000/k-content/ferrino/themes/ferrino/html/imagebank/e-shop/photogallery-34909/2815.jpg',
+    'camping',
+    8,
+    200
+  ),
 
-//         console.log(`Product tables created!`)
-//     } catch(error) {
-//         console.error(error)
-//         throw error;
-//     }
-// }
+  ( 4,
+    title:'Family Tent',
+    'like regular tent but better',
+    'ZordPeak Adventure Supplies',
+    true,
+    'https://media.istockphoto.com/id/142533334/photo/yellow-dome-tent-with-open-zip-enclosure.jpg?s=612x612&w=0&k=20&c=GZyiiSF95j0Yxa_7pc6LUebf8MVvRebJcrnMXETN5eU=',
+    'camping',
+    4,
+    400
+  ),
 
+  ( 5,
+    title:'Single Tent',
+    'also a normal tent',
+    'Alpine Echo Outfitters',
+    true,
+    'https://www.ferrino.it/k-components/resize/w_2000-h_2000/k-content/ferrino/themes/ferrino/html/imagebank/e-shop/photogallery-34909/2815.jpg',
+    'camping',
+    2,
+    700
+  ),
 
+  ( 6,
+    title:'Carabiner',
+    'Great for climbing, also never fails',
+    'TerraTrail Gear',
+    true,
+    'https://www.metoliusclimbing.com/media/Rig-auto-lock.jpg',
+    'accessories',
+    2000,
+    10
+  ),
 
+  ( 7,
+    title:'Water Bottle',
+    'Stores water, and other liquids',
+    'CampMaven',
+    true,
+    'https://img.everymarket.com/tx1sueuect5jgf8rcfup99cav9yi?width=650&height=650&format=jpg',
+    'accessories',
+    100,
+    40
+  ),
 
-const seedDatabse = async () => {
-    try {
-        db.connect();
-        await dropTables();
-        await createTables();
-        await insertUsers();
+  ( 8,
+    title:'Camp Burner',
+    'Starts fires for....cooking..',
+    'WildRoam Outdoors',
+    true,
+    'https://academy.scene7.com/is/image/academy/20069863?$pdp-gallery-ng$',
+    'camping',
+    6,
+    100
+  ),
+
+  ( 9,
+    title:'Stakes',
+    'Holds down tents, and other accessories',
+    'PinePeak Adventures',
+    true,
+    'https://www.rei.com/media/product/693153',
+    'parts',
+    200,
+    5
+  ),
+
+  ( 10,
+    title:'Tent Poles',
+    'Spare poles for your overprices tents',
+    'MorphTrek Outfitters',
+    true,
+    'https://m.media-amazon.com/images/I/61hj8-ZY42L._AC_UF1000,1000_QL80_.jpg',
+    'parts',
+    350,
+    30
+  ),
+
+  ( 11,
+    title:'Outdoors Tent',
+    'Keeps you dry',
+    'Alping Echo Outfitters',
+    true,
+    'https://media.istockphoto.com/id/142533334/photo/yellow-dome-tent-with-open-zip-enclosure.jpg?s=612x612&w=0&k=20&c=GZyiiSF95j0Yxa_7pc6LUebf8MVvRebJcrnMXETN5eU=',
+    'camping',
+    12,
+    150
+  ),
+
+  ( 12,
+    title:'Indoors Tent',
+    'Rugged and Windproof',
+    'WildRoam Outdoors',
+    true,
+    'https://www.ferrino.it/k-components/resize/w_2000-h_2000/k-content/ferrino/themes/ferrino/html/imagebank/e-shop/photogallery-34909/2815.jpg',
+    'camping',
+    10,
+    200
+  ),
+
+  ( 13,
+    title:'Generic Tent',
+    'Its literally, just a tent',
+    'Alping Echo Outfitters',
+    true,
+    'https://www.ferrino.it/k-components/resize/w_2000-h_2000/k-content/ferrino/themes/ferrino/html/imagebank/e-shop/photogallery-34909/2815.jpg',
+    'camping',
+    8,
+    200
+  ),
+
+  ( 14,
+    title:'Hunter Tent',
+    'Like a regular tent, but more redneck',
+    'Alping Echo OutFitters',
+    true,
+    'https://cdn11.bigcommerce.com/s-yaxmx/images/stencil/1280x1280/products/239/744/6173_Back_and_Side_W__16921.1641589161.jpg?c=2',
+    'camping',
+    4,
+    400
+  ),
+
+  ( 15,
+    title:'Mountaineer Tent',
+    'Also a normal Tent',
+    'MorphTrek Outfitters',
+    true,
+    'https://media.istockphoto.com/id/142533334/photo/yellow-dome-tent-with-open-zip-enclosure.jpg?s=612x612&w=0&k=20&c=GZyiiSF95j0Yxa_7pc6LUebf8MVvRebJcrnMXETN5eU=',
+    'camping',
+    2,
+    700
+  ),
+
+  ( 16,
+    title:'Tent',
+    'Keeps you dry in outdoor enviroments!',
+    'WildRoam Outdoors',
+    true,
+    'https://www.ferrino.it/k-components/resize/w_2000-h_2000/k-content/ferrino/themes/ferrino/html/imagebank/e-shop/photogallery-34909/2815.jpg',
+    'camping',
+    12,
+    150
+  ),
+
+  ( 17,
+    title:'Ultra Tent',
+    'Rugged and wind proof',
+    'ZordPeak Adventure Supplies',
+    true,
+    'https://media.istockphoto.com/id/142533334/photo/yellow-dome-tent-with-open-zip-enclosure.jpg?s=612x612&w=0&k=20&c=GZyiiSF95j0Yxa_7pc6LUebf8MVvRebJcrnMXETN5eU=',
+    'camping',
+    10,
+    200
+  ),
+
+  ( 18,
+    title:'The Tent',
+    'Much Like the dude, it is actually just a tent',
+    'Alping Echo Outfitters',
+    true,
+    'https://www.ferrino.it/k-components/resize/w_2000-h_2000/k-content/ferrino/themes/ferrino/html/imagebank/e-shop/photogallery-34909/2815.jpg',
+    'camping',
+    8,
+    200
+  ),
+
+  (19,
+    title:'Range Tent',
+    'Like a regular tent, but bulletproof for...accidents',
+    'WildRoam Outdoors',
+    true,
+    'https://cdn11.bigcommerce.com/s-yaxmx/images/stencil/1280x1280/products/239/744/6173_Back_and_Side_W__16921.1641589161.jpg?c=2',
+    'camping',
+    4,
+    4000
+  ),
+
+  ( 20,
+    title:'Tent 9',
+    'There be aliens living among us...',
+    'MorphTrek Outfitters',
+    true,
+    'https://media.istockphoto.com/id/142533334/photo/yellow-dome-tent-with-open-zip-enclosure.jpg?s=612x612&w=0&k=20&c=GZyiiSF95j0Yxa_7pc6LUebf8MVvRebJcrnMXETN5eU=',
+    'camping',
+    2,
+    900
+  ),
+
+  ( 21,
+    title:'Fishing Pole',
+    'Sturdy construction, reliable',
+    'Pinepeak Adventure Supplies',
+    true,
+    'https://www.outdoorlife.com/uploads/2023/01/31/Abu-Garcia-Jordan-Lee-Spinning-Rod-7-Medium.jpg?auto=webp&width=800&crop=16:10,offset-x50',
+    'fishing',
+    4,
+    210
+  ),
+
+  ( 22,
+    title:'Bait',
+    'Fish eat this',
+    'WildRoam Outdoors',
+    true,
+    'https://i5.walmartimages.com/asr/5be2a726-e5d0-4d72-8009-0900cc0f232b_1.402e5d547f53796ba88ffe88231bd9a7.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF',
+    'fishing',
+    20,
+    30
+  ),
+
+  ( 23,
+    title:'Tackle',
+    'Hook Included',
+    'WildRoam Outdoors',
+    true,
+    'https://m.media-amazon.com/images/I/817NtJdAx0L._AC_UF1000,1000_QL80_.jpg',
+    'fishing',
+    40,
+    45
+  ),
+
+  ( 24,
+    title:'Mountain Bike',
+    'At least two wheels',
+    'TerraTrail Gear Co.',
+    true,
+    'https://pedegoelectricbikes.com/wp-content/uploads/2020/12/pedego-ridge-rider-classic.jpg',
+    'recreation',
+    6,
+    450
+  ),
+
+  ( 25,
+    title:'First Aid Kit',
+    'Heal the injured and the sick, all basics included',
+    'TerraTrail Gear Co.',
+    true,
+    'https://m.media-amazon.com/images/I/512V-EypsTL.jpg',
+    'medical',
+    23,
+    50
+  ),
+
+  ( 26,
+    title:'MRE',
+    '2,000 - 3,000 calories, beware the gum...',
+    'WildRoam Outdoors',
+    true,
+    'https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/MRE_7862.jpg/1200px-MRE_7862.jpg',
+    'food',
+    50,
+    30
+  ),
+
+  ( 27,
+    title:'Sleeping Bag',
+    'Probably way to hot, but at least its comfy',
+    'Pinepeak Adventure Supply',
+    true,
+    'https://olympiadsports.com/storage/media/Do8Q1GY8bJk55fzl9eBs0iE2PrDAoFari9S0R4Oq.jpg',
+    'camping',
+    3,
+    300
+  ),
+
+  ( 28,
+    title:'Cold Weather jacket',
+    'Great for breaking harsh mountain winds and keeping warm',
+    'WildRoam Outdoors',
+    true,
+    'https://www.uswings.com/wp-content/uploads/2018/01/G2ECWSPBK_2019.jpg',
+    'clothing',
+    8,
+    120
+  ),
+
+  ( 29,
+    title:'Snowshoes',
+    'Keeps you from sinking into the snow',
+    'Alping Echo Outfitters',
+    true,
+    'https://retrospec.com/cdn/shop/products/4746_2_1400x.jpg?v=1665458219',
+    'accessories',
+    65,
+    120
+  ),
+
+  ( 30,
+    title:'Ice Pick',
+    'In case you want to climb a glacier...or breaking ice for coctails, your call',
+    'WildRoam Outdoors',
+    true,
+    'https://vintageclimbing.com/cdn/shop/products/751ZeroAxeChouinardVintageclimbing.com_2048x.jpg?v=1648383528',
+    'accessories',
+    70,
+    200
+  ),
+
+  ( 31,
+    title:'hat',
+    'Helps keep the sun out of your eyes',
+    'Pinepeak Adventure Supply',
+    true,
+    'https://u7q2x7c9.stackpathcdn.com/photos/23/97/361267_28185_L.jpg',
+    'clothing',
+    100,
+    35
+  )
+    
+  `);
+      console.log('products posted!');
+  } catch (error) {
+      console.error(error)
+      throw error;
     }
-    catch (err) {
-        throw err;
-    }
-    finally {
-        db.end()
-    }
-}
-
-seedDatabse()
+  }
