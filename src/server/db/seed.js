@@ -3,28 +3,33 @@ const { createUser } = require('./users');
 
 const users = [
   {
-    name: 'Emily Johnson',
-    email: 'emily@example.com',
+    name: 'Emily',
+    email: 'Xpre55@aol.com',
     password: 'securepass',
   },
   {
-    name: 'Liu Wei',
-    email: 'liu@example.com',
+    name: 'Roger',
+    email: 'React23@yahoo.com',
     password: 'strongpass',
   },
   {
-    name: 'Isabella García',
-    email: 'bella@example.com',
+    name: 'Patrick',
+    email: 'HTML@gmail.com',
     password: 'pass1234',
   },
   {
-    name: 'Mohammed Ahmed',
-    email: 'mohammed@example.com',
+    name: 'Fred',
+    email: 'xXnode_rangerXx@gmail.com',
     password: 'mysecretpassword',
   },
   {
-    name: 'John Smith',
-    email: 'john@example.com',
+    name: 'admin',
+    email: 'admin123@gmail.com',
+    password: 'password123',
+  },
+  {
+    name: 'Bobby',
+    email: 'backend_ranger@gmail.com',
     password: 'password123',
   },
   // Add more user objects as needed
@@ -41,20 +46,30 @@ const dropTables = async () => {
     }
 }
 
-const createTables = async () => {
-    try{
-        await db.query(`
-        CREATE TABLE users(
-            id SERIAL PRIMARY KEY,
-            name VARCHAR(255) DEFAULT 'name',
-            email VARCHAR(255) UNIQUE NOT NULL,
-            password VARCHAR(255) NOT NULL
-        )`)
-    }
-    catch(err) {
-        throw err;
-    }
-}
+async function createTables() {
+  try {
+      console.log("Starting to build tables...");
+
+      await client.query(`
+      CREATE TABLE users (
+          id SERIAL PRIMARY KEY,
+          username TEXT UNIQUE NOT NULL,
+          billingId INT
+          isAdmin BOOLEAN,
+          created_at TIMESTAMP(255),
+          firstName VARCHAR(255),
+          lastName VARCHAR(255),
+          color TEXT,
+          email VARCHAR(255),
+          password TEXT NOT NULL,
+          
+        );
+      `);
+          console.log('Finished building Users table')
+      }catch(error){
+          throw error;
+      }
+  }
 
 const insertUsers = async () => {
   try {
