@@ -26,7 +26,7 @@ const getAddressByUser = async (userId) => {
   }
 }
 
-modeule.exports = {
+module.exports = {
   createAddress,
   getAddressByUser
 }
