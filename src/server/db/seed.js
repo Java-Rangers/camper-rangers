@@ -2,6 +2,8 @@ const db = require('./client');
 const { createUser } = require('./users');
 const { createProduct } = require('./product');
 const { createBilling } = require('./billing');
+const { createOrderItems } =require('./orderItems');
+const { createOrders } = require ('./orders')
 
 const users = [
   {
@@ -586,33 +588,20 @@ const insertProducts = async () => {
   }
 }
 
-// ----------------------- Product table data ---------------------------------------------------------
-
-// async function createProductTables() {
-//     try {
-//         console.log('creating product tables...')
-
-//         await client.query(`
-//             CREATE TABLE products (
-//                 id SERIAL PRIMARY KEY,
-//                 title TEXT UNIQUE NOT NULL,
-//                 Description TEXT NOT NULL,
-//                 brand varchar(225) NOT NULL,
-//                 availability boolean DEFAULT true,
-//                 image varchar(225) NOT NULL,
-//                 category TEXT NOT NULL,
-//                 quantity INTEGER NOT NULL
-//                 price INTEGER NOT NULL
-//             );
-//         `)
-
-//         console.log(`Product tables created!`)
-//     } catch(error) {
-//         console.error(error)
-//         throw error;
-//     }
-// }
-
+const insertOrder = async () => {
+  try{
+  
+    for (const order of orders) {
+      
+      await createOrders ( { userId, total, fullfilled, createdAt, modifiedAt } );
+      
+    
+    }
+    console.log('insertion of orders successful', err);
+  } catch(err) {
+    console.log('error inserting orders', err)
+  }
+}
 
 
 
@@ -623,6 +612,7 @@ const seedDatabse = async () => {
         await createTables();
         await insertUsers();
         await insertProducts();
+        await insertOrder();
     }
     catch (err) {
         throw err;
