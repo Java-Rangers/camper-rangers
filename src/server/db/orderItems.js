@@ -45,6 +45,10 @@ const getCartItems = async(orderId) => {
             WHERE orderId = $1
         `, [orderId])
 
+        const orders = await Promise.all(orderItems.map(
+            product => getProductById(product.id)
+        ))
+
         return products     
     } catch(error) {
         console.error('error getting cart items', error)
