@@ -1,3 +1,6 @@
+const db = require('./client')
+
+
 const createOrders = async (userId, total, fullfilled, createdAt, modifiedAt) => {
     try {
         console.log('creating orders...')
@@ -13,3 +16,26 @@ const createOrders = async (userId, total, fullfilled, createdAt, modifiedAt) =>
         throw error;
     }
 } 
+
+const getCart = async(fullfilled) => {
+    console.log('getting cart...')
+    try {
+        const { rows:[order] } = await db.query(`
+            SELECT *
+            FROM orders
+            WHERE fullfilled = false
+        `, [order])
+        if(fullfilled) {
+            return;
+        } else {
+            return cart;
+        }
+
+    } catch(error) {
+        console.error('error getting cart...',error)
+    }
+}
+
+module.exports = {
+    createOrders
+}
