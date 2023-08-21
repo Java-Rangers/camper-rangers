@@ -8,7 +8,7 @@ const { createAddress } = require('./address');
 
 const users = [
   {
-    userName: 'Xpre55 Ranger',
+    username: 'Xpre55 Ranger',
     fName: 'Emily',
     lName: 'Matherson',
     isAdmin: false,
@@ -16,7 +16,7 @@ const users = [
     password: 'securepass',
   },
   {
-    userName: 'React Ranger',
+    username: 'React Ranger',
     fName: 'Roger',
     lName: 'Blackwood',
     isAdmin: false,
@@ -24,7 +24,7 @@ const users = [
     password: 'securepass',
   },
   {
-    userName: 'HTML Ranger',
+    username: 'HTML Ranger',
     fName: 'Patrick',
     lName: 'Whitestone',
     isAdmin: false,
@@ -32,7 +32,7 @@ const users = [
     password: 'securepass',
   },
   {
-    userName: 'xXnode_rangerXx.js',
+    username: 'xXnode_rangerXx.js',
     fName: 'Fred',
     lName: 'Ravenscroft',
     isAdmin: false,
@@ -40,7 +40,7 @@ const users = [
     password: 'securepass',
   },
   {
-    userName: '4dmin_ranger',
+    username: '4dmin_ranger',
     fName: 'admin',
     lName: 'Greenfield',
     isAdmin: true,
@@ -48,7 +48,7 @@ const users = [
     password: 'securepass',
   },
   {
-    userName: 'backend_ranger',
+    username: 'backend_ranger',
     fName: 'Bobby',
     lName: 'Goldwater',
     isAdmin: false,
@@ -60,7 +60,7 @@ const users = [
 const products = [
   {
     title:'Super Tent',
-    Description:'Keeps you dry',
+    description:'Keeps you dry',
     brand:'Alpine Echo Outfitters',
     availability: true,
     image:'https://cdn11.bigcommerce.com/s-yaxmx/images/stencil/1280x1280/products/239/744/6173_Back_and_Side_W__16921.1641589161.jpg?c=2',
@@ -70,7 +70,7 @@ const products = [
   },
   {
     title:'All-Weather Tent',
-    Description:'Rugged and wind proof',
+    description:'Rugged and wind proof',
     brand:'Alpine Echo Outfitters',
     availability: true,
     image:'https://m.media-amazon.com/images/I/61YYm19tLKL._AC_UF1000,1000_QL80_.jpg',
@@ -80,7 +80,7 @@ const products = [
   },
   {
     title:'Survivalist Tent',
-    Description:'its just a tent',
+    description:'its just a tent',
     brand:'Alpine Echo Outfitters',
     availability: true,
     image:'https://www.ferrino.it/k-components/resize/w_2000-h_2000/k-content/ferrino/themes/ferrino/html/imagebank/e-shop/photogallery-34909/2815.jpg',
@@ -90,7 +90,7 @@ const products = [
   },
   {
     title:'Family Tent',
-    Description:'like regular tent but better',
+    description:'like regular tent but better',
     brand:'ZordPeak Adventure Supplies',
     availability: true,
     image:'https://media.istockphoto.com/id/142533334/photo/yellow-dome-tent-with-open-zip-enclosure.jpg?s=612x612&w=0&k=20&c=GZyiiSF95j0Yxa_7pc6LUebf8MVvRebJcrnMXETN5eU=',
@@ -100,7 +100,7 @@ const products = [
   },
   {
     title:'Single Tent',
-    Description:'also a normal tent',
+    description:'also a normal tent',
     brand:'Alpine Echo Outfitters',
     availability: true,
     image:'https://www.ferrino.it/k-components/resize/w_2000-h_2000/k-content/ferrino/themes/ferrino/html/imagebank/e-shop/photogallery-34909/2815.jpg',
@@ -110,7 +110,7 @@ const products = [
   },
   {
     title:'Carabiner',
-    Description:'Great for climbing, also never fails',
+    description:'Great for climbing, also never fails',
     brand:'TerraTrail Gear',
     availability: true,
     image:'https://www.metoliusclimbing.com/media/Rig-auto-lock.jpg',
@@ -120,7 +120,7 @@ const products = [
   },
   {
     title:'Water Bottle',
-    Description:'Stores water, and other liquids',
+    description:'Stores water, and other liquids',
     brand:'CampMaven',
     availability: true,
     image:'https://img.everymarket.com/tx1sueuect5jgf8rcfup99cav9yi?width=650&height=650&format=jpg',
@@ -130,7 +130,7 @@ const products = [
   },
   {
     title:'Camp Burner',
-    Description:'Starts fires for....cooking..',
+    description:'Starts fires for....cooking..',
     brand:'WildRoam Outdoors',
     availability: true,
     image:'https://academy.scene7.com/is/image/academy/20069863?$pdp-gallery-ng$',
@@ -140,7 +140,7 @@ const products = [
   },
   {
     title:'Stakes',
-    Description:'Holds down tents, and other accessories',
+    description:'Holds down tents, and other accessories',
     brand:'PinePeak Adventures',
     availability: true,
     image:'https://www.rei.com/media/product/693153',
@@ -150,7 +150,7 @@ const products = [
   },
   {
     title:'Tent Poles',
-    Description:'Spare poles for your overprices tents',
+    description:'Spare poles for your overprices tents',
     brand:'MorphTrek Outfitters',
     availability: true,
     image:'https://m.media-amazon.com/images/I/61hj8-ZY42L._AC_UF1000,1000_QL80_.jpg',
@@ -160,7 +160,7 @@ const products = [
   },
   {
     title:'Outdoors Tent',
-    Description:'Keeps you dry',
+    description:'Keeps you dry',
     brand:'Alping Echo Outfitters',
     availability: true,
     image:'https://media.istockphoto.com/id/142533334/photo/yellow-dome-tent-with-open-zip-enclosure.jpg?s=612x612&w=0&k=20&c=GZyiiSF95j0Yxa_7pc6LUebf8MVvRebJcrnMXETN5eU=',
@@ -170,7 +170,7 @@ const products = [
   },
   {
     title:'Indoors Tent',
-    Description:'Rugged and Windproof',
+    description:'Rugged and Windproof',
     brand:'WildRoam Outdoors',
     availability: true,
     image:'https://www.ferrino.it/k-components/resize/w_2000-h_2000/k-content/ferrino/themes/ferrino/html/imagebank/e-shop/photogallery-34909/2815.jpg',
@@ -180,7 +180,7 @@ const products = [
   },
   {
     title:'Generic Tent',
-    Description:'Its literally, just a tent',
+    description:'Its literally, just a tent',
     brand:'Alping Echo Outfitters',
     availability: true,
     image:'https://www.ferrino.it/k-components/resize/w_2000-h_2000/k-content/ferrino/themes/ferrino/html/imagebank/e-shop/photogallery-34909/2815.jpg',
@@ -190,7 +190,7 @@ const products = [
   },
   {
     title:'Hunter Tent',
-    Description:'Like a regular tent, but more redneck',
+    description:'Like a regular tent, but more redneck',
     brand:'Alping Echo OutFitters',
     availability: true,
     image:'https://cdn11.bigcommerce.com/s-yaxmx/images/stencil/1280x1280/products/239/744/6173_Back_and_Side_W__16921.1641589161.jpg?c=2',
@@ -200,7 +200,7 @@ const products = [
   },
   {
     title:'Mountaineer Tent',
-    Description:'Also a normal Tent',
+    description:'Also a normal Tent',
     brand:'MorphTrek Outfitters',
     availability: true,
     image:'https://media.istockphoto.com/id/142533334/photo/yellow-dome-tent-with-open-zip-enclosure.jpg?s=612x612&w=0&k=20&c=GZyiiSF95j0Yxa_7pc6LUebf8MVvRebJcrnMXETN5eU=',
@@ -210,7 +210,7 @@ const products = [
   },
   {
     title:'Tent',
-    Description:'Keeps you dry in outdoor enviroments!',
+    description:'Keeps you dry in outdoor enviroments!',
     brand:'WildRoam Outdoors',
     availability: true,
     image:'https://www.ferrino.it/k-components/resize/w_2000-h_2000/k-content/ferrino/themes/ferrino/html/imagebank/e-shop/photogallery-34909/2815.jpg',
@@ -220,7 +220,7 @@ const products = [
   },
   {
     title:'Ultra Tent',
-    Description:'Rugged and wind proof',
+    description:'Rugged and wind proof',
     brand:'ZordPeak Adventure Supplies',
     availability: true,
     image:'https://media.istockphoto.com/id/142533334/photo/yellow-dome-tent-with-open-zip-enclosure.jpg?s=612x612&w=0&k=20&c=GZyiiSF95j0Yxa_7pc6LUebf8MVvRebJcrnMXETN5eU=',
@@ -230,7 +230,7 @@ const products = [
   },
   {
     title:'The Tent',
-    Description:'Much Like the dude, it is actually just a tent',
+    description:'Much Like the dude, it is actually just a tent',
     brand:'Alping Echo Outfitters',
     availability: true,
     image:'https://www.ferrino.it/k-components/resize/w_2000-h_2000/k-content/ferrino/themes/ferrino/html/imagebank/e-shop/photogallery-34909/2815.jpg',
@@ -240,7 +240,7 @@ const products = [
   },
   {
     title:'Range Tent',
-    Description:'Like a regular tent, but bulletproof for...accidents',
+    description:'Like a regular tent, but bulletproof for...accidents',
     brand:'WildRoam Outdoors',
     availability: true,
     image:'https://cdn11.bigcommerce.com/s-yaxmx/images/stencil/1280x1280/products/239/744/6173_Back_and_Side_W__16921.1641589161.jpg?c=2',
@@ -250,7 +250,7 @@ const products = [
   },
   {
     title:'Tent 9',
-    Description:'There be aliens living among us...',
+    description:'There be aliens living among us...',
     brand:'MorphTrek Outfitters',
     availability: true,
     image:'https://media.istockphoto.com/id/142533334/photo/yellow-dome-tent-with-open-zip-enclosure.jpg?s=612x612&w=0&k=20&c=GZyiiSF95j0Yxa_7pc6LUebf8MVvRebJcrnMXETN5eU=',
@@ -260,7 +260,7 @@ const products = [
   },
   {
     title:'Fishing Pole',
-    Description:'Sturdy construction, reliable',
+    description:'Sturdy construction, reliable',
     brand:'Pinepeak Adventure Supplies',
     availability: true,
     image:'https://www.outdoorlife.com/uploads/2023/01/31/Abu-Garcia-Jordan-Lee-Spinning-Rod-7-Medium.jpg?auto=webp&width=800&crop=16:10,offset-x50',
@@ -270,7 +270,7 @@ const products = [
   },
   {
     title:'Bait',
-    Description:'Fish eat this',
+    description:'Fish eat this',
     brand:'WildRoam Outdoors',
     availability: true,
     image:'https://i5.walmartimages.com/asr/5be2a726-e5d0-4d72-8009-0900cc0f232b_1.402e5d547f53796ba88ffe88231bd9a7.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF',
@@ -280,7 +280,7 @@ const products = [
   },
   {
     title:'Tackle',
-    Description:'Hook Included',
+    description:'Hook Included',
     brand:'WildRoam Outdoors',
     availability: true,
     image:'https://m.media-amazon.com/images/I/817NtJdAx0L._AC_UF1000,1000_QL80_.jpg',
@@ -290,7 +290,7 @@ const products = [
   },
   {
     title:'Mountain Bike',
-    Description:'At least two wheels',
+    description:'At least two wheels',
     brand:'TerraTrail Gear Co.',
     availability: true,
     image:'https://pedegoelectricbikes.com/wp-content/uploads/2020/12/pedego-ridge-rider-classic.jpg',
@@ -300,7 +300,7 @@ const products = [
   },
   {
     title:'First Aid Kit',
-    Description:'Heal the injured and the sick, all basics included',
+    description:'Heal the injured and the sick, all basics included',
     brand:'TerraTrail Gear Co.',
     availability: true,
     image:'https://m.media-amazon.com/images/I/512V-EypsTL.jpg',
@@ -310,7 +310,7 @@ const products = [
   },
   {
     title:'MRE',
-    Description:'2,000 - 3,000 calories, beware the gum...',
+    description:'2,000 - 3,000 calories, beware the gum...',
     brand:'WildRoam Outdoors',
     availability: true,
     image:'https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/MRE_7862.jpg/1200px-MRE_7862.jpg',
@@ -320,7 +320,7 @@ const products = [
   },
   {
     title:'Sleeping Bag',
-    Description:'Probably way to hot, but at least its comfy',
+    description:'Probably way to hot, but at least its comfy',
     brand:'Pinepeak Adventure Supply',
     availability: true,
     image:'https://olympiadsports.com/storage/media/Do8Q1GY8bJk55fzl9eBs0iE2PrDAoFari9S0R4Oq.jpg',
@@ -330,7 +330,7 @@ const products = [
   },
   {
     title:'Cold Weather jacket',
-    Description:'Great for breaking harsh mountain winds and keeping warm',
+    description:'Great for breaking harsh mountain winds and keeping warm',
     brand:'WildRoam Outdoors',
     availability: true,
     image:'https://www.uswings.com/wp-content/uploads/2018/01/G2ECWSPBK_2019.jpg',
@@ -340,7 +340,7 @@ const products = [
   },
   {
     title:'Snowshoes',
-    Description:'Keeps you from sinking into the snow',
+    description:'Keeps you from sinking into the snow',
     brand:'Alping Echo Outfitters',
     availability: true,
     image:'https://retrospec.com/cdn/shop/products/4746_2_1400x.jpg?v=1665458219',
@@ -350,7 +350,7 @@ const products = [
   },
   {
     title:'Ice Pick',
-    Description:'In case you want to climb a glacier...or breaking ice for coctails, your call',
+    description:'In case you want to climb a glacier...or breaking ice for coctails, your call',
     brand:'WildRoam Outdoors',
     availability: true,
     image:'https://vintageclimbing.com/cdn/shop/products/751ZeroAxeChouinardVintageclimbing.com_2048x.jpg?v=1648383528',
@@ -360,7 +360,7 @@ const products = [
   },
   {
     title:'hat',
-    Description:'Helps keep the sun out of your eyes',
+    description:'Helps keep the sun out of your eyes',
     brand:'Pinepeak Adventure Supply',
     availability: true,
     image:'https://u7q2x7c9.stackpathcdn.com/photos/23/97/361267_28185_L.jpg',
@@ -378,69 +378,69 @@ const addresses = [
     zip: '43210'
   },
   {
-    userId: 2,
+    userID: 2,
     address: '456 Birch Street, Sunnyville',
     state: 'CA',
     zip: '98765'
   },
   {
-    userId: 3,
+    userID: 3,
     address: '789 Cedar Drive, Maple Ridge',
     state: 'IL',
     zip: '60606'
   },
   {
-    userId: 4,
+    userID: 4,
     address: '321 Dogwood Avenue, Starlight',
     state: 'TX',
     zip: '75001'
   },
   {
-    userId: 5,
+    userID: 5,
     address: '654 Elm Place, Rivertown',
     state: 'PA',
     zip: '19191'
   },
   {
-    userId: 6,
+    userID: 6,
     address: '987 Fir Blvd, Stone Creek',
     state: 'NY',
     zip: '11223'
   },
-  {
-    userId: 7,
-    address: '257 Maple Avenue, Suncrest',
-    state: 'CA',
-    zip: '91025'
-  },
-  {
-    userId: 8,
-    address: '482 Oak Lane, Misty Meadows',
-    state: 'TX',
-    zip: '77544'
-  },
-  {
-    userId: 9,
-    address: '109 Pine Circle, Blue Harbor',
-    state: 'NY',
-    zip: '11492'
-  },
-  {
-    userId: 10,
-    address: '604 Birch Drive, Silver Peak',
-    state: 'FL',
-    zip: '33981'
-  }
+  // {
+  //   userId: 7,
+  //   address: '257 Maple Avenue, Suncrest',
+  //   state: 'CA',
+  //   zip: '91025'
+  // },
+  // {
+  //   userId: 8,
+  //   address: '482 Oak Lane, Misty Meadows',
+  //   state: 'TX',
+  //   zip: '77544'
+  // },
+  // {
+  //   userId: 9,
+  //   address: '109 Pine Circle, Blue Harbor',
+  //   state: 'NY',
+  //   zip: '11492'
+  // },
+  // {
+  //   userId: 10,
+  //   address: '604 Birch Drive, Silver Peak',
+  //   state: 'FL',
+  //   zip: '33981'
+  // }
 ]
 
 const billingInfo = [
   {
-    userId: '1',
+    userID: 1,
     paymentType: 'Credit card',
     cardNumber: '1111-2222-3333-4444',
   },
   {
-    userId: '2',
+    userID: 2,
     paymentType: 'Debit card',
     cardNumber: '5555-6666-7777-8888',
   }
@@ -450,11 +450,13 @@ const dropTables = async () => {
     console.log('---Dropping Tables---')  
     try {
         await db.query(`
-        DROP TABLE IF EXISTS users;
+        
         DROP TABLE IF EXISTS orderItems;
         DROP TABLE IF EXISTS orders;
+        DROP TABLE IF EXISTS products;
         DROP TABLE IF EXISTS address;
         DROP TABLE IF EXISTS billing;
+        DROP TABLE IF EXISTS users;
         `)
     }
     catch(err) {
@@ -469,31 +471,47 @@ const createTables = async () => {
         await db.query(`
         CREATE TABLE users(
             id SERIAL PRIMARY KEY,
-            name VARCHAR(255) DEFAULT 'name',
+            username VARCHAR (255), 
+            "fName" VARCHAR(255),
+            "lName" VARCHAR (255),
+            "isAdmin" BOOLEAN,
             email VARCHAR(255) UNIQUE NOT NULL,
             password VARCHAR(255) NOT NULL
         );
         CREATE TABLE billing (
             id SERIAL PRIMARY KEY,
-            "userId" INTEGER REFERENCES users(id),
-            paymentType VARCHAR(255),
-            cardNumber VARCHAR(255)
+            "userID" INTEGER REFERENCES users(id),
+            "paymentType" VARCHAR(255),
+            "cardNumber" VARCHAR(255)
         );  
         CREATE TABLE address (
             id SERIAL PRIMARY KEY,
-            "userId" INTEGER REFERENCES users(id),
+            "userID" INTEGER REFERENCES users(id),
             address VARCHAR(255),
             state VARCHAR(255),
             zip VARCHAR(255)
         );
         CREATE TABLE orders (
             id SERIAL PRIMARY KEY,
-            "userId" INTEGER REFERENCES users(id),
+            "userID" INTEGER REFERENCES users(id),
             total INTEGER,
             createdAt TIMESTAMP,
             modifiedAt TIMESTAMP,
             fullfilled BOOLEAN
         );
+        
+        CREATE TABLE products (
+          id SERIAL PRIMARY KEY,
+          title TEXT,
+          description TEXT,
+          brand TEXT,
+          availability BOOLEAN,
+          image TEXT,
+          category TEXT,
+          price DECIMAL,
+          quantity INTEGER
+      );          
+        
         CREATE TABLE orderItems (
             id SERIAL PRIMARY KEY,
             "orderId" INTEGER REFERENCES orders(id),
@@ -502,17 +520,7 @@ const createTables = async () => {
             modifiedAt TIMESTAMP,
             quantity INTEGER
         );
-        CREATE TABLE products (
-            id SERIAL PRIMARY KEY,
-            title TEXT,
-            "Description" TEXT,
-            brand TEXT,
-            availability BOOLEAN,
-            image TEXT,
-            category TEXT,
-            price DECIMAL,
-            quantity INTEGER
-        );  
+        
         `)
     }
     catch(err) {
@@ -525,7 +533,7 @@ const createTables = async () => {
 async function insertAddresses() {
   try{
     for (const address of addresses){
-      createAddress({userId: address.userId, address: address.address, state: address.state, zip: address.zip})
+      createAddress({userId: address.userID, address: address.address, state: address.state, zip: address.zip})
     }
   }catch(err){
     console.error(err)
@@ -537,7 +545,7 @@ async function insertAddresses() {
 async function insertBilling() {
   try {
     for (const billing of billingInfo){
-      await createBilling({userId: billing.userId, paymentType: billing.paymentType, cardNumber: billing.cardNumber})
+      await createBilling({userId: billing.userID, paymentType: billing.paymentType, cardNumber: billing.cardNumber})
     }
     console.log('---Creating Initial Billing Data---');
   } catch(err) {
@@ -551,7 +559,7 @@ async function insertBilling() {
 const insertUsers = async () => {
   try {
     for (const user of users) {
-      await createUser({userName: user.userName, fname: user.fname, lName: user.lName, isAdmin: user.isAdmin, email: user.email, password: user.password});
+      await createUser({username: user.username, fName: user.fName, lName: user.lName, isAdmin: user.isAdmin, email: user.email, password: user.password});
     }
     console.log('Seed data inserted successfully.');
   } catch (error) {
@@ -562,7 +570,7 @@ const insertUsers = async () => {
 const insertProducts = async () => {
   try{
   for (const product of products) {
-    await createProduct ({title: product.title, Description: product.Description, brand: product.brand, 
+    await createProduct ({title: product.title, description: product.description, brand: product.brand, 
       availability: product.availability, image: product.image, category: product.category,
        price: product.price, quantity: product.quantity});
   }
@@ -572,27 +580,27 @@ const insertProducts = async () => {
   }
 }
 
-const insertOrder = async () => {
-  try{
-    for (const order of orders) {
-      await createOrders ( { userId, total, fullfilled, createdAt, modifiedAt } );
-    }
-    console.log('insertion of orders successful', err);
-  } catch(err) {
-    console.log('error inserting orders', err)
-  }
-}
+// const insertOrder = async () => {
+//   try{
+//     for (const order of orders) {
+//       await createOrders ( { userId, total, fullfilled, createdAt, modifiedAt } );
+//     }
+//     console.log('insertion of orders successful', err);
+//   } catch(err) {
+//     console.log('error inserting orders', err)
+//   }
+// }
 
-const insertOrderItems = async() => {
-  try{
-  for (const orderItem of orderItems) {
-    await createOrderItems ( { orderId, productId, quantity, createAt, modifiedAt } )
-  }
-  console.log('inserting order items successful', err);
-  } catch(err) {
-    console.log( 'error inserting order items', err)
-  }
-}
+// const insertOrderItems = async() => {
+//   try{
+//   for (const orderItem of orderItems) {
+//     await createOrderItems ( { orderId, productId, quantity, createAt, modifiedAt } )
+//   }
+//   console.log('inserting order items successful', err);
+//   } catch(err) {
+//     console.log( 'error inserting order items', err)
+//   }
+// }
 
 
 const seedDatabse = async () => {
@@ -604,8 +612,8 @@ const seedDatabse = async () => {
         await insertProducts();
         await insertAddresses();
         await insertBilling();
-        await insertOrder();
-        await insertOrderItems();
+        // await insertOrder();
+        // await insertOrderItems();
     }
     catch (err) {
         throw err;
