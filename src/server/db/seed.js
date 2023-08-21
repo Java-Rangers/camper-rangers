@@ -533,7 +533,7 @@ const createTables = async () => {
 async function insertAddresses() {
   try{
     for (const address of addresses){
-      createAddress({userId: address.userID, address: address.address, state: address.state, zip: address.zip})
+      createAddress({userID: address.userID, address: address.address, state: address.state, zip: address.zip})
     }
   }catch(err){
     console.error(err)
@@ -545,7 +545,7 @@ async function insertAddresses() {
 async function insertBilling() {
   try {
     for (const billing of billingInfo){
-      await createBilling({userId: billing.userID, paymentType: billing.paymentType, cardNumber: billing.cardNumber})
+      await createBilling({userID: billing.userID, paymentType: billing.paymentType, cardNumber: billing.cardNumber})
     }
     console.log('---Creating Initial Billing Data---');
   } catch(err) {
