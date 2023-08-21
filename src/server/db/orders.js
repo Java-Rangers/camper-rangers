@@ -1,3 +1,6 @@
+const db = require('./client')
+
+
 const createOrders = async (userId, total, fullfilled, createdAt, modifiedAt) => {
     try {
         console.log('creating orders...')
@@ -13,3 +16,7 @@ const createOrders = async (userId, total, fullfilled, createdAt, modifiedAt) =>
         throw error;
     }
 } 
+
+module.exports = {
+    createOrders
+}

@@ -1,3 +1,5 @@
+const db = require('./client')
+
 const createOrderItems = async (orderId, productId, quantity, createdAt, modifiedAt) => {
     try {
         console.log('creating order items...')
@@ -12,4 +14,8 @@ const createOrderItems = async (orderId, productId, quantity, createdAt, modifie
         console.error('error creating order items...', error)
         throw error;
     }
-} 
+}
+
+module.exports = {
+    createOrderItems
+}
