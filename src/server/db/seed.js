@@ -2,7 +2,7 @@ const db = require('./client');
 const { createUser } = require('./users');
 const { createProduct } = require('./product');
 const { createBilling } = require('./billing');
-const { createAddresses } = require('./address');
+const { createAddress } = require('./address');
 
 const users = [
   {
@@ -523,7 +523,7 @@ const createTables = async () => {
 async function insertAddresses() {
   try{
     for (const address of addresses){
-      createAddresses({userId: address.userId, address: address.address, state: address.state, zip: address.zip})
+      createAddress({userId: address.userId, address: address.address, state: address.state, zip: address.zip})
     }
   }catch(err){
     console.error(err)

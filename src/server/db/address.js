@@ -1,6 +1,6 @@
 const db = require('./client');
 
-const createAddresses = async ({userId, address, state, zip}) => {
+const createAddress = async ({userId, address, state, zip}) => {
   try{
     const { rows: [ addressInfo ] } = await db.query(`
     INSERT INTO address("userId", address, state, zip)
@@ -27,7 +27,7 @@ const getAddressByUser = async (userId) => {
 }
 
 modeule.exports = {
-  createAddresses,
+  createAddress,
   getAddressByUser
 }
 
