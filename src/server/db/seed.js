@@ -546,37 +546,7 @@ async function insertBilling() {
   }
 }
 
-// POPULATES ORDERS TABLE
-async function createInitialOrders() {
-  try {
-    console.log('---Creating Initial Orders Data---');
-    await client.query(`
-      INSERT INTO orders ("userId", total, fullfilled, createdAt, modifiedAt)
-      VALUES
-        (1, REPLACE_WITH_VARIABLE_OF_PRODUCT_PRICE_SUM, false, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP()),
-        (2, REPLACE_WITH_VARIABLE_OF_PRODUCT_PRICE_SUM, false, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP())
-    `);
-  } catch(err) {
-    console.error(err);
-    throw err;
-  }
-}
 
-// POPULATES ORDERITEMS TABLE
-async function createInitialOrderItems() {
-  try {
-    console.log('---Creating Initial Order Items Data---');
-    await client.query(`
-      INSERT INTO orderItems ("orderId", "productId", quantity, createdAt, modifiedAt)
-      VALUES
-        (1, 1, 3, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP()),
-        (2, 4, 3, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP())
-    `);
-  } catch(err) {
-    console.error(err);
-    throw err;
-  }
-}
 
 const insertUsers = async () => {
   try {
@@ -604,12 +574,8 @@ const insertProducts = async () => {
 
 const insertOrder = async () => {
   try{
-  
     for (const order of orders) {
-      
       await createOrders ( { userId, total, fullfilled, createdAt, modifiedAt } );
-      
-    
     }
     console.log('insertion of orders successful', err);
   } catch(err) {
@@ -617,6 +583,16 @@ const insertOrder = async () => {
   }
 }
 
+const insertOrderItems = async() => {
+  try{
+  for (const orderItem of orderItems) {
+    await createOrderItems ( { orderId, productId, quantity, createAt, modifiedAt } )
+  }
+  console.log('inserting order items successful', err);
+  } catch(err) {
+    console.log( 'error inserting order items', err)
+  }
+}
 
 
 const seedDatabse = async () => {
@@ -626,9 +602,10 @@ const seedDatabse = async () => {
         await createTables();
         await insertUsers();
         await insertProducts();
-        await insertOrder();
         await insertAddresses();
         await insertBilling();
+        await insertOrder();
+        await insertOrderItems();
     }
     catch (err) {
         throw err;
