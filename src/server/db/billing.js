@@ -4,12 +4,12 @@ const db = require('./client');
 const bcrypt = require('bcrypt');
 const SALT_COUNT = 10;
 
-const createBilling = async ({userId, paymentType, cardNumber}) => {
+const createBilling = async ({userID, paymentType, cardNumber}) => {
   try{
     const { rows: [billingInfo]} = await db.query(`
-    INSERT INTO billing("userId", "paymentType", "cardNumber")
+    INSERT INTO billing("userID", "paymentType", "cardNumber")
     VALUES($1, $2, $3)
-    RETURNING *`, [userId, paymentType, cardNumber]);
+    RETURNING *`, [userID, paymentType, cardNumber]);
 
     return billingInfo;
   }catch(err){
@@ -17,12 +17,12 @@ const createBilling = async ({userId, paymentType, cardNumber}) => {
   }
 }
 
-const getBillingByUser = async (userId) => {
+const getBillingByUser = async (userID) => {
   try{
     const { rows: [ billingInfo ] } = await db.query(`
     SELECT *
     FROM billing
-    WHERE userId=$1`, [userId]);
+    WHERE "userID"=$1`, [userID]);
 
     return billingInfo;
   }catch(err){
