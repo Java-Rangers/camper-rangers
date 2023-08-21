@@ -1,11 +1,11 @@
 const db = require('./client')
 const { getProductById } = require('./product')
 
-const createOrderItems = async (orderId, productId, quantity, createdAt, modifiedAt) => {
+const createOrderItems = async ({orderId, productId, quantity, createdAt, modifiedAt}) => {
     try {
         console.log('creating order items...')
         const { rows: [orderItems] } = await db.query(`
-            INSERT INTO 'orderItems'('orderId', 'productId', quantity, 'createdAt', 'modifiedAt')
+            INSERT INTO "orderItems"("orderId", "productId", quantity, "createdAt", "modifiedAt")
             VALUES ($1, $2, $3, $4, $5)
             RETURNING *
         `, [orderId, productId, quantity, createdAt, modifiedAt])
@@ -22,7 +22,7 @@ const getAllOrderItems = async() => {
     try {
         const { rows: [productId] } = await client.query(`
             SELECT id
-            FROM 'orderItems';
+            FROM "orderItems";
         `);
 
         const products = await Promise.all(productId.map(
@@ -41,8 +41,7 @@ const getCartItems = async(orderId) => {
     try {
         const { rows: [products] } = await client.query(`
             SELECT *
-            FROM 'orderItems'
-            WHERE orderId = $1
+            FROM "orderItems"
         `, [orderId])
 
         const orders = await Promise.all(orderItems.map(

@@ -2,6 +2,8 @@ const db = require('./client');
 const { createUser } = require('./users');
 const { createProduct } = require('./product');
 const { createBilling } = require('./billing');
+const { createOrderItems } =require('./orderItems');
+const { createOrders } = require ('./orders')
 const { createAddress } = require('./address');
 
 const users = [
@@ -600,6 +602,23 @@ const insertProducts = async () => {
   }
 }
 
+const insertOrder = async () => {
+  try{
+  
+    for (const order of orders) {
+      
+      await createOrders ( { userId, total, fullfilled, createdAt, modifiedAt } );
+      
+    
+    }
+    console.log('insertion of orders successful', err);
+  } catch(err) {
+    console.log('error inserting orders', err)
+  }
+}
+
+
+
 const seedDatabse = async () => {
     try {
         db.connect();
@@ -607,6 +626,7 @@ const seedDatabse = async () => {
         await createTables();
         await insertUsers();
         await insertProducts();
+        await insertOrder();
         await insertAddresses();
         await insertBilling();
     }
