@@ -1,6 +1,10 @@
 const db = require('./client');
 const { createUser } = require('./users');
 const { createProduct } = require('./product');
+const { createBilling } = require('./billing');
+const { createOrderItems } = require ('./orderItems');
+const { createOrders } = require ('./orders')
+const { createAddress } = require('./address');
 
 const users = [
   {
@@ -51,11 +55,8 @@ const users = [
     email: 'backend_ranger@gmail.com',
     password: 'securepass',
   },
-  // Add more user objects as needed
 ];  
 
-
-// ----------product dummy data------------------
 const products = [
   {
     title:'Super Tent',
@@ -67,7 +68,6 @@ const products = [
     quantity: 12,
     price: 150
   },
-
   {
     title:'All-Weather Tent',
     description:'Rugged and wind proof',
@@ -78,7 +78,6 @@ const products = [
     quantity: 10,
     price: 200
   },
-
   {
     title:'Survivalist Tent',
     description:'its just a tent',
@@ -89,7 +88,6 @@ const products = [
     quantity: 8,
     price: 200
   },
-
   {
     title:'Family Tent',
     description:'like regular tent but better',
@@ -100,7 +98,6 @@ const products = [
     quantity: 4,
     price: 400
   },
-
   {
     title:'Single Tent',
     description:'also a normal tent',
@@ -111,7 +108,6 @@ const products = [
     quantity: 2,
     price: 700
   },
-
   {
     title:'Carabiner',
     description:'Great for climbing, also never fails',
@@ -122,7 +118,6 @@ const products = [
     quantity: 2000,
     price: 10
   },
-
   {
     title:'Water Bottle',
     description:'Stores water, and other liquids',
@@ -133,7 +128,6 @@ const products = [
     quantity: 100,
     price: 40
   },
-
   {
     title:'Camp Burner',
     description:'Starts fires for....cooking..',
@@ -144,7 +138,6 @@ const products = [
     quantity: 6,
     price: 100
   },
-
   {
     title:'Stakes',
     description:'Holds down tents, and other accessories',
@@ -155,7 +148,6 @@ const products = [
     quantity: 200,
     price: 5
   },
-
   {
     title:'Tent Poles',
     description:'Spare poles for your overprices tents',
@@ -166,7 +158,6 @@ const products = [
     quantity: 350,
     price: 30
   },
-
   {
     title:'Outdoors Tent',
     description:'Keeps you dry',
@@ -177,7 +168,6 @@ const products = [
     quantity: 12,
     price: 150
   },
-
   {
     title:'Indoors Tent',
     description:'Rugged and Windproof',
@@ -188,7 +178,6 @@ const products = [
     quantity: 10,
     price: 200
   },
-
   {
     title:'Generic Tent',
     description:'Its literally, just a tent',
@@ -199,7 +188,6 @@ const products = [
     quantity: 8,
     price: 200
   },
-
   {
     title:'Hunter Tent',
     description:'Like a regular tent, but more redneck',
@@ -210,7 +198,6 @@ const products = [
     quantity: 4,
     price: 400
   },
-
   {
     title:'Mountaineer Tent',
     description:'Also a normal Tent',
@@ -221,7 +208,6 @@ const products = [
     quantity: 2,
     price: 700
   },
-
   {
     title:'Tent',
     description:'Keeps you dry in outdoor enviroments!',
@@ -232,7 +218,6 @@ const products = [
     quantity: 12,
     price: 150
   },
-
   {
     title:'Ultra Tent',
     description:'Rugged and wind proof',
@@ -243,7 +228,6 @@ const products = [
     quantity: 10,
     price: 200
   },
-
   {
     title:'The Tent',
     description:'Much Like the dude, it is actually just a tent',
@@ -254,7 +238,6 @@ const products = [
     quantity: 8,
     price: 200
   },
-
   {
     title:'Range Tent',
     description:'Like a regular tent, but bulletproof for...accidents',
@@ -265,7 +248,6 @@ const products = [
     quantity: 4,
     price: 4000
   },
-
   {
     title:'Tent 9',
     description:'There be aliens living among us...',
@@ -276,7 +258,6 @@ const products = [
     quantity: 2,
     price: 900
   },
-
   {
     title:'Fishing Pole',
     description:'Sturdy construction, reliable',
@@ -287,7 +268,6 @@ const products = [
     quantity: 4,
     price: 210
   },
-
   {
     title:'Bait',
     description:'Fish eat this',
@@ -298,7 +278,6 @@ const products = [
     quantity: 20,
     price: 30
   },
-
   {
     title:'Tackle',
     description:'Hook Included',
@@ -309,7 +288,6 @@ const products = [
     quantity: 40,
     price: 45
   },
-
   {
     title:'Mountain Bike',
     description:'At least two wheels',
@@ -320,7 +298,6 @@ const products = [
     quantity: 6,
     price: 450
   },
-
   {
     title:'First Aid Kit',
     description:'Heal the injured and the sick, all basics included',
@@ -331,7 +308,6 @@ const products = [
     quantity: 23,
     price: 50
   },
-
   {
     title:'MRE',
     description:'2,000 - 3,000 calories, beware the gum...',
@@ -342,7 +318,6 @@ const products = [
     quantity: 50,
     price: 30
   },
-
   {
     title:'Sleeping Bag',
     description:'Probably way to hot, but at least its comfy',
@@ -353,7 +328,6 @@ const products = [
     quantity: 3,
     price: 300
   },
-
   {
     title:'Cold Weather jacket',
     description:'Great for breaking harsh mountain winds and keeping warm',
@@ -364,7 +338,6 @@ const products = [
     quantity: 8,
     price: 120
   },
-
   {
     title:'Snowshoes',
     description:'Keeps you from sinking into the snow',
@@ -375,7 +348,6 @@ const products = [
     quantity: 65,
     price: 120
   },
-
   {
     title:'Ice Pick',
     description:'In case you want to climb a glacier...or breaking ice for coctails, your call',
@@ -386,7 +358,6 @@ const products = [
     quantity: 70,
     price: 200
   },
-
   {
     title:'hat',
     description:'Helps keep the sun out of your eyes',
@@ -397,19 +368,152 @@ const products = [
     quantity: 100,
     price: 35
   }
-
 ];
+
+const addresses = [
+  {
+    userID: 1,
+    street: '123 Applewood Lane',
+    city: 'Evergreen',
+    state: 'OH',
+    zip: '43210'
+  },
+  {
+    userID: 2,
+    street: '456 Birch Street',
+    city: 'Sunnyville',
+    state: 'CA',
+    zip: '98765'
+  },
+  {
+    userID: 3,
+    street: '789 Cedar Drive',
+    city: 'Maple Ridge',
+    state: 'IL',
+    zip: '60606'
+  },
+  {
+    userID: 4,
+    street: '321 Dogwood Avenue',
+    city: 'Starlight',
+    state: 'TX',
+    zip: '75001'
+  },
+  {
+    userID: 5,
+    street: '654 Elm Place',
+    city: 'Rivertown',
+    state: 'PA',
+    zip: '19191'
+  },
+  {
+    userID: 6,
+    street: '987 Fir Blvd',
+    city: 'Stone Creek',
+    state: 'NY',
+    zip: '11223'
+  },
+  // {
+  //   userId: 7,
+  //   street: '257 Maple Avenue',
+  //   city: 'Suncrest',
+  //   state: 'CA',
+  //   zip: '91025'
+  // },
+  // {
+  //   userId: 8,
+  //   street: '482 Oak Lane',
+  //   city: 'Misty Meadows',
+  //   state: 'TX',
+  //   zip: '77544'
+  // },
+  // {
+  //   userId: 9,
+  //   street: '109 Pine Circle',
+  //   city: 'Blue Harbor',
+  //   state: 'NY',
+  //   zip: '11492'
+  // },
+  // {
+  //   userId: 10,
+  //   street: '604 Birch Drive',
+  //   city: 'Silver Peak',
+  //   state: 'FL',
+  //   zip: '33981'
+  // }
+]
+
+const billingInfo = [
+  {
+    userID: 1,
+    paymentType: 'Credit card',
+    cardNumber: '1111-2222-3333-4444',
+  },
+  {
+    userID: 2,
+    paymentType: 'Debit card',
+    cardNumber: '5555-6666-7777-8888',
+  }
+]
+
+const orderItems = [
+  {
+    orderID: 1,
+    productID: 22,
+    quantity: 1,
+    createdAt: "08-22-2023 11:01:42",
+    modifiedAt: "08-22-2023 11:01:42",
+  },
+  {
+    orderID: 2,
+    productID: 12,
+    quantity: 7,
+    createdAt: "08-22-2023 11:01:42",
+    modifiedAt: "08-22-2023 11:01:42",
+  },
+  {
+    orderID: 3,
+    productID: 3,
+    quantity: 2,
+    createdAt: "08-22-2023 11:01:42",
+    modifiedAt: "08-22-2023 11:01:42"
+  }
+]
+
+const orders = [
+  {
+    userID: 1, //find way to dynamically insert var
+    total: 34.99, //find way to dynamically calculate the total
+    fullfilled: false,
+    createdAt: "08-22-2023 11:01:42",
+    modifiedAt: "08-22-2023 11:01:42"
+  },
+  {
+    userID: 2,
+    total: 149.99,
+    fullfilled: false,
+    createdAt: "08-22-2023 11:01:42",
+    modifiedAt: "08-22-2023 11:01:42",
+  },
+  {
+    userID: 2,
+    total: 359.99,
+    fullfilled: true,
+    createdAt: "08-22-2023 11:01:42",
+    modifiedAt: "08-22-2023 11:01:42",
+  }
+]
 
 const dropTables = async () => {
     console.log('---Dropping Tables---')  
     try {
         await db.query(`
-        DROP TABLE IF EXISTS users CASCADE;
+        DROP TABLE IF EXISTS orders CASCADE ;
+        DROP TABLE IF EXISTS "orderItems" ;
         DROP TABLE IF EXISTS products CASCADE;
-        DROP TABLE IF EXISTS orderItems ;
-        DROP TABLE IF EXISTS orders ;
-        DROP TABLE IF EXISTS address ;
-        DROP TABLE IF EXISTS billing ;
+        DROP TABLE IF EXISTS address;
+        DROP TABLE IF EXISTS billing;
+        DROP TABLE IF EXISTS users;
         `)
     }
     catch(err) {
@@ -423,14 +527,37 @@ const createTables = async () => {
     try{
         await db.query(`
         CREATE TABLE users(
-            id SERIAL PRIMARY KEY,
-            username VARCHAR(255) DEFAULT 'name',
-            "fName" VARCHAR(255), 
-            "lName" VARCHAR (255),
-            "isAdmin" BOOLEAN,
-            email VARCHAR(255) UNIQUE NOT NULL,
-            password VARCHAR(255) NOT NULL
+          id SERIAL PRIMARY KEY,
+          username VARCHAR (255), 
+          "fName" VARCHAR(255),
+          "lName" VARCHAR (255),
+          "isAdmin" BOOLEAN,
+          email VARCHAR(255) UNIQUE NOT NULL,
+          password VARCHAR(255) NOT NULL
         );
+        CREATE TABLE billing (
+          id SERIAL PRIMARY KEY,
+          "userID" INTEGER REFERENCES users(id),
+          "paymentType" VARCHAR(255),
+          "cardNumber" VARCHAR(255)
+        );  
+        CREATE TABLE address (
+          id SERIAL PRIMARY KEY,
+          "userID" INTEGER REFERENCES users(id),
+          street VARCHAR(255),
+          city VARCHAR(255),
+          state VARCHAR(255),
+          zip VARCHAR(255)
+        );
+        CREATE TABLE orders (
+          id SERIAL PRIMARY KEY,
+          "userID" INTEGER REFERENCES users(id),
+          total DECIMAL,
+          "createdAt" TIMESTAMP,
+          "modifiedAt" TIMESTAMP,
+          fullfilled BOOLEAN
+        );
+        
         CREATE TABLE products (
           id SERIAL PRIMARY KEY,
           title TEXT,
@@ -441,39 +568,17 @@ const createTables = async () => {
           category TEXT,
           price DECIMAL,
           quantity INTEGER
-        ); 
-        CREATE TABLE billing (
-            id SERIAL PRIMARY KEY,
-            "userId" INTEGER REFERENCES users(id),
-            paymentType VARCHAR(255),
-            cardNumber VARCHAR(255),
-            createdAt TIMESTAMP,
-            modifiedAt TIMESTAMP
-        );  
-        CREATE TABLE address (
-            id SERIAL PRIMARY KEY,
-            "userId" INTEGER REFERENCES users(id),
-            address VARCHAR(255),
-            state VARCHAR(255),
-            zip VARCHAR(255)
+      );          
+        
+        CREATE TABLE "orderItems" (
+          id SERIAL PRIMARY KEY,
+          "orderId" INTEGER REFERENCES orders(id),
+          "productId" INTEGER REFERENCES products(id),
+          "createdAt" TIMESTAMP,
+          "modifiedAt" TIMESTAMP,
+          quantity INTEGER
         );
-        CREATE TABLE orders (
-            id SERIAL PRIMARY KEY,
-            "userId" INTEGER REFERENCES users(id),
-            total INTEGER,
-            createdAt TIMESTAMP,
-            modifiedAt TIMESTAMP,
-            fullfilled BOOLEAN
-        );
-        CREATE TABLE orderItems (
-            id SERIAL PRIMARY KEY,
-            "orderId" INTEGER REFERENCES orders(id),
-            "productId" INTEGER REFERENCES products(id),
-            createdAt TIMESTAMP,
-            modifiedAt TIMESTAMP,
-            quantity INTEGER
-        );
-         
+        
         `)
     }
     catch(err) {
@@ -483,23 +588,11 @@ const createTables = async () => {
 }
 
 // POPULATES ADDRESS TABLE
-async function createInitialAddress() {
+async function insertAddresses() {
   try{
-    console.log('---Creating Initial Address Data---')
-    await client.query(`
-    INSERT INTO address ("userId", address, state, zip)
-    VALUES
-      (1, '123 Applewood Lane, Evergreen', 'OH', '43210'),
-      (2, '456 Birch Street, Sunnyville', 'CA', '98765'),
-      (3, '789 Cedar Drive, Maple Ridge', 'IL', '60606'),
-      (4, '321 Dogwood Avenue, Starlight', 'TX', '75001'),
-      (5, '654 Elm Place, Rivertown', 'PA', '19191'),
-      (6, '987 Fir Blvd, Stone Creek', 'NY', '11223'),
-      (7, '257 Maple Avenue, Suncrest', 'CA', '91025'),
-      (8, '482 Oak Lane, Misty Meadows', 'TX', '77544'),
-      (9, '109 Pine Circle, Blue Harbor', 'NY', '11492'),
-      (10, '604 Birch Drive, Silver Peak', 'FL', '33981')
-    `);
+    for (const address of addresses){
+      createAddress({userID: address.userID, street: address.street, city: address.city, state: address.state, zip: address.zip})
+    }
   }catch(err){
     console.error(err)
     throw err
@@ -507,52 +600,19 @@ async function createInitialAddress() {
 }
 
 // POPULATES BILLING TABLE
-async function createInitialBilling() {
+async function insertBilling() {
   try {
+    for (const billing of billingInfo){
+      await createBilling({userID: billing.userID, paymentType: billing.paymentType, cardNumber: billing.cardNumber})
+    }
     console.log('---Creating Initial Billing Data---');
-    await client.query(`
-      INSERT INTO billing ("userId", paymentType, cardNumber, createdAt, modifiedAt)
-      VALUES
-        (1, 'Credit', '1111-2222-3333-4444', CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP()),
-        (2, 'Debit', '1111-2222-3333-4444', CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP())
-    `);
   } catch(err) {
     console.error(err);
     throw err;
   }
 }
 
-// POPULATES ORDERS TABLE
-async function createInitialOrders() {
-  try {
-    console.log('---Creating Initial Orders Data---');
-    await client.query(`
-      INSERT INTO orders ("userId", total, fullfilled, createdAt, modifiedAt)
-      VALUES
-        (1, REPLACE_WITH_VARIABLE_OF_PRODUCT_PRICE_SUM, false, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP()),
-        (2, REPLACE_WITH_VARIABLE_OF_PRODUCT_PRICE_SUM, false, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP())
-    `);
-  } catch(err) {
-    console.error(err);
-    throw err;
-  }
-}
 
-// POPULATES ORDERITEMS TABLE
-async function createInitialOrderItems() {
-  try {
-    console.log('---Creating Initial Order Items Data---');
-    await client.query(`
-      INSERT INTO orderItems ("orderId", "productId", quantity, createdAt, modifiedAt)
-      VALUES
-        (1, 1, 3, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP()),
-        (2, 4, 3, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP())
-    `);
-  } catch(err) {
-    console.error(err);
-    throw err;
-  }
-}
 
 const insertUsers = async () => {
   try {
@@ -564,12 +624,6 @@ const insertUsers = async () => {
     console.error('Error inserting seed data:', error);
   }
 };
-
-
-
-
-//-----------------Dummy product data--------------------------------------------
-
 
 const insertProducts = async () => {
   try{
@@ -584,34 +638,27 @@ const insertProducts = async () => {
   }
 }
 
-// ----------------------- Product table data ---------------------------------------------------------
+const insertOrder = async () => {
+  try{
+    for (const order of orders) {
+      await createOrders ( { userID: order.userID, total: order.total, fullfilled: order.fullfilled, createdAt: order.createdAt, modifiedAt: order.modifiedAt } );
+    }
+    console.log('insertion of orders successful');
+  } catch(err) {
+    console.log('error inserting orders', err)
+  }
+}
 
-// async function createProductTables() {
-//     try {
-//         console.log('creating product tables...')
-
-//         await client.query(`
-//             CREATE TABLE products (
-//                 id SERIAL PRIMARY KEY,
-//                 title TEXT UNIQUE NOT NULL,
-//                 description TEXT NOT NULL,
-//                 brand varchar(225) NOT NULL,
-//                 availability boolean DEFAULT true,
-//                 image varchar(225) NOT NULL,
-//                 category TEXT NOT NULL,
-//                 quantity INTEGER NOT NULL
-//                 price INTEGER NOT NULL
-//             );
-//         `)
-
-//         console.log(`Product tables created!`)
-//     } catch(error) {
-//         console.error(error)
-//         throw error;
-//     }
-// }
-
-
+const insertOrderItems = async() => {
+  try{
+  for (const orderItem of orderItems) {
+    await createOrderItems ( { orderID: orderItem.orderID, productID: orderItem.productID, quantity: orderItem.quantity, createdAt: orderItem.createdAt, modifiedAt: orderItem.modifiedAt } )
+  }
+  console.log('inserting order items successful');
+  } catch(err) {
+    console.log( 'error inserting order items', err)
+  }
+}
 
 
 const seedDatabse = async () => {
@@ -621,6 +668,10 @@ const seedDatabse = async () => {
         await createTables();
         await insertUsers();
         await insertProducts();
+        await insertAddresses();
+        await insertBilling();
+        await insertOrder();
+        await insertOrderItems();
     }
     catch (err) {
         throw err;
