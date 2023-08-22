@@ -7,7 +7,7 @@ const {
     deleteBillingById,
     updateBillingById,
 } = require('../db');
-const { deleteBillingById } = require('../db/billing');
+
 
 
 
@@ -24,7 +24,7 @@ billingRouter.get('/', async (req, res, next) => {
 });
 
 // GET /api/:userId
-billingRouter.get('/:userId', async(req,res,next) =>{
+billingRouter.get('/:userID', async(req,res,next) =>{
     try {
         const user = await getBillingByUser(req.params.userId);
         res.send(user)
@@ -33,7 +33,7 @@ billingRouter.get('/:userId', async(req,res,next) =>{
     }
 })
 
-billingRouter.delete('/:userId', async(req, res,next) => {
+billingRouter.delete('/:userID', async(req, res,next) => {
     try {
         const user = await deleteBillingById(req.params.userId);
         res.send(user);
