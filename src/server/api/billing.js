@@ -3,7 +3,9 @@ const billingRouter = express.Router();
 
 const {
     createBilling,
-    getBillingByUser
+    getBillingByUser,
+    deleteBillingById,
+    updateBillingById,
 } = require('../db');
 const { deleteBillingById } = require('../db/billing');
 
@@ -34,12 +36,20 @@ billingRouter.get('/:userId', async(req,res,next) =>{
 billingRouter.delete('/:userId', async(req, res,next) => {
     try {
         const user = await deleteBillingById(req.params.userId);
-        res.send(bike);
+        res.send(user);
     } catch (error){
         next(error)
     }
 })
 
+billingRouter.patch ('/:userID', async(req, res, next) => {
+    try {
+        const user = await updateBillingById(req.params.userID, req.body);
+        res.send(user);
+    } catch (error){
+        next (error)
+    }
+})
 
 
 
