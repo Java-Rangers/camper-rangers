@@ -30,7 +30,44 @@ const getBillingByUser = async (userID) => {
   }
 }
 
+async function updateBillingById(userId, fields ={}){
+  const setString = object.keys(fields).map(
+    (key, index) => `"${key}"=$${index + 1}`
+  ) .join(', ');
+    if (setString.length === 0) {
+      return;
+    }
+    try{
+      const { rows: [billingInfo] } = await client.query(`
+      UPDATE billing
+      SET ${setString}
+      WHERE id={userId}
+      RETURNING *;
+      `, Object.values(fields))
+
+      return billingInfo
+    } catch (error){
+      throw error;
+    }
+}
+  
+
+async function deleteBillingById(userId){
+  try {
+    const { rows: [billingInfo] } = await client.query(`
+    DELETE FROM billing
+    WHERE id=$1
+    RETURNING *;
+    `, [billingInfo]);
+    return bike;
+} catch (error) {
+    throw error;
+}
+}
+
 module.exports = {
   createBilling,
-  getBillingByUser
+  getBillingByUser,
+  updateBillingById,
+  deleteBillingById
 }
