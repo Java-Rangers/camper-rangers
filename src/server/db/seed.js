@@ -2,7 +2,7 @@ const db = require('./client');
 const { createUser } = require('./users');
 const { createProduct } = require('./product');
 const { createBilling } = require('./billing');
-const { createOrderItems } =require('./orderItems');
+const { createOrderItems } = require ('./orderItems');
 const { createOrders } = require ('./orders')
 const { createAddress } = require('./address');
 
@@ -446,14 +446,61 @@ const billingInfo = [
   }
 ]
 
+const orderItems = [
+  {
+    orderID: 1,
+    productID: 22,
+    quantity: 1,
+    createdAt: "08-22-2023 11:01:42",
+    modifiedAt: "08-22-2023 11:01:42",
+  },
+  {
+  orderID: 2,
+  productID: 12,
+  quantity: 7,
+  createdAt: "08-22-2023 11:01:42",
+  modifiedAt: "08-22-2023 11:01:42",
+  },
+  {
+  orderID: 3,
+  productID: 3,
+  quantity: 2,
+  createdAt: "08-22-2023 11:01:42",
+  modifiedAt: "08-22-2023 11:01:42"
+  }
+]
+
+const orders = [
+  {
+    userID: 1, //find way to dynamically insert var
+    total: 34.99, //find way to dynamically calculate the total
+    fullfilled: false,
+    createdAt: "08-22-2023 11:01:42",
+    modifiedAt: "08-22-2023 11:01:42"
+  },
+  {
+  userID: 2,
+  total: 149.99,
+  fullfilled: false,
+  createdAt: "08-22-2023 11:01:42",
+  modifiedAt: "08-22-2023 11:01:42",
+  },
+  {
+    userID: 2,
+    total: 359.99,
+    fullfilled: true,
+    createdAt: "08-22-2023 11:01:42",
+    modifiedAt: "08-22-2023 11:01:42",
+  }
+]
+
 const dropTables = async () => {
     console.log('---Dropping Tables---')  
     try {
         await db.query(`
-        
-        DROP TABLE IF EXISTS orderItems;
-        DROP TABLE IF EXISTS orders;
-        DROP TABLE IF EXISTS products;
+        DROP TABLE IF EXISTS orders CASCADE ;
+        DROP TABLE IF EXISTS "orderItems" ;
+        DROP TABLE IF EXISTS products CASCADE;
         DROP TABLE IF EXISTS address;
         DROP TABLE IF EXISTS billing;
         DROP TABLE IF EXISTS users;
@@ -494,9 +541,9 @@ const createTables = async () => {
         CREATE TABLE orders (
             id SERIAL PRIMARY KEY,
             "userID" INTEGER REFERENCES users(id),
-            total INTEGER,
-            createdAt TIMESTAMP,
-            modifiedAt TIMESTAMP,
+            total DECIMAL,
+            "createdAt" TIMESTAMP,
+            "modifiedAt" TIMESTAMP,
             fullfilled BOOLEAN
         );
         
@@ -512,12 +559,12 @@ const createTables = async () => {
           quantity INTEGER
       );          
         
-        CREATE TABLE orderItems (
+        CREATE TABLE "orderItems" (
             id SERIAL PRIMARY KEY,
             "orderId" INTEGER REFERENCES orders(id),
             "productId" INTEGER REFERENCES products(id),
-            createdAt TIMESTAMP,
-            modifiedAt TIMESTAMP,
+            "createdAt" TIMESTAMP,
+            "modifiedAt" TIMESTAMP,
             quantity INTEGER
         );
         
@@ -580,27 +627,27 @@ const insertProducts = async () => {
   }
 }
 
-// const insertOrder = async () => {
-//   try{
-//     for (const order of orders) {
-//       await createOrders ( { userId, total, fullfilled, createdAt, modifiedAt } );
-//     }
-//     console.log('insertion of orders successful', err);
-//   } catch(err) {
-//     console.log('error inserting orders', err)
-//   }
-// }
+const insertOrder = async () => {
+  try{
+    for (const order of orders) {
+      await createOrders ( { userID: order.userID, total: order.total, fullfilled: order.fullfilled, createdAt: order.createdAt, modifiedAt: order.modifiedAt } );
+    }
+    console.log('insertion of orders successful');
+  } catch(err) {
+    console.log('error inserting orders', err)
+  }
+}
 
-// const insertOrderItems = async() => {
-//   try{
-//   for (const orderItem of orderItems) {
-//     await createOrderItems ( { orderId, productId, quantity, createAt, modifiedAt } )
-//   }
-//   console.log('inserting order items successful', err);
-//   } catch(err) {
-//     console.log( 'error inserting order items', err)
-//   }
-// }
+const insertOrderItems = async() => {
+  try{
+  for (const orderItem of orderItems) {
+    await createOrderItems ( { orderID: orderItem.orderID, productID: orderItem.productID, quantity: orderItem.quantity, createdAt: orderItem.createdAt, modifiedAt: orderItem.modifiedAt } )
+  }
+  console.log('inserting order items successful');
+  } catch(err) {
+    console.log( 'error inserting order items', err)
+  }
+}
 
 
 const seedDatabse = async () => {
@@ -612,8 +659,8 @@ const seedDatabse = async () => {
         await insertProducts();
         await insertAddresses();
         await insertBilling();
-        // await insertOrder();
-        // await insertOrderItems();
+        await insertOrder();
+        await insertOrderItems();
     }
     catch (err) {
         throw err;
