@@ -5,7 +5,7 @@ const db = require('./client');
 const createAddress = async ({userID, street, city, state, zip}) => {
   try{
     const { rows: [ address ] } = await db.query(`
-    INSERT INTO address("userID", address, state, zip)
+    INSERT INTO address("userID", street, city, state, zip)
     VALUES($1, $2, $3, $4, $5)
     RETURNING *`, [userID, street, city, state, zip]);
 
@@ -51,6 +51,30 @@ const editAddress = async (id) => {
     const { rows: [address] } = await db.query(`
     UPDATE address SET ${somevariable}
     WHERE id=$1`, [id])
+  }catch(err){
+    throw err
+  }
+}
+
+const editAddressByUser = async () => {
+  try{
+
+  }catch(err){
+    throw err
+  }
+}
+
+const deleteAddress = async () => {
+  try{
+
+  }catch(err){
+    throw err
+  }
+}
+
+const deleteAddressByUser = async () => {
+  try{
+
   }catch(err){
     throw err
   }
