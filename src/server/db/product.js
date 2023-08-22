@@ -15,6 +15,21 @@ const createProduct = async({title, description, brand, availability, image, cat
   }
 }
 
+const getProducts = async() => {
+  try{
+    const {rows: [product] } = await db.query(`
+    SELECT * 
+    FROM products
+    RETURNING *
+    `)
+    
+    console.log('GET all products successful')
+    return product
+  } catch (err) {
+    console.log('error getting all products', err)
+  }
+}
+
 const getProductById = async(productId) => {
   try {
     const { rows: [product] } = await db.query(`
@@ -34,5 +49,6 @@ const getProductById = async(productId) => {
 
 module.exports = {
   createProduct,
+  getProducts,
   getProductById
 }
