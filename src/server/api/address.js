@@ -43,6 +43,7 @@ addressRouter.get('/:id', async(req, res, next) => {
 })
 
 // ADDS A NEW ADDRESS TO DATABASE
+// need to pass in the userID the address will be assigned to, is this variable inside the req.body?
 addressRouter.post('/', async(req, res, next) => {
   const {userID, street, city, state, zip} = req.body
   try{
