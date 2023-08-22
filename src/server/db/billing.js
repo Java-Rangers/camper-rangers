@@ -4,12 +4,12 @@ const db = require('./client');
 const bcrypt = require('bcrypt');
 const SALT_COUNT = 10;
 
-const createBilling = async ({userId, paymentType, cardNumber, createdAt, modifiedAt}) => {
+const createBilling = async ({userID, paymentType, cardNumber, createdAt, modifiedAt}) => {
   try{
     const { rows: [billingInfo]} = await db.query(`
     INSERT INTO billing("userId", "paymentType", "cardNumber", "createdAt", "modifiedAt")
     VALUES($1, $2, $3, $4, $5)
-    RETURNING *`, [userId, paymentType, cardNumber, createdAt, modifiedAt]);
+    RETURNING *`, [userID, paymentType, cardNumber, createdAt, modifiedAt]);
 
     return billingInfo;
   }catch(err){
@@ -17,12 +17,12 @@ const createBilling = async ({userId, paymentType, cardNumber, createdAt, modifi
   }
 }
 
-const getBillingByUser = async (userId) => {
+const getBillingByUser = async (userID) => {
   try{
     const { rows: [ billingInfo ] } = await db.query(`
     SELECT *
     FROM billing
-    WHERE userId=$1`, [userId]);
+    WHERE userId=$1`, [userID]);
 
     return billingInfo;
   }catch(err){
@@ -30,7 +30,7 @@ const getBillingByUser = async (userId) => {
   }
 }
 
-async function updateBillingById(userId, fields ={}){
+async function updateBillingById(userID, fields ={}){
   const setString = object.keys(fields).map(
     (key, index) => `"${key}"=$${index + 1}`
   ) .join(', ');
@@ -41,7 +41,7 @@ async function updateBillingById(userId, fields ={}){
       const { rows: [billingInfo] } = await client.query(`
       UPDATE billing
       SET ${setString}
-      WHERE id={userId}
+      WHERE id={userID}
       RETURNING *;
       `, Object.values(fields))
 
@@ -52,7 +52,7 @@ async function updateBillingById(userId, fields ={}){
 }
   
 
-async function deleteBillingById(userId){
+async function deleteBillingById(userID){
   try {
     const { rows: [billingInfo] } = await client.query(`
     DELETE FROM billing
@@ -64,6 +64,8 @@ async function deleteBillingById(userId){
     throw error;
 }
 }
+
+
 
 module.exports = {
   createBilling,
