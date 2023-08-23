@@ -27,7 +27,6 @@ export default function SingleProduct() {
             title: data.products.title,
             description: data.products.description,
             brand: data.products.brand,
-            availability: data.products.availability,
             image: data.products.image,
             quantity: data.products.quantity,
             price: data.products.price
@@ -37,6 +36,14 @@ export default function SingleProduct() {
     console.log(product);
 
     return <div className="singleProduct">
+        <h1>{product.title}</h1>
+        <h3>{product.brand}</h3>
+        <img src={product.image}/>
+        <p>{product.description}</p>
+        <h3>{product.quantity}</h3>
+        <h3>{product.price}</h3>
 
+        <Link to='/' className="backButton"><button>go back</button></Link>
+        
     </div>
 }
