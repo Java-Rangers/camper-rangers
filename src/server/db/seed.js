@@ -373,61 +373,71 @@ const products = [
 const addresses = [
   {
     userID: 1,
-    address: '123 Applewood Lane, Evergreen',
+    street: '123 Applewood Lane',
+    city: 'Evergreen',
     state: 'OH',
     zip: '43210'
   },
   {
     userID: 2,
-    address: '456 Birch Street, Sunnyville',
+    street: '456 Birch Street',
+    city: 'Sunnyville',
     state: 'CA',
     zip: '98765'
   },
   {
     userID: 3,
-    address: '789 Cedar Drive, Maple Ridge',
+    street: '789 Cedar Drive',
+    city: 'Maple Ridge',
     state: 'IL',
     zip: '60606'
   },
   {
     userID: 4,
-    address: '321 Dogwood Avenue, Starlight',
+    street: '321 Dogwood Avenue',
+    city: 'Starlight',
     state: 'TX',
     zip: '75001'
   },
   {
     userID: 5,
-    address: '654 Elm Place, Rivertown',
+    street: '654 Elm Place',
+    city: 'Rivertown',
     state: 'PA',
     zip: '19191'
   },
   {
     userID: 6,
-    address: '987 Fir Blvd, Stone Creek',
+    street: '987 Fir Blvd',
+    city: 'Stone Creek',
     state: 'NY',
     zip: '11223'
   },
   // {
   //   userId: 7,
-  //   address: '257 Maple Avenue, Suncrest',
+  //   street: '257 Maple Avenue',
+  //   city: 'Suncrest',
   //   state: 'CA',
   //   zip: '91025'
   // },
   // {
   //   userId: 8,
-  //   address: '482 Oak Lane, Misty Meadows',
+  //   street: '482 Oak Lane',
+  //   city: 'Misty Meadows',
   //   state: 'TX',
   //   zip: '77544'
   // },
   // {
   //   userId: 9,
-  //   address: '109 Pine Circle, Blue Harbor',
+  //   street: '109 Pine Circle',
+  //   city: 'Blue Harbor',
   //   state: 'NY',
   //   zip: '11492'
   // },
   // {
   //   userId: 10,
-  //   address: '604 Birch Drive, Silver Peak',
+  //   street: '604 Birch Drive',
+  //   city: 'Silver Peak',
   //   state: 'FL',
   //   zip: '33981'
   // }
@@ -455,18 +465,18 @@ const orderItems = [
     modifiedAt: "08-22-2023 11:01:42",
   },
   {
-  orderID: 2,
-  productID: 12,
-  quantity: 7,
-  createdAt: "08-22-2023 11:01:42",
-  modifiedAt: "08-22-2023 11:01:42",
+    orderID: 2,
+    productID: 12,
+    quantity: 7,
+    createdAt: "08-22-2023 11:01:42",
+    modifiedAt: "08-22-2023 11:01:42",
   },
   {
-  orderID: 3,
-  productID: 3,
-  quantity: 2,
-  createdAt: "08-22-2023 11:01:42",
-  modifiedAt: "08-22-2023 11:01:42"
+    orderID: 3,
+    productID: 3,
+    quantity: 2,
+    createdAt: "08-22-2023 11:01:42",
+    modifiedAt: "08-22-2023 11:01:42"
   }
 ]
 
@@ -479,11 +489,11 @@ const orders = [
     modifiedAt: "08-22-2023 11:01:42"
   },
   {
-  userID: 2,
-  total: 149.99,
-  fullfilled: false,
-  createdAt: "08-22-2023 11:01:42",
-  modifiedAt: "08-22-2023 11:01:42",
+    userID: 2,
+    total: 149.99,
+    fullfilled: false,
+    createdAt: "08-22-2023 11:01:42",
+    modifiedAt: "08-22-2023 11:01:42",
   },
   {
     userID: 2,
@@ -517,34 +527,35 @@ const createTables = async () => {
     try{
         await db.query(`
         CREATE TABLE users(
-            id SERIAL PRIMARY KEY,
-            username VARCHAR (255), 
-            "fName" VARCHAR(255),
-            "lName" VARCHAR (255),
-            "isAdmin" BOOLEAN,
-            email VARCHAR(255) UNIQUE NOT NULL,
-            password VARCHAR(255) NOT NULL
+          id SERIAL PRIMARY KEY,
+          username VARCHAR (255), 
+          "fName" VARCHAR(255),
+          "lName" VARCHAR (255),
+          "isAdmin" BOOLEAN,
+          email VARCHAR(255) UNIQUE NOT NULL,
+          password VARCHAR(255) NOT NULL
         );
         CREATE TABLE billing (
-            id SERIAL PRIMARY KEY,
-            "userID" INTEGER REFERENCES users(id),
-            "paymentType" VARCHAR(255),
-            "cardNumber" VARCHAR(255)
+          id SERIAL PRIMARY KEY,
+          "userID" INTEGER REFERENCES users(id),
+          "paymentType" VARCHAR(255),
+          "cardNumber" VARCHAR(255)
         );  
         CREATE TABLE address (
-            id SERIAL PRIMARY KEY,
-            "userID" INTEGER REFERENCES users(id),
-            address VARCHAR(255),
-            state VARCHAR(255),
-            zip VARCHAR(255)
+          id SERIAL PRIMARY KEY,
+          "userID" INTEGER REFERENCES users(id),
+          street VARCHAR(255),
+          city VARCHAR(255),
+          state VARCHAR(255),
+          zip VARCHAR(255)
         );
         CREATE TABLE orders (
-            id SERIAL PRIMARY KEY,
-            "userID" INTEGER REFERENCES users(id),
-            total DECIMAL,
-            "createdAt" TIMESTAMP,
-            "modifiedAt" TIMESTAMP,
-            fullfilled BOOLEAN
+          id SERIAL PRIMARY KEY,
+          "userID" INTEGER REFERENCES users(id),
+          total DECIMAL,
+          "createdAt" TIMESTAMP,
+          "modifiedAt" TIMESTAMP,
+          fullfilled BOOLEAN
         );
         
         CREATE TABLE products (
@@ -560,12 +571,12 @@ const createTables = async () => {
       );          
         
         CREATE TABLE "orderItems" (
-            id SERIAL PRIMARY KEY,
-            "orderId" INTEGER REFERENCES orders(id),
-            "productId" INTEGER REFERENCES products(id),
-            "createdAt" TIMESTAMP,
-            "modifiedAt" TIMESTAMP,
-            quantity INTEGER
+          id SERIAL PRIMARY KEY,
+          "orderId" INTEGER REFERENCES orders(id),
+          "productId" INTEGER REFERENCES products(id),
+          "createdAt" TIMESTAMP,
+          "modifiedAt" TIMESTAMP,
+          quantity INTEGER
         );
         
         `)
@@ -580,7 +591,7 @@ const createTables = async () => {
 async function insertAddresses() {
   try{
     for (const address of addresses){
-      createAddress({userID: address.userID, address: address.address, state: address.state, zip: address.zip})
+      createAddress({userID: address.userID, street: address.street, city: address.city, state: address.state, zip: address.zip})
     }
   }catch(err){
     console.error(err)

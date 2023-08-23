@@ -39,6 +39,12 @@ apiRouter.use('/users', usersRouter);
 const addressRouter = require('./address');
 apiRouter.use('/address', addressRouter);
 
+const productRouter = require('./products');
+apiRouter.use('/products', productRouter);
+
+const adminRouter = require('./admin');
+apiRouter.use('/admin', adminRouter);
+
 apiRouter.use((err, req, res, next) => {
     res.status(500).send(err)
   })
