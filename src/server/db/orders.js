@@ -50,7 +50,7 @@ const getOrderByUser = async (id) => {
   }
 }
 
-const createOrders = async ({userID, total, fullfilled, createdAt, modifiedAt}) => {
+const createOrder = async ({userID, total, fullfilled, createdAt, modifiedAt}) => {
     try {
         console.log('creating orders...')
         const { rows: [orders] } = await db.query(`
@@ -87,6 +87,6 @@ module.exports = {
   getAllOrders,
   getOrder,
   getOrderByUser,
-  createOrders,
+  createOrder,
   getCart
 }
