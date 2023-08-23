@@ -2,7 +2,11 @@ const express = require('express')
 const adminRouter = express.Router();
 
 const {
-  editProduct
+  editProduct,
+  getAllUsers,
+  deleteUser,
+  getUserById
+
 } =require('../db/admin');
 
 adminRouter.patch('/edit/:id', async(req, res, next)  => {
@@ -16,5 +20,31 @@ adminRouter.patch('/edit/:id', async(req, res, next)  => {
   }
 })
 
+adminRouter.get ('/', async (req, res, next) => {
+  try {
+    const user = await getAllUsers();
+    res.send({user})
+  } catch (error) {
+    next(error)
+  }
+})
+
+adminRouter.delete('/:id' , async (req, res, next) => {
+  try {
+    const user = await deleteUser(req.params.id);
+    res.send(user)
+  } catch (error) {
+    next(error)
+  }
+})
+
+adminRouter.get('/:id', async (req, res, next) => {
+  try {
+    const user = await getUserById ( req.params.id);
+    res.send(user);
+  } catch (error){
+    next(error)
+  }
+})
 
 module.exports = adminRouter
