@@ -20,6 +20,7 @@ addressRouter.get('/', async(req, res, next) => {
     const addresses = await getAllAddresses();
     res.send({addresses})
   }catch(err){
+    console.error('Error while getting all addresses', err);
     throw err
   }
 })
@@ -30,6 +31,7 @@ addressRouter.get('/:id', async(req, res, next) => {
     const address = await getAddress(req.params.id)
     res.send({address})
   }catch(err){
+    console.error('Error while getting address by id', err);
     throw err
   }
 })
@@ -40,6 +42,7 @@ addressRouter.get('/user/:id', async(req, res, next) => {
     const address = await getAddressByUser(req.params.id);
     res.send({address})
   }catch(err){
+    console.error('Error while getting address by user id', err);
     throw err
   }
 })
@@ -54,6 +57,7 @@ addressRouter.post('/', async(req, res, next) => {
     const address = await createAddress({userID, street, city, state, zip})
     res.send({address})
   }catch(err){
+    console.error('Error while creating new address', err);
     throw err
   }
 })
@@ -67,6 +71,7 @@ addressRouter.patch('/:id', async(req, res, next) => {
     console.log(typeof address, address)
     res.send({address})
   }catch(err){
+    console.error('Error while updating address by id', err);
     throw err
   }
 })
@@ -77,6 +82,7 @@ addressRouter.patch('/user/:id', async(req, res, next) => {
     const address = await editAddressByUser(req.params.id, req.body)
     res.send({address})
   }catch(err){
+    console.error('Error while updating address by user id', err);
     throw err
   }
 })
@@ -89,6 +95,7 @@ addressRouter.delete('/:id', async(req, res, next) => {
     const address = await deleteAddress(req.params.id)
     res.send({address})
   }catch(err){
+    console.error('Error while deleting address by id', err);
     throw err
   }
 })
@@ -99,6 +106,7 @@ addressRouter.delete('/user/:id', async(req, res, next) => {
     const address = await deleteAddressByUser(req.params.id)
     res.send({address})
   }catch(err){
+    console.error('Error while deleting address by user id', err);
     throw err
   }
 })

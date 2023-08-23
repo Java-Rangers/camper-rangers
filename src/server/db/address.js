@@ -34,6 +34,7 @@ const getAllAddresses = async () => {
     const addresses = await db.query(`SELECT * FROM address`)
     return addresses.rows
   }catch(err){
+    console.error('Error while getting all addresses', err);
     throw err
   }
 }
@@ -46,6 +47,7 @@ const getAddress = async (id) => {
     WHERE id = $1`, [id])
     return address
   }catch(err){
+    console.error('Error while getting address by id', err);
     throw err
   }
 }
@@ -58,6 +60,7 @@ const getAddressByUser = async (id) => {
     WHERE "userID"=$1`, [id]);
     return address;
   }catch(err){
+    console.error('Error while getting address by user id', err);
     throw err
   }
 }
@@ -75,6 +78,7 @@ const createAddress = async ({userID, street, city, state, zip}) => {
 
     return address;
   }catch(err){
+    console.error('Error while creating address', err);
     throw err
   }
 }
@@ -101,6 +105,7 @@ const editAddress = async (id, fields = {}) => {
     console.log('data to be returned: ', {rows: [address]})
     return address;
   }catch(err){
+    console.error('Error while updating address by id', err);
     throw err
   }
 }
@@ -121,6 +126,7 @@ const editAddressByUser = async (id, fields = {}) => {
     RETURNING *;`, [...Object.values(fields), id]);
     return address;
   }catch(err){
+    console.error('Error while updating address by user id', err);
     throw err
   }
 }
@@ -133,6 +139,7 @@ const deleteAddress = async (id) => {
     DELETE FROM address WHERE id=$1`, [id]);
     return address;
   }catch(err){
+    console.error('Error while deleting address by id', err);
     throw err
   }
 }
@@ -143,6 +150,7 @@ const deleteAddressByUser = async (id) => {
     DELETE FROM address WHERE "userID"=$1`, [id]);
     return address;
   }catch(err){
+    console.error('Error while deleting address by user id', err);
     throw err
   }
 }
