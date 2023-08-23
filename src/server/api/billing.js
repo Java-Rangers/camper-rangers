@@ -12,7 +12,7 @@ const {
 
 
 // GET /api/createBilling
-billingRouter.get('/', async (req, res, next) => {
+billingRouter.post('/', async (req, res, next) => {
     try {
         const billing = await createBilling();
 
@@ -26,7 +26,7 @@ billingRouter.get('/', async (req, res, next) => {
 // GET /api/:userId
 billingRouter.get('/:userID', async(req,res,next) =>{
     try {
-        const user = await getBillingByUser(req.params.userId);
+        const user = await getBillingByUser(req.params.id);
         res.send(user)
     } catch (error){
         next(error)
@@ -35,7 +35,7 @@ billingRouter.get('/:userID', async(req,res,next) =>{
 
 billingRouter.delete('/:userID', async(req, res,next) => {
     try {
-        const user = await deleteBillingById(req.params.userId);
+        const user = await deleteBillingById(req.params.id);
         res.send(user);
     } catch (error){
         next(error)
@@ -44,7 +44,7 @@ billingRouter.delete('/:userID', async(req, res,next) => {
 
 billingRouter.patch ('/:userID', async(req, res, next) => {
     try {
-        const user = await updateBillingById(req.params.userID, req.body);
+        const user = await updateBillingById(req.params.id, req.body);
         res.send(user);
     } catch (error){
         next (error)
