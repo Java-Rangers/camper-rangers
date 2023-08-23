@@ -18,3 +18,5 @@ function App() {
 }
 
 export default App;
+
+export { BASE_URL } ; 
