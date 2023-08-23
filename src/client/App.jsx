@@ -2,6 +2,8 @@ import { useState } from 'react';
 import reactLogo from './assets/react.svg';
 import Login from './components/Login';
 
+const BASE_URL = 'http://localhost:3000/api'
+
 function App() {
   const [count, setCount] = useState(0);
 
