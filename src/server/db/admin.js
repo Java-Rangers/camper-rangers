@@ -2,7 +2,7 @@ const { query } = require('express');
 const db = require('./client');
 const { getProductById } = require('./product');
 
-const editProduct = async ( postID, fields = {} ) => {
+const editProduct = async ( id, fields = {} ) => {
   
   // build set string from input field
   const setString = Object.keys(fields).map(
@@ -11,15 +11,15 @@ const editProduct = async ( postID, fields = {} ) => {
   
   try {
     if (setString.length > 0) {
-      await client.query(`
+      await db.query(`
       UPDATE products
       SET ${ setString }
-      WHERE id=${postID}
+      WHERE id=$${id}
       RETURNING *;
       `, Object.values(fields));
     }
   
-    return await getProductById (postID);
+    return await getProductById (id);
   } catch(err) {
     console.log('error editing product', err)
   } 
