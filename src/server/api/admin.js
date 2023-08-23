@@ -15,4 +15,6 @@ adminRouter.patch('/edit/:id', async(req, res, next)  => {
     console.log('error route to edit product', err)
   }
 })
+
+
 module.exports = adminRouter
