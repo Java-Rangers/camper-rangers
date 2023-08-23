@@ -26,7 +26,7 @@ productRouter.get('/', async (req, res, next) => {
 // -----------------routes to a single product page that will useable on click--------------
 productRouter.get('/:id', async (req, res, next) => {
   try{
-    const singleProduct = await getProductById();
+    const singleProduct = await getProductById(req.params.id);
 
     res.send({
       singleProduct
