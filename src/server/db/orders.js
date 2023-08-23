@@ -20,11 +20,11 @@ const createOrders = async ({userID, total, fullfilled, createdAt, modifiedAt}) 
 const getCart = async(userId) => {
     console.log('getting cart...')
     try {
-        const { rows:[order] } = await db.query(`
+        const { rows: [order] } = await db.query(`
             SELECT *
             FROM orders
-            WHERE fullfilled = false
-        `, [order])
+            WHERE fullfilled = false AND "userID" = $1
+        `, [userId])
         
         return order;
        

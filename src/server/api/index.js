@@ -32,6 +32,8 @@ apiRouter.use(async (req, res, next) => {
   }
 });
 
+const cartRouter = require('./cart');
+apiRouter.use('/cart', cartRouter);
 
 const usersRouter = require('./users');
 apiRouter.use('/users', usersRouter);
@@ -44,6 +46,9 @@ apiRouter.use('/products', productRouter);
 
 const adminRouter = require('./admin');
 apiRouter.use('/admin', adminRouter);
+
+const billingRouter = require('./billing');
+apiRouter.use('/billing', billingRouter);
 
 apiRouter.use((err, req, res, next) => {
     res.status(500).send(err)
