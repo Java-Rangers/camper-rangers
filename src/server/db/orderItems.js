@@ -55,7 +55,7 @@ const getCartItems = async(orderId) => {
     }
 }
 
-const createOrderItem = async()
+// const createOrderItem = async()
 
 const editOrderItem = async ({id, orderID, productID, quantity, modifiedAt}) => {
     try {
@@ -72,10 +72,11 @@ const editOrderItem = async ({id, orderID, productID, quantity, modifiedAt}) => 
     }
 }
 
-const deleteCartItem = async(order)
+// const deleteCartItem = async(order)
 
 module.exports = {
     createOrderItems,
     getAllOrderItems,
-    getCartItems
+    getCartItems,
+    editOrderItem
 }
