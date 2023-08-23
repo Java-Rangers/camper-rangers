@@ -1,10 +1,17 @@
 const express = require('express');
+<<<<<<< HEAD
+const usersRouter = express.Router();
+=======
 const productRouter = express.Router();
+>>>>>>> main
 
 const {
   createProduct,
   getProducts,
   getProductById
+<<<<<<< HEAD
+} = require ('../db/product')
+=======
 } = require ('../db/product')
 
 
@@ -26,7 +33,7 @@ productRouter.get('/', async (req, res, next) => {
 // -----------------routes to a single product page that will useable on click--------------
 productRouter.get('/:id', async (req, res, next) => {
   try{
-    const singleProduct = await getProductById();
+    const singleProduct = await getProductById(req.params.id);
 
     res.send({
       singleProduct
@@ -38,3 +45,4 @@ productRouter.get('/:id', async (req, res, next) => {
 })
 
 module.exports = productRouter;
+>>>>>>> main
