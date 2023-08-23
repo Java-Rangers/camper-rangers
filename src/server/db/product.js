@@ -17,6 +17,19 @@ const createProduct = async({title, description, brand, availability, image, cat
 
 const getProducts = async() => {
   try{
+<<<<<<< HEAD
+    const {rows: [product] } = await db.query(`
+    SELECT * 
+    FROM products
+    RETURNING *
+    `)
+    
+    console.log('GET all products successful')
+    return product
+  } catch (err) {
+    console.log('error getting all products', err)
+  }
+=======
     const products = await db.query(`
     SELECT *
     FROM products
@@ -27,6 +40,7 @@ const getProducts = async() => {
     console.log('error getting products', err)
   }
 
+>>>>>>> main
 }
 
 const getProductById = async(productId) => {
@@ -48,6 +62,11 @@ const getProductById = async(productId) => {
 
 module.exports = {
   createProduct,
+<<<<<<< HEAD
+  getProducts,
+  getProductById
+=======
   getProductById,
   getProducts
+>>>>>>> main
 }

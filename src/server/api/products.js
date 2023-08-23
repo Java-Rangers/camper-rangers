@@ -1,10 +1,17 @@
 const express = require('express');
+<<<<<<< HEAD
+const usersRouter = express.Router();
+=======
 const productRouter = express.Router();
+>>>>>>> main
 
 const {
   createProduct,
   getProducts,
   getProductById
+<<<<<<< HEAD
+} = require ('../db/product')
+=======
 } = require ('../db/product')
 
 
@@ -38,3 +45,4 @@ productRouter.get('/:id', async (req, res, next) => {
 })
 
 module.exports = productRouter;
+>>>>>>> main
