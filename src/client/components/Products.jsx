@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 
 export default function Products( {token} ) {
@@ -25,5 +25,15 @@ export default function Products( {token} ) {
 // setSearch([]);
 //setEarchActive (false);
 // }
+  useEffect(() => {
+    
+    const getAllProducts = async () => {
+      try{
+        const response = await fetch (`${BASE_URL}/`)
+      } catch(err) {
+        console.log('error fetching ALL PRODUCTS', err)
+      }
+    }
+  })
 
 }

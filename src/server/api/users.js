@@ -5,11 +5,12 @@ const {
     createUser,
     getUser,
     getUserByEmail
-} = require('../db');
+} = require('../db/users');
 
 const jwt = require('jsonwebtoken')
 
 usersRouter.get('/', async( req, res, next) => {
+    console.log('getting users...')
     try {
         const users = await getAllUsers();
 
@@ -22,6 +23,7 @@ usersRouter.get('/', async( req, res, next) => {
 });
 
 usersRouter.post('/login', async(req, res, next) => {
+    console.log('logging in')
     const { email, password } = req.body;
     if(!email || !password) {
         next({
@@ -51,6 +53,7 @@ usersRouter.post('/login', async(req, res, next) => {
             });
         }
     } catch(err) {
+        console.error(err);
         next(err);
     }
 });
