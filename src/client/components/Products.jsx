@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { BASE_URL } from 'App';
-import { post } from '../../server/api/address';
+import { BASE_URL } from '../App';
 
 
 export default function Products( {token} ) {
