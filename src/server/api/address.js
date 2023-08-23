@@ -63,7 +63,8 @@ addressRouter.post('/', async(req, res, next) => {
 // EDITS AN ADDRESS BY ID
 addressRouter.patch('/:id', async(req, res, next) => {
   try{
-    const address = await editAddress(req.params)
+    const address = await editAddress(req.params.id, req.body)
+    console.log(typeof address, address)
     res.send({address})
   }catch(err){
     throw err
@@ -73,7 +74,7 @@ addressRouter.patch('/:id', async(req, res, next) => {
 // EDITS AN ADDRESS BY USER ID
 addressRouter.patch('/user/:id', async(req, res, next) => {
   try{
-    const address = await editAddressByUser(req.params)
+    const address = await editAddressByUser(req.params.id, req.body)
     res.send({address})
   }catch(err){
     throw err
@@ -85,7 +86,7 @@ addressRouter.patch('/user/:id', async(req, res, next) => {
 // DELETES AN ADDRESS BY ID
 addressRouter.delete('/:id', async(req, res, next) => {
   try{
-    const address = await deleteAddress(req.params)
+    const address = await deleteAddress(req.params.id)
     res.send({address})
   }catch(err){
     throw err
@@ -95,7 +96,7 @@ addressRouter.delete('/:id', async(req, res, next) => {
 // DELETES AN ADDRESS BY USER ID
 addressRouter.delete('/user/:id', async(req, res, next) => {
   try{
-    const address = await deleteAddressByUser(req.params)
+    const address = await deleteAddressByUser(req.params.id)
     res.send({address})
   }catch(err){
     throw err

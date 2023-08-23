@@ -55,8 +55,28 @@ const getCartItems = async(orderId) => {
     }
 }
 
+// const createOrderItem = async()
+
+const editOrderItem = async ({id, orderID, productID, quantity, modifiedAt}) => {
+    try {
+        console.log('editing order items...')
+        const { rows: [editOrderItem] } = await client.query(`
+            UPDATE "orderItems"
+            SET "orderId = $1, "productId" = $2, quantity = $3, "modifiedAt" = $4
+            WHERE id = $5
+            RETURNING *
+        `, [orderID, productID, quantity, modifiedAt, id])
+        console.log('item edited succesfully!')
+    } catch(err) {
+        console.log('error editing item...',err)
+    }
+}
+
+// const deleteCartItem = async(order)
+
 module.exports = {
     createOrderItems,
     getAllOrderItems,
-    getCartItems
+    getCartItems,
+    editOrderItem
 }

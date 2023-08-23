@@ -1,3 +1,30 @@
+/*
+GET /api/address/
+  ---gets all addresses
+
+GET /api/address/id
+  ---gets an address by id
+
+GET /api/address/user/id
+  ---gets an address by user id
+
+POST /api/address/
+  ---posts a new address
+  ---requires a user id
+
+PATCH /api/address/id
+  ---updates an address by id
+
+PATCH /api/address/user/id
+  ---updates an address by user id
+
+DELETE /api/address/id
+  ---deletes an address by id
+
+DELETE /api/address/user/id
+  ---deletes an address by user id
+*/
+
 const db = require('./client');
 
 // --------------------GET FUNCTIONS--------------------
@@ -11,6 +38,7 @@ const getAllAddresses = async () => {
   }
 }
 
+// currently only displays the first address, not built for multiple addresses
 const getAddress = async (id) => {
   try{
     const { rows: [address] } = await db.query(`
@@ -22,11 +50,12 @@ const getAddress = async (id) => {
   }
 }
 
-const getAddressByUser = async (userID) => {
+// currently only displays the first address, not built for multiple addresses
+const getAddressByUser = async (id) => {
   try{
     const { rows: [address] } = await db.query(`
     SELECT * FROM address
-    WHERE "userID"=$1`, [userID]);
+    WHERE "userID"=$1`, [id]);
     return address;
   }catch(err){
     throw err
@@ -51,20 +80,46 @@ const createAddress = async ({userID, street, city, state, zip}) => {
 }
 
 // --------------------EDIT FUNCTIONS-----------------------
+  // takes the object fields, and returns an array of its keys
+  // maps over that array, for each property it creates and joins strings for SQL's SET function
+  // Object.values(fields) returns an array of all the key values of fields
 
-const editAddress = async (id) => {
+const editAddress = async (id, fields = {}) => {
+
+  const setString = Object.keys(fields).map(
+    (key, index) => `"${key}"=$${index + 1}`
+  ).join(', ');
+
+  if (setString.length === 0){
+    return;
+  }  
   try{
     const { rows: [address] } = await db.query(`
-    UPDATE address SET ${somevariable}
-    WHERE id=$1`, [id])
+    UPDATE address SET ${setString}
+    WHERE id=$${Object.keys(fields).length + 1}
+    RETURNING *;`, [...Object.values(fields), id]);
+    console.log('data to be returned: ', {rows: [address]})
+    return address;
   }catch(err){
     throw err
   }
 }
 
-const editAddressByUser = async () => {
-  try{
+const editAddressByUser = async (id, fields = {}) => {
 
+  const setString = Object.keys(fields).map(
+    (key, index) => `"${key}"=$${index + 1}`
+  ).join(', ');
+
+  if (setString.length === 0){
+    return;
+  }
+  try{
+    const { rows: [address] } = await db.query(`
+    UPDATE address SET ${setString}
+    WHERE "userID"=$${Object.keys(fields).length + 1}
+    RETURNING *;`, [...Object.values(fields), id]);
+    return address;
   }catch(err){
     throw err
   }
@@ -72,17 +127,21 @@ const editAddressByUser = async () => {
 
 // -------------------DELETE FUNCTIONS-------------------
 
-const deleteAddress = async () => {
+const deleteAddress = async (id) => {
   try{
-
+    const { rows: [address] } = await db.query(`
+    DELETE FROM address WHERE id=$1`, [id]);
+    return address;
   }catch(err){
     throw err
   }
 }
 
-const deleteAddressByUser = async () => {
+const deleteAddressByUser = async (id) => {
   try{
-
+    const { rows: [address] } = await db.query(`
+    DELETE FROM address WHERE "userID"=$1`, [id]);
+    return address;
   }catch(err){
     throw err
   }

@@ -1,5 +1,54 @@
+/*
+GET /api/orders/id
+  ---get order by id
+
+GET /api/orders
+  ---get all orders
+
+GET /api/orders/user/id
+  ---get order by user id
+
+POST /api/orders
+  ---create a new order
+  ---when will this be needed? what situation?
+
+PATCH /api/orders/id
+  ---edits order by id
+  ---adding/removing orderItems from order
+*/
+
 const db = require('./client')
 
+const getAllOrders = async () => {
+  try{
+    const orders = await db.query(`SELECT * FROM orders`);
+    return orders.rows;
+  }catch(err){
+    throw err
+  }
+}
+
+const getOrder = async (id) => {
+  try{
+    const { rows: [order] } = await db.query(`
+    SELECT * FROM orders
+    WHERE id=$1`, [id]);
+    return order;
+  }catch(err){
+    throw err
+  }
+}
+
+const getOrderByUser = async (id) => {
+  try{
+    const { rows: [order] } = await db.query(`
+    SELECT * FROM orders
+    WHERE "userID"=$1`, [id]);
+    return order;
+  }catch(err){
+    throw err
+  }
+}
 
 const createOrders = async ({userID, total, fullfilled, createdAt, modifiedAt}) => {
     try {
@@ -35,6 +84,9 @@ const getCart = async(userId) => {
 }
 
 module.exports = {
-    createOrders,
-    getCart
+  getAllOrders,
+  getOrder,
+  getOrderByUser,
+  createOrders,
+  getCart
 }
