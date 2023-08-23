@@ -25,6 +25,48 @@ const editProduct = async ( id, fields = {} ) => {
   } 
 }
 
+
+async function deleteUser(id){
+  try{
+    const { rows: [user] } = await db.query(`
+     DELETE FROM user
+     WHERE id=$1
+     RETURNING *;
+    `, [id])
+    return user
+  } catch (error){
+    throw error;
+  }
+}
+
+async function getAllUsers() {
+  try {
+    const { rows: users } = await db.query(`
+      SELECT * FROM users;
+    `);
+    return users
+  } catch (error) {
+    throw error;
+  }
+
+}
+
+async function getUserById(id) {
+  try {
+    const { rows: [user] } = await db.query(`
+      SELECT * FROM user
+      WHERE id = $1;
+    `, [id])
+    return user
+  } catch (error){
+    throw error
+  }
+}
+
+
 module.exports = {
-  editProduct
+  editProduct,
+  getAllUsers,
+  deleteUser,
+  getUserById
 }
