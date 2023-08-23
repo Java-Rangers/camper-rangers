@@ -6,7 +6,7 @@ const {
     getBillingByUser,
     deleteBillingById,
     updateBillingById,
-} = require('../db');
+} = require('../db/billing');
 
 
 
@@ -24,28 +24,28 @@ billingRouter.post('/', async (req, res, next) => {
 });
 
 // GET /api/:userId
-billingRouter.get('/:userID', async(req,res,next) =>{
+billingRouter.get('/:id', async(req,res,next) =>{
     try {
         const user = await getBillingByUser(req.params.id);
-        res.send(user)
+        res.send({user})
     } catch (error){
         next(error)
     }
 })
 
-billingRouter.delete('/:userID', async(req, res,next) => {
+billingRouter.delete('/:id', async(req, res,next) => {
     try {
         const user = await deleteBillingById(req.params.id);
-        res.send(user);
+        res.send({user});
     } catch (error){
         next(error)
     }
 })
 
-billingRouter.patch ('/:userID', async(req, res, next) => {
+billingRouter.patch ('/:id', async(req, res, next) => {
     try {
         const user = await updateBillingById(req.params.id, req.body);
-        res.send(user);
+        res.send({user});
     } catch (error){
         next (error)
     }
