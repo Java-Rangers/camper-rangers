@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-
+import { API } from '../App';
 import { BASE_URL } from '../App';
 
 
@@ -11,46 +11,47 @@ export default function Products( {token} ) {
   const [ searchActive, setSearchActive ] = useState(false);
 
 
-const handleSearch = () => {
+// const handleSearch = () => {
 
-  const filteredProducts = products.filter(product => {
+//   const filteredProducts = products.filter(product => {
     
-    return product.title.toLowerCase().includes(searchBar.toLocaleLowerCase());
-  });
-}
-setSearch(filteredProducts);
-setSearchActive(true);
-console.log(filteredProducts);
+//     return product.title.toLowerCase().includes(searchBar.toLocaleLowerCase());
+//   });
+// }
+// setSearch(filteredProducts);
+// setSearchActive(true);
+// console.log(filteredProducts);
 
-const clearSearch = () => {
-setSearchBar('') 
-setSearch([]);
-setSearchActive (false);
-}
+// const clearSearch = () => {
+// setSearchBar('') 
+// setSearch([]);
+// setSearchActive (false);
+// }
 
-    
+useEffect (() => {    
   const getAllProducts = async () => {
     
     try{
       
-      const response = await fetch (`${BASE_URL}/products`)
+      const response = await fetch (`${API}/products`)
 
       const data = await response.json();
 
       console.log('fetch all products success', data);
-      setProducts (data)
+      setProducts (data.products)
     } catch(err) {
       
       console.log('error fetching ALL PRODUCTS', err)
       
     }
-
-  }
+}  
   getAllProducts();
 
+}, [])
   return (
       <>
         <div>
+          <h1>PRODUCTS COMPONENT TEST</h1>
           <div id ='searchContainer'>
             <h1> Products </h1>
             <form onSubmit = {(e)=> {
@@ -74,10 +75,10 @@ setSearchActive (false);
             search.map(product => (
               <div key= {product._id} className='productsContainer'>
                 <div className='productCard'>  
-                  <h3 className='postTitle'> {product.title} </h3>
-                  <p className='productDescription'> {product.description} </p>
-                  <p className= 'productPrice'> {product.price} </p>
-                  <p className='productBrand'> {product.brand} </p>
+                  <h3 className='postTitle'> {products.title} </h3>
+                  <p className='productDescription'> {products.description} </p>
+                  <p className= 'productPrice'> {products.price} </p>
+                  <p className='productBrand'> {products.brand} </p>
                 </div>
               </div>
               ))
@@ -85,11 +86,11 @@ setSearchActive (false);
                 products.map((products, index) => (
                   <div key = {index} className='productsContainer'> 
                     <div className='productCard'>
-                      <h3 className='postTitle'> {product.title} </h3>
-                      <p className='productDescription'> {product.description} </p>
-                      <p className= 'productPrice'> {product.price} </p>
-                      <p className='productBrand'> {product.brand} </p>
-                      <form onSubmit={(e) = cartSubmit (e, products.id)} >
+                      <h3 className='postTitle'> {products.title} </h3>
+                      <p className='productDescription'> {products.description} </p>
+                      <p className= 'productPrice'> {products.price} </p>
+                      <p className='productBrand'> {products.brand} </p>
+                      {/* <form onSubmit={(e) = cartSubmit (e, products.id)} >
                         <label>
                           <input
                           type = 'submit'
@@ -97,7 +98,7 @@ setSearchActive (false);
                           value='Add to Cart'
                           />
                         </label>
-                      </form>
+                      </form> */}
                     </div>
                   </div>
                 ))
