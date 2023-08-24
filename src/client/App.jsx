@@ -4,6 +4,7 @@ import Login from './components/Login';
 import {Routes, Route} from 'react-router-dom'
 import SingleProduct from './components/SingleProduct';
 import Products from './components/Products'
+import RegisterUser from './components/registerUser';
 
 const API = 'http://localhost:3000/api'
 const BASE_URL = 'http://localhost:3000'
@@ -19,11 +20,14 @@ function App() {
         <p>Replace the starter code in this template with something cool</p>
         <Login /> */}
         <h3>APP Test</h3> 
+        <Products/>
+        <RegisterUser />
     </div>
     
     <Routes>
       <Route path='/products' element={<Products />} />
       <Route path='/products/:id' element={<SingleProduct />} />
+      <Route path='/registerUser' element={<RegisterUser />} />
     </Routes>
     
     </>

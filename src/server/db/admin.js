@@ -1,4 +1,5 @@
 const { query } = require('express');
+const bcrypt = require('bcrypt')
 const db = require('./client');
 const { getProductById } = require('./products');
 
@@ -25,6 +26,22 @@ const editProduct = async ( id, fields = {} ) => {
   } 
 }
 
+async function logIn ({ username, password }) {
+  const {
+    rows: [ user ],
+    
+  } = await db.query(`SELECT * FROM users WHERE username = $1`, [username])
+  if(!user){
+    throw new Error('Username does not exist')
+  }
+
+  const compare = await bcrypt.compare(password, user.password)
+  if (compare) {
+    return user
+  } else {
+    throw new Error ('Passwords do not match')
+  }
+}
 
 async function deleteUser(id){
   try{
@@ -68,5 +85,6 @@ module.exports = {
   editProduct,
   getAllUsers,
   deleteUser,
-  getUserById
+  getUserById,
+  logIn
 }

@@ -8,7 +8,7 @@ const { createAddress } = require('./address');
 
 const users = [
   {
-    username: 'Xpre55 Ranger',
+    username: 'Xpre55ranger',
     fName: 'Emily',
     lName: 'Matherson',
     isAdmin: false,
@@ -16,7 +16,7 @@ const users = [
     password: 'securepass',
   },
   {
-    username: 'React Ranger',
+    username: 'ReactRanger',
     fName: 'Roger',
     lName: 'Blackwood',
     isAdmin: false,
@@ -24,7 +24,7 @@ const users = [
     password: 'securepass',
   },
   {
-    username: 'HTML Ranger',
+    username: 'HTML_Ranger',
     fName: 'Patrick',
     lName: 'Whitestone',
     isAdmin: false,
@@ -53,6 +53,38 @@ const users = [
     lName: 'Goldwater',
     isAdmin: false,
     email: 'backend_ranger@gmail.com',
+    password: 'securepass',
+  },
+  {
+    username: 'Em1ly_CodeGuru',
+    fName: 'Emily',
+    lName: 'Thompsom',
+    isAdmin: false,
+    email: 'em1ly_ArtL0v3r@example.com',
+    password: 'securepass',
+  },
+  {
+    username: 'M1ke_OutdoorDev',
+    fName: 'Michael',
+    lName: 'Stevens',
+    isAdmin: false,
+    email: 'm1chael_Sp33dFreak@example.net',
+    password: 'securepass',
+  },
+  {
+    username: 'S0ph1a_JavaQueen',
+    fName: 'Sophia',
+    lName: 'Martinez',
+    isAdmin: false,
+    email: 's0ph1a_FoodieQu33n@example.org',
+    password: 'securepass',
+  },
+  {
+    username: 'Will_MorphinTime',
+    fName: 'William',
+    lName: 'Clark',
+    isAdmin: false,
+    email: 'w1ll_StarG4z3r@example.co',
     password: 'securepass',
   },
 ];  
@@ -413,46 +445,86 @@ const addresses = [
     state: 'NY',
     zip: '11223'
   },
-  // {
-  //   userId: 7,
-  //   street: '257 Maple Avenue',
-  //   city: 'Suncrest',
-  //   state: 'CA',
-  //   zip: '91025'
-  // },
-  // {
-  //   userId: 8,
-  //   street: '482 Oak Lane',
-  //   city: 'Misty Meadows',
-  //   state: 'TX',
-  //   zip: '77544'
-  // },
-  // {
-  //   userId: 9,
-  //   street: '109 Pine Circle',
-  //   city: 'Blue Harbor',
-  //   state: 'NY',
-  //   zip: '11492'
-  // },
-  // {
-  //   userId: 10,
-  //   street: '604 Birch Drive',
-  //   city: 'Silver Peak',
-  //   state: 'FL',
-  //   zip: '33981'
-  // }
+  {
+    userID: 7,
+    street: '257 Maple Avenue',
+    city: 'Suncrest',
+    state: 'CA',
+    zip: '91025'
+  },
+  {
+    userID: 8,
+    street: '482 Oak Lane',
+    city: 'Misty Meadows',
+    state: 'TX',
+    zip: '77544'
+  },
+  {
+    userID: 9,
+    street: '109 Pine Circle',
+    city: 'Blue Harbor',
+    state: 'NY',
+    zip: '11492'
+  },
+  {
+    userID: 10,
+    street: '604 Birch Drive',
+    city: 'Silver Peak',
+    state: 'FL',
+    zip: '33981'
+  }
 ]
 
 const billingInfo = [
   {
     userID: 1,
-    paymentType: 'Credit card',
+    paymentType: 'credit',
     cardNumber: '1111-2222-3333-4444',
   },
   {
     userID: 2,
-    paymentType: 'Debit card',
+    paymentType: 'debit',
     cardNumber: '5555-6666-7777-8888',
+  },
+  {
+    userID: 3,
+    paymentType: 'debit',
+    cardNumber: '7777-8888-9999-0000',
+  },
+  {
+    userID: 4,
+    paymentType: 'credit',
+    cardNumber: '1111-2222-3333-4444',
+  },
+  {
+    userID: 5,
+    paymentType: 'credit',
+    cardNumber: '5555-6666-7777-8888',
+  },
+  {
+    userID: 6,
+    paymentType: 'debit',
+    cardNumber: '7777-8888-9999-0000',
+  },
+  {
+    userID: 7,
+    paymentType: 'debit',
+    cardNumber: '7777-8888-9999-0000',
+  },
+  {
+    userID: 8,
+    paymentType: 'credit',
+    cardNumber: '1111-2222-3333-4444',
+  },
+  {
+    userID: 9,
+    paymentType: 'credit',
+    cardNumber: '5555-6666-7777-8888',
+  },
+  {
+    userID: 10,
+    paymentType: 'debit',
+    cardNumber: '7777-8888-9999-0000',
   }
 ]
 
@@ -468,9 +540,44 @@ const orderItems = [
     quantity: 7
   },
   {
-    orderID: 3,
+    orderID: 2,
     productID: 3,
     quantity: 2
+  },
+  {
+    orderID: 2,
+    productID: 15,
+    quantity: 6
+  },
+  {
+    orderID: 3,
+    productID: 20,
+    quantity: 3
+  },
+  {
+    orderID: 3,
+    productID: 22,
+    quantity: 1
+  },
+  {
+    orderID: 3,
+    productID: 12,
+    quantity: 17
+  },
+  {
+    orderID: 3,
+    productID: 3,
+    quantity: 21
+  },
+  {
+    orderID: 7,
+    productID: 5,
+    quantity: 62
+  },
+  {
+    orderID: 8,
+    productID: 7,
+    quantity: 12
   }
 ]
 
@@ -486,9 +593,44 @@ const orders = [
     fullfilled: false
   },
   {
-    userID: 2,
+    userID: 3,
+    total: 359.99,
+    fullfilled: false
+  },
+  {
+    userID: 3,
+    total: 34.99,
+    fullfilled: false
+  },
+  {
+    userID: 3,
+    total: 149.99,
+    fullfilled: false
+  },
+  {
+    userID: 4,
     total: 359.99,
     fullfilled: true
+  },
+  {
+    userID: 5,
+    total: 34.99,
+    fullfilled: false
+  },
+  {
+    userID: 6,
+    total: 149.99,
+    fullfilled: false
+  },
+  {
+    userID: 6,
+    total: 359.99,
+    fullfilled: false
+  },
+  {
+    userID: 10,
+    total: 359.99,
+    fullfilled: false
   }
 ]
 
