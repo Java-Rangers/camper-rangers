@@ -11,11 +11,11 @@ export default function SingleProduct() {
     useEffect(() => {
 
         async function fetchData() {
-            const response = await fetch(`${BASE_URL}/products`)
+            const response = await fetch(`${API}/products`)
             const data = await response.json()
 
             console.log(data)
-            setProduct(cleanProduct(data))
+            setProduct(cleanProduct(data.product))
         }
         console.log(data);
         fetchData();

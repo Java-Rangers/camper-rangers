@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-
+import { API } from '../App';
 import { BASE_URL } from '../App';
 
 
@@ -19,40 +19,39 @@ export default function Products( {token} ) {
 //   });
 // }
 // setSearch(filteredProducts);
-//setSearchActive(true);
-// console.log(filteredPosts);
+// setSearchActive(true);
+// console.log(filteredProducts);
 
-//const clearSearch = () => {
+// const clearSearch = () => {
 // setSearchBar('') 
 // setSearch([]);
-//setEarchActive (false);
+// setSearchActive (false);
 // }
-  useEffect(() => {
+
+useEffect (() => {    
+  const getAllProducts = async () => {
     
-    const getAllProducts = async () => {
+    try{
       
-      try{
-        
-        const response = await fetch (`${BASE_URL}/products`)
+      const response = await fetch (`${API}/products`)
 
-        const data = await response.json();
+      const data = await response.json();
 
-        console.log('fetch all products success', data);
-        return data.
-        setProducts (await getAllProducts)
-      } catch(err) {
-        
-        console.log('error fetching ALL PRODUCTS', err)
-        
-      }
-    
+      console.log('fetch all products success', data);
+      setProducts (data.products)
+    } catch(err) {
+      
+      console.log('error fetching ALL PRODUCTS', err)
+      
     }
-    getAllProducts();
-  }, [])
+}  
+  getAllProducts();
 
+}, [])
   return (
       <>
         <div>
+          <h1>PRODUCTS COMPONENT TEST</h1>
           <div id ='searchContainer'>
             <h1> Products </h1>
             <form onSubmit = {(e)=> {
@@ -76,10 +75,10 @@ export default function Products( {token} ) {
             search.map(product => (
               <div key= {product._id} className='productsContainer'>
                 <div className='productCard'>  
-                  <h3 className='postTitle'> {product.title} </h3>
-                  <p className='productDescription'> {product.description} </p>
-                  <p className= 'productPrice'> {product.price} </p>
-                  <p className='productBrand'> {product.brand} </p>
+                  <h3 className='postTitle'> {products.title} </h3>
+                  <p className='productDescription'> {products.description} </p>
+                  <p className= 'productPrice'> {products.price} </p>
+                  <p className='productBrand'> {products.brand} </p>
                 </div>
               </div>
               ))
@@ -87,11 +86,11 @@ export default function Products( {token} ) {
                 products.map((products, index) => (
                   <div key = {index} className='productsContainer'> 
                     <div className='productCard'>
-                      <h3 className='postTitle'> {product.title} </h3>
-                      <p className='productDescription'> {product.description} </p>
-                      <p className= 'productPrice'> {product.price} </p>
-                      <p className='productBrand'> {product.brand} </p>
-                      <form onSubmit={(e) = cartSubmit (e, products.id)} >
+                      <h3 className='postTitle'> {products.title} </h3>
+                      <p className='productDescription'> {products.description} </p>
+                      <p className= 'productPrice'> {products.price} </p>
+                      <p className='productBrand'> {products.brand} </p>
+                      {/* <form onSubmit={(e) = cartSubmit (e, products.id)} >
                         <label>
                           <input
                           type = 'submit'
@@ -99,7 +98,7 @@ export default function Products( {token} ) {
                           value='Add to Cart'
                           />
                         </label>
-                      </form>
+                      </form> */}
                     </div>
                   </div>
                 ))
