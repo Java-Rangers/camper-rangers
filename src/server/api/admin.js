@@ -1,13 +1,32 @@
 const express = require('express')
 const adminRouter = express.Router();
+require('dotenv').config()
+const jwt = require('jsonwebtoken')
+
 
 const {
   editProduct,
   getAllUsers,
   deleteUser,
-  getUserById
+  getUserById,
+  logIn
 
 } =require('../db/admin');
+
+adminRouter.post( '/login', async (req, res) => {
+  try {
+    const { username, password, isAdmin } = req.body
+
+    let user = await logIn({ username, password, isAdmin })
+    
+    
+  
+    res.send({ message: 'You successfully logged in!'})
+  } catch (err) {
+    console.log(err.message)
+    res.status(500).send(err.message)
+  }
+})
 
 adminRouter.patch('/edit/:id', async(req, res, next)  => {
   try{
