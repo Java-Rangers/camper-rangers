@@ -468,9 +468,19 @@ const orderItems = [
     quantity: 7
   },
   {
-    orderID: 3,
+    orderID: 2,
     productID: 3,
     quantity: 2
+  },
+  {
+    orderID: 2,
+    productID: 5,
+    quantity: 6
+  },
+  {
+    orderID: 3,
+    productID: 2,
+    quantity: 1
   }
 ]
 
@@ -481,7 +491,7 @@ const orders = [
     fullfilled: false
   },
   {
-    userID: 2,
+    userID: 3,
     total: 149.99,
     fullfilled: false
   },

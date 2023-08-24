@@ -1,6 +1,20 @@
 const db = require('./client')
 const { getProductById } = require('./products')
 
+
+const getOrderItemsByOrder = async (id) => {
+  try{
+    const { rows: orderItems } = await db.query(`
+    SELECT * FROM "orderItems" WHERE "orderId"=$1`, [id])
+    console.log('order items are: ', orderItems)
+
+    return orderItems
+  }catch(err){
+    console.log('Error getting items by order', err)
+    throw err
+  }
+}
+
 const createOrderItem = async ({orderID, productID, quantity}) => {
     try {
         const { rows: [orderItems] } = await db.query(`
@@ -26,6 +40,7 @@ const getAllOrderItems = async() => {
             product => getProductById(product.id)
         ))
         
+        
         return products
 
     } catch(error) {
@@ -33,23 +48,7 @@ const getAllOrderItems = async() => {
     }
 }
 
-const getCartItems = async(orderId) => {
-    try {
-        const { rows: [products] } = await client.query(`
-            SELECT *
-            FROM "orderItems"
-        `, [orderId])
 
-        const orders = await Promise.all(orderItems.map(
-            product => getProductById(product.id)
-        ))
-
-        return products     
-    } catch(error) {
-        console.error('error getting cart items', error)
-        throw error;
-    }
-}
 
 // const createOrderItem = async()
 
@@ -73,6 +72,6 @@ const editOrderItem = async ({id, orderID, productID, quantity, modifiedAt}) => 
 module.exports = {
     createOrderItem,
     getAllOrderItems,
-    getCartItems,
+    getOrderItemsByOrder,
     editOrderItem
 }

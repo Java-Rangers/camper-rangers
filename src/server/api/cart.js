@@ -5,8 +5,7 @@ const {
     getCartByUser
 } = require('../db/cart')
 
-cartRouter.get('/:id', async (req, res, next) => {
-    console.log('running cart get...')
+cartRouter.get('/user/:id', async (req, res, next) => {
     try {
         const cart = await getCartByUser(req.params.id);
         res.send ({cart})
