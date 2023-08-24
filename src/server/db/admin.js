@@ -1,6 +1,6 @@
 const { query } = require('express');
 const db = require('./client');
-const { getProductById } = require('./product');
+const { getProductById } = require('./products');
 
 const editProduct = async ( id, fields = {} ) => {
   
