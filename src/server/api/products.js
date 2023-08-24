@@ -2,7 +2,7 @@ const express = require("express");
 const usersRouter = express.Router();
 const productRouter = express.Router();
 
-const { createProduct, getProducts, getProductById } = require("../db/product");
+const { createProduct, getProducts, getProductById } = require("../db/products");
 
 //-----------------routes to an all products "home" page-----------------------
 productRouter.get("/", async (req, res, next) => {
