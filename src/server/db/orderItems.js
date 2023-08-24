@@ -6,7 +6,6 @@ const getOrderItemsByOrder = async (id) => {
   try{
     const { rows: orderItems } = await db.query(`
     SELECT * FROM "orderItems" WHERE "orderId"=$1`, [id])
-    console.log('order items are: ', orderItems)
 
     return orderItems
   }catch(err){
