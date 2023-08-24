@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom"
 import { useState, useEffect } from "react"
-import { BASE_URL } from "./app"
+import { BASE_URL } from "../App"
+import { useParams } from "react-router-dom"
 
 export default function SingleProduct() {
 
@@ -10,11 +11,11 @@ export default function SingleProduct() {
     useEffect(() => {
 
         async function fetchData() {
-            const response = await fetch(`${BASE_URL}/products`)
+            const response = await fetch(`${API}/products`)
             const data = await response.json()
 
             console.log(data)
-            setProduct(cleanProduct(data))
+            setProduct(cleanProduct(data.product))
         }
         console.log(data);
         fetchData();

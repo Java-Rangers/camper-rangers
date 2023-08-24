@@ -1,15 +1,27 @@
 const db = require('./client')
-const { getProductById } = require('./product')
+const { getProductById } = require('./products')
 
-const createOrderItems = async ({orderID, productID, quantity, createdAt, modifiedAt}) => {
+
+const getOrderItemsByOrder = async (id) => {
+  try{
+    const { rows: orderItems } = await db.query(`
+    SELECT * FROM "orderItems" WHERE "orderId"=$1`, [id])
+    console.log('order items are: ', orderItems)
+
+    return orderItems
+  }catch(err){
+    console.log('Error getting items by order', err)
+    throw err
+  }
+}
+
+const createOrderItem = async ({orderID, productID, quantity}) => {
     try {
-        console.log('creating order items...')
         const { rows: [orderItems] } = await db.query(`
-            INSERT INTO "orderItems"("orderId", "productId", quantity, "createdAt", "modifiedAt")
-            VALUES ($1, $2, $3, $4, $5)
+            INSERT INTO "orderItems"("orderId", "productId", quantity)
+            VALUES ($1, $2, $3)
             RETURNING *
-        `, [orderID, productID, quantity, createdAt, modifiedAt])
-        console.log('order items created succesfully!')
+        `, [orderID, productID, quantity])
         return orderItems
     } catch(error) {
         console.error('error creating order items...', error)
@@ -18,7 +30,6 @@ const createOrderItems = async ({orderID, productID, quantity, createdAt, modifi
 }
 
 const getAllOrderItems = async() => {
-    console.log('getting all order items...')
     try {
         const { rows: [productId] } = await client.query(`
             SELECT id
@@ -29,6 +40,7 @@ const getAllOrderItems = async() => {
             product => getProductById(product.id)
         ))
         
+        
         return products
 
     } catch(error) {
@@ -36,24 +48,7 @@ const getAllOrderItems = async() => {
     }
 }
 
-const getCartItems = async(orderId) => {
-    console.log('getting cart items...')
-    try {
-        const { rows: [products] } = await client.query(`
-            SELECT *
-            FROM "orderItems"
-        `, [orderId])
 
-        const orders = await Promise.all(orderItems.map(
-            product => getProductById(product.id)
-        ))
-
-        return products     
-    } catch(error) {
-        console.error('error getting cart items', error)
-        throw error;
-    }
-}
 
 // const createOrderItem = async()
 
@@ -75,8 +70,8 @@ const editOrderItem = async ({id, orderID, productID, quantity, modifiedAt}) => 
 // const deleteCartItem = async(order)
 
 module.exports = {
-    createOrderItems,
+    createOrderItem,
     getAllOrderItems,
-    getCartItems,
+    getOrderItemsByOrder,
     editOrderItem
 }

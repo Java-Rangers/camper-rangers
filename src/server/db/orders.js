@@ -50,15 +50,13 @@ const getOrderByUser = async (id) => {
   }
 }
 
-const createOrders = async ({userID, total, fullfilled, createdAt, modifiedAt}) => {
+const createOrder = async ({userID, total, fullfilled}) => {
     try {
-        console.log('creating orders...')
         const { rows: [orders] } = await db.query(`
-            INSERT INTO orders ("userID", total, fullfilled, "createdAt", "modifiedAt")
-            VALUES ($1, $2, $3, $4, $5)
+            INSERT INTO orders ("userID", total, fullfilled)
+            VALUES ($1, $2, $3)
             RETURNING *
-        `, [userID, total, fullfilled, createdAt, modifiedAt])
-        console.log('orders created succesfully!')
+        `, [userID, total, fullfilled])
         return orders
     } catch(error) {
         console.error('error creating orders...', error)
@@ -67,7 +65,6 @@ const createOrders = async ({userID, total, fullfilled, createdAt, modifiedAt}) 
 } 
 
 const getCart = async(userId) => {
-    console.log('getting cart...')
     try {
         const { rows: [order] } = await db.query(`
             SELECT *
@@ -87,6 +84,6 @@ module.exports = {
   getAllOrders,
   getOrder,
   getOrderByUser,
-  createOrders,
+  createOrder,
   getCart
 }
