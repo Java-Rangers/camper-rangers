@@ -11,44 +11,42 @@ export default function Products( {token} ) {
   const [ searchActive, setSearchActive ] = useState(false);
 
 
-// const handleSearch = () => {
+const handleSearch = () => {
 
-//   const filteredProducts = products.filter(product => {
+  const filteredProducts = products.filter(product => {
     
-//     return product.title.toLowerCase().includes(searchBar.toLocaleLowerCase());
-//   });
-// }
-// setSearch(filteredProducts);
-//setSearchActive(true);
-// console.log(filteredPosts);
+    return product.title.toLowerCase().includes(searchBar.toLocaleLowerCase());
+  });
+}
+setSearch(filteredProducts);
+setSearchActive(true);
+console.log(filteredProducts);
 
-//const clearSearch = () => {
-// setSearchBar('') 
-// setSearch([]);
-//setEarchActive (false);
-// }
-  useEffect(() => {
+const clearSearch = () => {
+setSearchBar('') 
+setSearch([]);
+setSearchActive (false);
+}
+
     
-    const getAllProducts = async () => {
+  const getAllProducts = async () => {
+    
+    try{
       
-      try{
-        
-        const response = await fetch (`${BASE_URL}/products`)
+      const response = await fetch (`${BASE_URL}/products`)
 
-        const data = await response.json();
+      const data = await response.json();
 
-        console.log('fetch all products success', data);
-        return data.
-        setProducts (await getAllProducts)
-      } catch(err) {
-        
-        console.log('error fetching ALL PRODUCTS', err)
-        
-      }
-    
+      console.log('fetch all products success', data);
+      setProducts (data)
+    } catch(err) {
+      
+      console.log('error fetching ALL PRODUCTS', err)
+      
     }
-    getAllProducts();
-  }, [])
+
+  }
+  getAllProducts();
 
   return (
       <>
