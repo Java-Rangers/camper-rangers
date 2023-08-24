@@ -8,7 +8,6 @@ const createProduct = async({title, description, brand, availability, image, cat
       VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
       RETURNING *`, [title, description, brand, availability, image, category, price, quantity]);
 
-      console.log('products made')
       return product;
   } catch(err) {
     console.log('error creating products', err)
