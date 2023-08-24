@@ -19,7 +19,6 @@ function App() {
         <p>Replace the starter code in this template with something cool</p>
         <Login /> */}
         <h3>APP Test</h3> 
-        <Products/>
     </div>
     
     <Routes>
