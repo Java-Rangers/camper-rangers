@@ -2,8 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  height: 100vh; 
+  justify-content: center; 
 }
 
 .App-header {
@@ -15,4 +14,28 @@
   width: 250px;
 }
 
+.subheader{
+  display: flexbox;
+}
+.postTitle {
+  position: inherit;
+}
+#productsPageTite{
+position: initial;
+}
+.productsContainer {
+  position: inherit;
+  display: flexbox;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+.productCard {
+  display: flexbox;
+  flex-direction: column;
+
+}
+.productImage {
+  width: 350px;
+}
 /* Add more styling for other elements if needed */
