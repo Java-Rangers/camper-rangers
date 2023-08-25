@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom"
 import { useState, useEffect } from "react"
 import { BASE_URL } from "../App"
+import { API } from "../App"
 import { useParams } from "react-router-dom"
 
 export default function SingleProduct() {
@@ -11,13 +12,13 @@ export default function SingleProduct() {
     useEffect(() => {
 
         async function fetchData() {
-            const response = await fetch(`${API}/products`)
+            const response = await fetch(`${API}/products/${id}`)
             const data = await response.json()
 
             console.log(data)
-            setProduct(cleanProduct(data.product))
+            setProduct(cleanProduct(data))
         }
-        console.log(data);
+        
         fetchData();
         console.log('fetch');
 
@@ -25,16 +26,14 @@ export default function SingleProduct() {
 
     function cleanProduct(data) {
         return {
-            title: data.products.title,
-            description: data.products.description,
-            brand: data.products.brand,
-            image: data.products.image,
-            quantity: data.products.quantity,
-            price: data.products.price
+            title: data.singleProduct.title,
+            description: data.singleProduct.description,
+            brand: data.singleProduct.brand,
+            image: data.singleProduct.image,
+            quantity: data.singleProduct.quantity,
+            price: data.singleProduct.price
         }
     }
-
-    console.log(product);
 
     return <div className="singleProduct">
         <h1>{product.title}</h1>
@@ -44,7 +43,7 @@ export default function SingleProduct() {
         <h3>{product.quantity}</h3>
         <h3>{product.price}</h3>
 
-        <Link to='/' className="backButton"><button>go back</button></Link>
+        <Link to='/products' className="backButton"><button>go back</button></Link>
         
     </div>
 }

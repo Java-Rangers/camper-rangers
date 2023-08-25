@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { API } from '../App';
 import { BASE_URL } from '../App';
+import { useNavigate } from 'react-router-dom';
 
 
   export default function Products( {token} ) {
@@ -9,7 +10,7 @@ import { BASE_URL } from '../App';
   const [searchBar, setSearchBar ] = useState ('');
   const [ search, setSearch ] = useState([]); 
   const [ searchActive, setSearchActive ] = useState(false);
-
+  const navigate = useNavigate();
 
   const handleSearch = () => {
 
@@ -77,7 +78,7 @@ import { BASE_URL } from '../App';
           {searchActive ? (
             search.map(product => (
               <div key= {product._id} className='productsContainer'>
-                <div className='productCard'>  
+                <div className='productCard' onClick={() => navigate(`/${product.id}`)}>  
                   <h3 className='productTitle'> {product.title} </h3>
                   <p className='productDescription'> {product.description} </p>
                   <p className= 'productPrice'> {product.price} </p>
