@@ -56,7 +56,7 @@ import { Container, Typography, Paper, Box } from '@mui/material'
       <>
       <Container>
         <div className='subheader'>
-          <Typography variant="h1" sx={{my:3, textAlign:'center', color:'secondary.main'}}>PRODUCTS COMPONENT TEST</Typography>
+          <Typography variant="h3" sx={{my:3, textAlign:'center', color:'secondary.main'}}>PRODUCTS COMPONENT TEST</Typography>
           <Typography id='productsPageTitle'> Products </Typography>
           <div id ='searchContainer'>
             <form onSubmit = {(e)=> {
