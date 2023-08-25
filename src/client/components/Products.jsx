@@ -86,9 +86,10 @@ import { BASE_URL } from '../App';
               </div>
               ))
               ) : (
-                products.map((product, index) => (
-                  <div key = {index} className='productsContainer'> 
-                    <div className='productCard'>
+                <div className='productsContainer'> 
+                  {products.map((product, index) => (
+                  
+                    <div key = {index}  className='productCard'>
                       <h3 className='postTitle'> {product.title} </h3>
                       <img className='productImage' src={product.image}/>
                       <p className='productDescription'> {product.description} </p>
@@ -104,8 +105,10 @@ import { BASE_URL } from '../App';
                         </label>
                       </form> */}
                     </div>
-                  </div>
+                
                 ))
+                }
+              </div>  
               )} 
       </>
     )
