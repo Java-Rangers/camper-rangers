@@ -90,7 +90,7 @@ import { useNavigate } from 'react-router-dom';
                 <div className='productsContainer'> 
                   {products.map((product, index) => (
                   
-                    <div key = {index}  className='productCard'>
+                    <div key = {index}  className='productCard' onClick={() => navigate(`/products/${product.id}`)}>
                       <h3 className='postTitle'> {product.title} </h3>
                       <img className='productImage' src={product.image}/>
                       <p className='productDescription'> {product.description} </p>
