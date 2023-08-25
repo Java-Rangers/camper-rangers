@@ -1,9 +1,7 @@
-
-
 const db = require('./client')
-const { getOrderItemsByOrder } = require('./orderItems')
+const { getItemsByOrder } = require('./orderItems')
 
-// gets the users cart and returns array of orderItems from cart
+// GETS AND RETURNS A USERS UNFULLFILLED ORDER
 const getCartByUser = async(id) => {
   console.log(`---Getting cart by user id: ${id}`)
   try{
@@ -11,18 +9,14 @@ const getCartByUser = async(id) => {
     SELECT * FROM orders
     WHERE "userID"=$1 AND fullfilled=false`, [id])
 
-    // checks if the user has an unfullfilled order
     if (cart.rows.length === 0){
       console.log(`---No unfullfilled orders for user id: ${id}`)
       return;
     }   
 
-    // grabs the order id of the unfullfilled order of the user, passes that id to getOrderItemsByOrder
-    // potential bug here if user has multiple unfullfilled orders (a state that shouldn't be allowed), it will only return the first order if this happens
     const cartOrder = await cart.rows[0].id
-    const userCart = await getOrderItemsByOrder(cartOrder)
+    const userCart = await getItemsByOrder(cartOrder)
 
-    // returns an array of orderItem objects
     console.log('---Received cart of user id: ', id, ' ', userCart)
     return userCart
   }catch(err){
@@ -31,7 +25,7 @@ const getCartByUser = async(id) => {
   }
 }
 
-// toggles cart fullfilled status to true
+// SETS AND RETURNS AN UNFULLFILLED ORDER TO FULLFILLED
 const checkoutCart = async (id) => {
   try{
     const { rows } = await db.query(`

@@ -1,14 +1,17 @@
 const express = require('express')
-const cartRouter = express.Router();
+const cartRouter = express.Router({ mergeParams:true });
 
 const {
     getCartByUser,
     checkoutCart
 } = require('../db/cart')
 
-cartRouter.get('/user/:id', async (req, res, next) => {
+// GET /api/users/userId/cart
+// GETS AND RETURNS CART BY USER ID
+cartRouter.get('/', async (req, res, next) => {
+  const {userId} = req.params
     try {
-        const cart = await getCartByUser(req.params.id);
+        const cart = await getCartByUser(userId);
 
         // sends an array of orderItem objects
         res.send ({cart})
@@ -18,9 +21,12 @@ cartRouter.get('/user/:id', async (req, res, next) => {
     }
 })
 
-cartRouter.patch('/user/:id', async (req, res, next) => {
+// PATCH /api/users/userId/cart
+// SETS CART OF USER ID TO FULLFILLED
+cartRouter.patch('/', async (req, res, next) => {
+  const {userId} = req.params
   try{
-    const cart = await checkoutCart(req.params.id);
+    const cart = await checkoutCart(userId);
     res.send({cart});
   }catch(err){
     console.log('Error during cart checkout of user id: ', req.params.id, err);
