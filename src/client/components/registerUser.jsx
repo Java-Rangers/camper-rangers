@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { API } from '../App'
 import { BASE_URL } from '../App';
+import { Container, Box, Paper, Typography, FormControl } from '@mui/material'
 
 function RegisterUser() {
   const [email, setEmail] = useState('');
@@ -36,22 +37,24 @@ function RegisterUser() {
   };
 
     return (
-        <div>
-          <h2>Register User</h2>
-          <form onSubmit={handleSubmit}>
-            <div>
-              <label>Email:</label>
-              <input type="email" value={email} onChange={handleEmailChange} />
-            </div>
-            <div>
-              <label>Password:</label>
-              <input type="password" value={password} onChange={handlePasswordChange} />
-            </div>
-            <div>
-              <button type="submit">Register</button>
-            </div>
-          </form>
-        </div>
+        <Container>
+          <Paper elevation={10}>
+            <Box sx={{textAlign:'center', padding:'30px', marginTop:'100px'}}>       
+              <Typography variant='h2' sx={{marginBottom:'10px'}}>Register User</Typography>
+                  <form onSubmit={handleSubmit}>
+                    <Box sx={{marginBottom:'10px'}}>
+                      <label>Email:</label>
+                      <input type="email" value={email} onChange={handleEmailChange} />
+                    </Box>
+                    <Box sx={{marginBottom:'10px'}}>
+                      <label>Password:</label>
+                      <input type="password" value={password} onChange={handlePasswordChange} />
+                    </Box>
+                      <button type="submit">Register</button>
+                  </form>
+            </Box>
+          </Paper>
+        </Container>
       );
     }
     
