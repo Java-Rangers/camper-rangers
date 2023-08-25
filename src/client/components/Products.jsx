@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { API } from '../App';
 import { BASE_URL } from '../App';
 import { useNavigate } from 'react-router-dom';
+import { Container, Typography, Paper, Box } from '@mui/material'
 
 
   export default function Products( {token} ) {
@@ -53,9 +54,10 @@ import { useNavigate } from 'react-router-dom';
   }, [])
   return (
       <>
+      <Container>
         <div className='subheader'>
-          <h1>PRODUCTS COMPONENT TEST</h1>
-          <h1 id='productsPageTitle'> Products </h1>
+          <Typography variant="h1" sx={{my:3, textAlign:'center', color:'secondary.main'}}>PRODUCTS COMPONENT TEST</Typography>
+          <Typography id='productsPageTitle'> Products </Typography>
           <div id ='searchContainer'>
             <form onSubmit = {(e)=> {
             e.preventDefault();
@@ -74,7 +76,7 @@ import { useNavigate } from 'react-router-dom';
             </form>
           </div>
         </div>
-
+        </Container>
           {searchActive ? (
             search.map(product => (
               <div key= {product._id} className='productsContainer'>
@@ -87,15 +89,16 @@ import { useNavigate } from 'react-router-dom';
               </div>
               ))
               ) : (
-                <div className='productsContainer'> 
-                  {products.map((product, index) => (
-                  
-                    <div key = {index}  className='productCard' onClick={() => navigate(`/products/${product.id}`)}>
-                      <h3 className='postTitle'> {product.title} </h3>
-                      <img className='productImage' src={product.image}/>
-                      <p className='productDescription'> {product.description} </p>
-                      <p className= 'productPrice'> {product.price} </p>
-                      <p className='productBrand'> {product.brand} </p>
+                <Container>
+                  <Typography sx={{textAlign:'center'}} variant='h3'>All Products</Typography>
+                  {products.map((product) => (
+                    <Paper elevation={4}>
+                      <Box sx={{display:'flex'}} onClick={() => navigate(`/products/${product.id}`)}>
+                      <Typography variant='h3' className='postTitle'> {product.title} </Typography>
+                      <Box component='img' className='productImage' sx={{width:300}} src={product.image}/>
+                      <Typography className='productDescription'> {product.description} </Typography>
+                      <Typography className= 'productPrice'> {product.price} </Typography>
+                      <Typography className='productBrand'> {product.brand} </Typography>
                       {/* <form onSubmit={(e) = cartSubmit (e, products.id)} >
                         <label>
                           <input
@@ -105,13 +108,12 @@ import { useNavigate } from 'react-router-dom';
                           />
                         </label>
                       </form> */}
-                    </div>
-                
+                    </Box>
+                    </Paper>
                 ))
                 }
-              </div>  
+              </Container>  
               )} 
       </>
     )
 }
-
