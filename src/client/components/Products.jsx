@@ -117,7 +117,3 @@ import { Container, Typography, Paper, Box } from '@mui/material'
       </>
     )
 }
-
-// {products.map((product, index) => (
-                  
-//   <div key = {index}  className='productCard' onClick={() => navigate(`/products/${product.id}`)}>
