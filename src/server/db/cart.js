@@ -1,8 +1,4 @@
-/*
-get cart by user
-add orderItem to order
-(stretch goal) update order to fullfilled
-*/
+
 
 const db = require('./client')
 const { getOrderItemsByOrder } = require('./orderItems')
