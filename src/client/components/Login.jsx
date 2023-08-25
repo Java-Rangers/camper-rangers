@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Container, Typography, FormControl, FormLabel, FormHelperText, TextField } from '@mui/material'
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -43,11 +44,25 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor='email'>Email:</label>
+    <Container> 
+      <Typography variant="h3" color="initial"> Login: </Typography>
+        <FormControl>
+          <TextField
+            id="email"
+            label="email"
+            value={email}
+            onChange={handleEmailChange}
+          />
+          <TextField
+            id="password"
+            label="password"
+            value={password}
+            onChange={handlePasswordChange}
+          />
+          <button type='submit'> Login! </button>
+        </FormControl> 
+        
+          {/* <label htmlFor='email'>Email:</label>
           <input
             type='email'
             id='email'
@@ -68,8 +83,8 @@ const Login = () => {
         </div>
         <button type='submit'>Login</button>
       </form>
-      <p>{message}</p>
-    </div>
+      <p>{message}</p> */}
+    </Container>
   );
 };
 

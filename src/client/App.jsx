@@ -20,10 +20,10 @@ function App() {
         <p>Replace the starter code in this template with something cool</p>
         <Login /> */}
         <h3>APP Test</h3> 
-        <RegisterUser />
     </div>
     
     <Routes>
+      <Route path = '/users/login' element= { <Login /> } />
       <Route path='/products' element={<Products />} />
       <Route path='/products/:id' element={<SingleProduct />} />
       <Route path='/registerUser' element={<RegisterUser />} />
