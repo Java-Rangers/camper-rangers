@@ -27,7 +27,7 @@ import { Container, Typography, Paper, Box } from '@mui/material'
     const clearSearch = () => {
     setSearchBar('') 
     setSearch([]);
-    setSearchActive (false);
+    setSearchActive(false);
     }
   }  
 
@@ -79,14 +79,19 @@ import { Container, Typography, Paper, Box } from '@mui/material'
         </Container>
           {searchActive ? (
             search.map(product => (
-              <div key= {product._id} className='productsContainer'>
-                <div className='productCard' onClick={() => navigate(`/${product.id}`)}>  
-                  <h3 className='productTitle'> {product.title} </h3>
-                  <p className='productDescription'> {product.description} </p>
-                  <p className= 'productPrice'> {product.price} </p>
-                  <p className='productBrand'> {product.brand} </p>
-                </div>
-              </div>
+              <Container sx={{textAlign:'center', padding:'20px'}}>
+                <Paper elevation={10}>
+                <Box key= {product._id} className='productsContainer' sx={{margin:'20px'}}>
+                  <Box className='productCard' onClick={() => navigate(`/${product.id}`)}>  
+                    <Typography variant='h3' className='productTitle'> {product.title} </Typography>
+                    <Box component='img' src={product.image} sx={{width:'200px'}}/>
+                    <Typography className='productDescription'> {product.description} </Typography>
+                    <Typography className= 'productPrice'> {product.price} </Typography>
+                    <Typography className='productBrand'> {product.brand} </Typography>
+                  </Box>
+                </Box>
+                </Paper>
+              </Container>
               ))
               ) : (
                 <Container>
