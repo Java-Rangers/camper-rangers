@@ -3,6 +3,7 @@ import { useState, useEffect } from "react"
 import { BASE_URL } from "../App"
 import { API } from "../App"
 import { useParams } from "react-router-dom"
+import { Container } from "@mui/material"
 
 export default function SingleProduct() {
 
@@ -35,7 +36,8 @@ export default function SingleProduct() {
         }
     }
 
-    return <div className="singleProduct">
+    return (
+    <Container>
         <h1>{product.title}</h1>
         <h3>{product.brand}</h3>
         <img src={product.image}/>
@@ -44,6 +46,6 @@ export default function SingleProduct() {
         <h3>{product.price}</h3>
 
         <Link to='/products' className="backButton"><button>go back</button></Link>
-        
-    </div>
+    </Container>        
+    )
 }
