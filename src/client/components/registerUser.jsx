@@ -19,10 +19,10 @@ function RegisterUser() {
     event.preventDefault();
 
     try {
-        const response = await fetch(`${API}/users`, {
-            method: 'POST',
+        const response = await fetch(`${API}/users/register`, {
+            method: "POST",
             headers: {
-                'Content-Type': 'application/json',
+                "Content-Type": 'application/json',
             },
             body: JSON.stringify({email, password})
         })
