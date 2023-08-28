@@ -7,8 +7,8 @@ import Products from './components/Products'
 import RegisterUser from './components/registerUser';
 import NavBar from './components/Navbar';
 
-const API = 'http://localhost:3000/api'
-const BASE_URL = 'http://localhost:3000'
+const API = 'http://localhost:8080/api'
+const BASE_URL = 'http://localhost:8080'
 
 function App() {
   const [count, setCount] = useState(0);
