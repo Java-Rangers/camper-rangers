@@ -2,7 +2,7 @@ const db = require('./client');
 const { createUser } = require('./users');
 const { createProduct } = require('./products');
 const { createBilling } = require('./billing');
-const { createOrderItem } = require ('./orderItems');
+const { addItemToOrder } = require ('./orderItems');
 const { createOrder } = require ('./orders')
 const { createAddress } = require('./address');
 
@@ -783,7 +783,7 @@ const insertOrderItems = async() => {
   console.log('---Inserting order items')
   try{
   for (const orderItem of orderItems) {
-    await createOrderItem ({ orderID: orderItem.orderID, productID: orderItem.productID, quantity: orderItem.quantity})
+    await addItemToOrder ({ orderId: orderItem.orderID, productId: orderItem.productID, quantity: orderItem.quantity})
   }
   console.log('---Order items inserted');
   } catch(err) {

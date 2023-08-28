@@ -12,7 +12,7 @@ apiRouter.use(async (req, res, next) => {
   if (!auth) { 
     next();
   } 
-  else if (auth.startsWith('REPLACE_ME')) {
+  else if (auth.startsWith('Bearer')) {
     // TODO - Get JUST the token out of 'auth'
     const token = 'REPLACE_ME';
     
