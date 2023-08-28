@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Container, Typography, FormControl, FormLabel, FormHelperText, TextField } from '@mui/material'
-import { useNavigate } from 'react-router-dom';
+import { Container, Typography, FormControl, FormLabel, FormHelperText, TextField, Box } from '@mui/material'
+import { Link, useNavigate } from 'react-router-dom';
 import { BASE_URL } from '../App'
 
 export default function Login ({ setToken }) {
@@ -103,7 +103,9 @@ export default function Login ({ setToken }) {
             <button type='submit'> Login! </button>
           </form>
         </FormControl> 
-        
+          <Box>
+            <Typography variant='h5' sx={{marginTop: 5}}><Link to='/registerUser'>Need an account? Create one here!</Link></Typography>
+          </Box>
           {/* <label htmlFor='email'>Email:</label>
           <input
             type='email'
