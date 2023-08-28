@@ -141,7 +141,7 @@ import { Container, Typography, Paper, Box, TextField, Button } from '@mui/mater
                         <Typography className= 'productPrice'> {product.price} </Typography>
                         <Typography className='productBrand'> {product.brand} </Typography>
                         <form onSubmit={(e) => cartSubmit ( products.id)} >
-                            <Button
+                            <Button variant='contained' sx={{color: 'secondary.main'}}
                             type = 'submit'
                             id= 'addCartButton'
                             value='Add to Cart'
