@@ -3,12 +3,64 @@ import { useState, useEffect } from "react"
 import { BASE_URL } from "../App"
 import { API } from "../App"
 import { useParams } from "react-router-dom"
-import { Container, Typography, Paper, Box } from "@mui/material"
+import { Container, Typography, Paper, Box, Button, SvgIcon } from "@mui/material"
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
 export default function SingleProduct() {
 
     const [ product, setProduct ] = useState({})
-    const { id } = useParams()
+    const { id } = useParams();
+    const [userCart, setUserCart] = useState([]);
+
+
+    useEffect(() => {
+        const getUserCart = async () => {
+    
+            try{
+            
+            const response = await fetch (`${API}/users/${id}/cart`)
+        
+            const data = await response.json();
+            console.log('fetch Cart success', data.cart[0].orderId)
+            setUserCart(data.cart[0].orderId);
+            return(data.cart[0].orderId);
+            } catch(err) {
+            console.log('error getting user cart', err)
+            }
+        
+            
+        }
+       getUserCart(); 
+    }, [])
+
+    
+
+      const cartSubmit = async ( userCart, productId, quantity ) => {
+        // e.preventDefault();
+        try{
+          const response = await fetch (`${API}/orders/${userCart}/items`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                orderId: `${userCart}`,
+                productId: productId,
+                quantity: quantity = 1,    
+            })
+                
+          });
+    
+          const data = await response.json();
+          setUserCart(data);
+          console.log('Updated cart', data)
+          return(data)
+        } catch(err) {
+          console.log('error adding item to cart', err)
+        }
+      }
+    
+     
 
     useEffect(() => {
 
@@ -53,7 +105,19 @@ export default function SingleProduct() {
                     <Typography>{product.description}</Typography>
                     <Typography variant="h3">In Stock:{product.quantity}</Typography>
                     <Typography variant="h3">Price:${product.price}</Typography>
-                    <Link to='/products' className="backButton"><button>go back</button></Link>
+                    <form >
+                        {/* <AddShoppingCartIcon> */}
+                            <Button variant='outlined' endIcon={<AddShoppingCartIcon/>} sx={{my:3, color: 'secondary.main', zIndex: 100000 }}
+                            onClick={()=> {cartSubmit(product.id)}} 
+                            // type = 'submit'
+                            id= 'addCartButton'
+                            // value='add to cart'
+                            >
+                            Add to cart
+                            </Button>
+                            {/* </AddShoppingCartIcon> */}
+                        </form>
+                    <Link to='/products'  className="backButton"><Button sx={{my:1 }} variant='contained'>go back</Button></Link>    
             </Box>
         </Paper>
         
