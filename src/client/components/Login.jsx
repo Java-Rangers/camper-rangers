@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import { Container, Typography, FormControl, FormLabel, FormHelperText, TextField } from '@mui/material'
+import { useNavigate } from 'react-router-dom';
+import { BASE_URL } from '../App'
 
-const Login = () => {
+export default function Login ({ setToken }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -14,7 +18,33 @@ const Login = () => {
     setPassword(e.target.value);
   };
 
-  const login = async() => {
+  // const login = async() => {
+//   try {
+  //       const response = await fetch('http://localhost:3000/api/users/login', {
+  //           method: 'POST',
+  //           headers: {
+  //               'Content-Type' : 'application/json'
+  //           }, 
+  //           body: JSON.stringify({
+  //               email,
+  //               password
+  //           })
+  //       });
+  //       const data = await response.json();
+  //       setMessage(data.message);
+  //       console.log(data)
+  //       if(!response.ok) {
+  //         throw(data)
+  //       }
+  //       setEmail('');
+  //       setPassword('');
+  //   } catch (err) {
+  //       console.error(`${err.name}: ${err.message}`);
+  //   }
+  // }
+
+  async function handleSubmit(e) {
+    e.preventDefault();
     try {
         const response = await fetch('http://localhost:3000/api/users/login', {
             method: 'POST',
@@ -26,40 +56,52 @@ const Login = () => {
                 password
             })
         });
-        const result = await response.json();
-        setMessage(result.message);
-        if(!response.ok) {
-          throw(result)
-        }
-        setEmail('');
-        setPassword('');
-    } catch (err) {
-        console.error(`${err.name}: ${err.message}`);
-    }
-  }
+        const data = await response.json();
+        setMessage(data.message);
+        console.log(data)
+          
+        // setEmail('');
+        // setPassword('');
+        console.log('logged in', data.token)
+        // setToken(data.token);
+        sessionStorage.setItem('token', data.token);
+        alert('You are logged in!');
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    login();
-  };
+        navigate('/products');
+
+  } catch (err) {
+    console.log('Invalid user or password', err)
+    alert('Incorrect email or password!')
+  }
+// } catch (err) {
+//       // console.error(`${err.name}: ${err.message}`);
+//       console.log('error logging in with email or password', err);
+//       setError ('Invalid username or password', error);
+//       alert ("Wrong email or password!")
+//   }
+
+    
+    };
 
   return (
-    <Container> 
-      <Typography variant="h3" color="initial"> Login: </Typography>
-        <FormControl>
-          <TextField
-            id="email"
-            label="email"
-            value={email}
-            onChange={handleEmailChange}
-          />
-          <TextField
-            id="password"
-            label="password"
-            value={password}
-            onChange={handlePasswordChange}
-          />
-          <button type='submit'> Login! </button>
+    <Container sx={{my:3, textAlign:'center',}}> 
+      <Typography variant="h3" color="secondary.main"> Login: </Typography>
+        <FormControl >
+          <form onSubmit={handleSubmit}>
+            <TextField
+              id="email"
+              label="email"
+              value={email}
+              onChange={handleEmailChange} required
+            />
+            <TextField
+              id="password"
+              label="password"
+              value={password}
+              onChange={handlePasswordChange} required
+            />
+            <button type='submit'> Login! </button>
+          </form>
         </FormControl> 
         
           {/* <label htmlFor='email'>Email:</label>
@@ -88,4 +130,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+

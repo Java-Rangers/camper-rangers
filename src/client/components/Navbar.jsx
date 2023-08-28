@@ -13,7 +13,7 @@ export default function NavBar() {
     return (
         <Container>
             <Paper elevation={10}>
-                    <Typography className='navigation' textAlign={'center'}>
+                    <Box className='navigation' textAlign={'center'}>
                         <nav>
                             <Typography variant='h2'>Java Campers</Typography>
                             <Typography variant='ul'>
@@ -21,7 +21,7 @@ export default function NavBar() {
                                     <Typography variant='li' margin={2}><Link to='/registerUser'>Register</Link></Typography>
                             </Typography>
                         </nav>
-                    </Typography>
+                    </Box>
             </Paper>
         </Container>
     )    
