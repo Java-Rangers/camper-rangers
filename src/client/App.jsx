@@ -6,6 +6,7 @@ import SingleProduct from './components/SingleProduct';
 import Products from './components/Products'
 import RegisterUser from './components/registerUser';
 import NavBar from './components/Navbar';
+import Cart from './components/Cart';
 
 const API = 'http://localhost:8080/api'
 const BASE_URL = 'http://localhost:8080'
@@ -24,6 +25,7 @@ function App() {
       <Route path='/products' element={<Products />} />
       <Route path='/products/:id' element={<SingleProduct />} />
       <Route path='/registerUser' element={<RegisterUser />} />
+      <Route path='/cart' element={<Cart />} />
     </Routes>
     
     </>

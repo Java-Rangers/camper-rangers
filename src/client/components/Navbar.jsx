@@ -19,6 +19,7 @@ export default function NavBar() {
                             <Typography variant='ul'>
                                     <Typography variant='li' margin={2}><Link to='/products'>Home</Link></Typography>
                                     <Typography variant='li' margin={2}><Link to='/registerUser'>Register</Link></Typography>
+                                    <Typography variant='li' margin={2}><Link to='/cart'>Cart</Link></Typography>
                             </Typography>
                         </nav>
                     </Box>
