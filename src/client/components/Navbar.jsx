@@ -13,7 +13,7 @@ export default function NavBar() {
     return (
         <Container>
             <Paper elevation={10}>
-                    <Box className='navigation' textAlign={'center'}>
+                    <Box sx={{textAlign: 'center', padding:'15px'}}>
                         <nav>
                             <Typography variant='h2'>Java Campers</Typography>
                             <Typography variant='ul'>

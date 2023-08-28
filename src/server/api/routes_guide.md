@@ -20,9 +20,9 @@ ADDRESSES
 
 CART
 
-  GET /api/user/id
+  GET /api/users/userId/cart
     ---get cart by user id
-  PATCH /api/user/id
+  PATCH /api/users/userId/cart
     ---sets user id's cart to fullfilled
 
 PRODUCTS
@@ -33,9 +33,9 @@ ORDERS
 
 ORDERITEMS
 
-  POST /api/orderItems
-    ---adds item to an order
-    ---req.body {orderId, productId, quantity}
+  POST /api/orders/id/items
+    ---adds item to an order id
+    ---req.body {productId, quantity}
 
 USERS
 
