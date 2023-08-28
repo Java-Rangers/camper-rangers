@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Container, Typography, FormControl, FormLabel, FormHelperText, TextField } from '@mui/material'
-import { useNavigate } from 'react-router-dom';
+import { Container, Typography, FormControl, FormLabel, FormHelperText, TextField, Box, Paper, Button } from '@mui/material'
+import { Link, useNavigate } from 'react-router-dom';
 import { BASE_URL } from '../App'
 
 export default function Login ({ setToken }) {
@@ -84,26 +84,39 @@ export default function Login ({ setToken }) {
     };
 
   return (
-    <Container sx={{my:3, textAlign:'center',}}> 
-      <Typography variant="h3" color="secondary.main"> Login: </Typography>
-        <FormControl >
-          <form onSubmit={handleSubmit}>
-            <TextField
-              id="email"
-              label="email"
-              value={email}
-              onChange={handleEmailChange} required
-            />
-            <TextField
-              id="password"
-              label="password"
-              value={password}
-              onChange={handlePasswordChange} required
-            />
-            <button type='submit'> Login! </button>
-          </form>
-        </FormControl> 
-        
+    <Container sx={{my:3, textAlign:'center', padding:'10px'}}>
+      <Paper elevation={20}>
+        <Box sx={{padding:'20px', paddingBottom:'70px'}}>
+          <Typography variant="h4" color="secondary.main" sx={{marginBottom:'10px'}}> Please login to your account </Typography>
+            <FormControl sx={{position:'relative', left:'40px'}}>
+              <form onSubmit={handleSubmit}>
+                <TextField sx={{marginRight:'10px'}}
+                  id="email"
+                  label="email"
+                  value={email}
+                  onChange={handleEmailChange} required
+                />
+                <TextField sx={{marginLeft:'10px'}}
+                  id="password"
+                  label="password"
+                  value={password}
+                  onChange={handlePasswordChange} required
+                />
+                <Button 
+                  type='submit' variant='outlined' color='success' sx={{
+                    position:'relative',
+                    top:'70px',
+                    right:'272px'
+
+                      }}>Login!
+                        </Button>
+              </form>
+          </FormControl>
+        </Box>
+      </Paper>
+          <Box>
+            <Typography variant='h5' sx={{marginTop: 5}}><Link to='/registerUser'>Need an account? Create one here!</Link></Typography>
+          </Box>
           {/* <label htmlFor='email'>Email:</label>
           <input
             type='email'
