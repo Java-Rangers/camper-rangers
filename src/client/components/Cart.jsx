@@ -8,6 +8,7 @@ export default function Cart({token}){
 
   const [ productArray, setProductArray ] = useState([]);
   const [ products, setProducts ] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(()=>{
     const getUserCart = async () => {
@@ -23,51 +24,44 @@ export default function Cart({token}){
     getUserCart();
   }, [])
 
-  console.log(productArray)
-
   useEffect(()=>{
     const getCartProducts = async () => {
       try{
-        
-        const response = productArray.map((product) => {
-          fetch(`${API}/products/${product.productId}`).then(res => res.json())
-          console.log(product.productId)
-        })
-        const result = await Promise.all(response)
-        console.log(result)
-
-        setProducts(result)
-
-        console.log('hello')
+        const productDetailsArray = []
+        if(productArray.length > 0){
+          for(let i = 0; i < productArray.length; i++){
+            const response = await fetch(`${API}/products/${productArray[i].productId}`)
+            const result = await response.json()
+            productDetailsArray.push(result.singleProduct)
+          }
+          setProducts(productDetailsArray)
+        }else{
+          return
+        }
       }catch(err){
         console.log('Error getting product items', err)
       }
     }
-    if (productArray.length > 0){
-      getCartProducts();
-    }
-
+    getCartProducts();
   }, [productArray])
 
-
-
-
-
-
-
-
-
-
   return(
-    <div>
-      {/* <Container>
-      <Typography sx={{textAlign:'center'}} variant='h3'>Shopping Cart</Typography>
-      {products.map((product)=>{
-        <Paper elevation={4}>
-          <Typography variant='h3' className='postTitle'> {product.title} </Typography>
-        </Paper>
-      })}
-      </Container> */}
-    </div>
+    <>
+      <Container>
+        <Typography sx={{textAlign:'center'}} variant='h3'>Shopping Cart</Typography>
+        {products.map((product)=> {
+          return(
+            <Paper elevation={4} key={product.id}>
+              <Box sx={{display:'flex'}} onClick={() => navigate(`/products/${product.id}`)}>
+                <Typography variant='h3' className='productTitle'>{product.title}</Typography>
+                <Box component='img' className='productImage' sx={{width:300}} src={product.image}/>
+                <Typography className='productDescription'>{product.description}</Typography>
+                <Typography className= 'productPrice'> {product.price} </Typography>
+                <Typography className='productBrand'> {product.brand} </Typography>
+              </Box>
+            </Paper>
+          )})}
+      </Container>
+    </>
   )
 }
