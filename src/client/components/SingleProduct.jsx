@@ -21,9 +21,9 @@ export default function SingleProduct() {
             const response = await fetch (`${API}/users/${id}/cart`)
         
             const data = await response.json();
-            console.log('fetch Cart success', data.cart[0].orderId)
-            setUserCart(data.cart[0].orderId);
-            return(data.cart[0].orderId);
+            console.log('fetch Cart success', data)
+            setUserCart(data);
+            return(data.cart.orderId);
             } catch(err) {
             console.log('error getting user cart', err)
             }

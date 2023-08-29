@@ -62,12 +62,12 @@ export default function Login ({ setToken }) {
           
         // setEmail('');
         // setPassword('');
-        console.log('logged in', data.token)
+        console.log('logged in', data)
         // setToken(data.token);
         sessionStorage.setItem('token', data.token);
         alert('You are logged in!');
 
-        navigate('/products');
+        // navigate('/products');
 
   } catch (err) {
     console.log('Invalid user or password', err)
