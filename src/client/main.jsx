@@ -10,6 +10,7 @@ const theme = createTheme({
   palette: {
     primary: {main: "#4B3C2A"},
     secondary: {main: "#3F8F29"},
+    trinary: {main: "#16652A"},
     text: {main: "#FFFFFF"}
   }
 });

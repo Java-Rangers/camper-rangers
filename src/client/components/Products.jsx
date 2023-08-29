@@ -72,9 +72,12 @@ import { BorderStyle, CenterFocusStrong } from '@mui/icons-material';
                   onChange= {(e) => setSearchBar(e.target.value)}
                   />
                 <Button id ='searchBarButton' type='submit' value='Find it!' sx={{
-                  color:'secondary.main',
+                  color:'trinary.main',
+                  fontWeight:'bold',
+                  padding:'15px',
                   backgroundColor:'text.main',
-                  
+                  position:'relative',
+                  left:'10px'
                   }}>Find it!</Button>
               </form>
             </Box>
@@ -104,7 +107,7 @@ import { BorderStyle, CenterFocusStrong } from '@mui/icons-material';
                       <Typography variant='h5' sx={{color:'secondary.main'}} className='postTitle'> {product.title} </Typography>
                       <Typography variant='h7' sx={{marginBottom:1}} className='productBrand'> {product.brand} </Typography>
                       <Box component='img' className='productImage' sx={{width:90, maxHeight:70, position:'relative', left:120}} src={product.image}/>
-                      <Typography variant='h5' sx={{color:'red'}} className= 'productPrice'> {product.price} </Typography>
+                      <Typography variant='h5' sx={{color:'trinary.main', fontWeight:'550'}} className= 'productPrice'> {product.price}$ </Typography>
                       {/* <form onSubmit={(e) = cartSubmit (e, products.id)} >
                         <label>
                           <input
