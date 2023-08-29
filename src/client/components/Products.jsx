@@ -3,6 +3,7 @@ import { API } from '../App';
 import { BASE_URL } from '../App';
 import { useNavigate } from 'react-router-dom';
 import { Container, Typography, Paper, Box } from '@mui/material'
+import { CenterFocusStrong } from '@mui/icons-material';
 
 
   export default function Products( {token} ) {
@@ -54,37 +55,36 @@ import { Container, Typography, Paper, Box } from '@mui/material'
   }, [])
   return (
       <>
-      <Container>
-        <div className='subheader'>
-          <Typography variant="h3" sx={{my:3, textAlign:'center', color:'secondary.main'}}>PRODUCTS COMPONENT TEST</Typography>
-          <Typography id='productsPageTitle'> Products </Typography>
-          <div id ='searchContainer'>
-            <form onSubmit = {(e)=> {
-            e.preventDefault();
-            handleSearch(); }}>
-              <label> Search
-                <input
-                type = 'text'
-                id= 'searchBar'
-                name= 'searchBar'
-                placeholder= 'Looking for something?'
-                value = {searchBar}
-                onChange= {(e) => setSearchBar(e.target.value)}
-                />
-              </label>
-              <input id ='searchBarButton' type='submit' value='Find it!'/>
-            </form>
-          </div>
-        </div>
+      <Container sx={{paddingTop:'20px'}}>
+        <Typography variant='h4' sx={{textAlign:'center', padding:'10px'}}>All Products</Typography>
+          <Box className='subheader'>
+            <Box id ='searchContainer' sx={{paddingBottom:'20px', textAlign:'center'}}>
+              <form onSubmit = {(e)=> {
+              e.preventDefault();
+              handleSearch(); }}>
+                <label>  
+                  <input
+                  type = 'text'
+                  id= 'searchBar'
+                  name= 'searchBar'
+                  placeholder= 'Looking for something?'
+                  value = {searchBar}
+                  onChange= {(e) => setSearchBar(e.target.value)}
+                  />
+                </label>
+                <input id ='searchBarButton' type='submit' value='Find it!'/>
+              </form>
+            </Box>
+          </Box>
         </Container>
           {searchActive ? (
             search.map(product => (
-              <Container sx={{textAlign:'center', padding:'20px'}}>
+              <Container sx={{textAlign:'center', padding:'10px'}}>
                 <Paper elevation={10}>
                 <Box key= {product._id} className='productsContainer' sx={{margin:'20px'}}>
                   <Box className='productCard' onClick={() => navigate(`/${product.id}`)}>  
                     <Typography variant='h3' className='productTitle'> {product.title} </Typography>
-                    <Box component='img' src={product.image} sx={{width:'200px'}}/>
+                    <Box component='img' src={product.image} sx={{width:'100px'}}/>
                     <Typography className='productDescription'> {product.description} </Typography>
                     <Typography className= 'productPrice'> {product.price} </Typography>
                     <Typography className='productBrand'> {product.brand} </Typography>
@@ -95,12 +95,11 @@ import { Container, Typography, Paper, Box } from '@mui/material'
               ))
               ) : (
                 <Container>
-                  <Typography sx={{textAlign:'center'}} variant='h3'>All Products</Typography>
                   {products.map((product) => (
                     <Paper elevation={4}>
                       <Box sx={{display:'flex'}} onClick={() => navigate(`/products/${product.id}`)}>
-                      <Typography variant='h3' className='postTitle'> {product.title} </Typography>
-                      <Box component='img' className='productImage' sx={{width:300}} src={product.image}/>
+                      <Typography variant='h5' className='postTitle'> {product.title} </Typography>
+                      <Box component='img' className='productImage' sx={{width:100}} src={product.image}/>
                       <Typography className='productDescription'> {product.description} </Typography>
                       <Typography className= 'productPrice'> {product.price} </Typography>
                       <Typography className='productBrand'> {product.brand} </Typography>
