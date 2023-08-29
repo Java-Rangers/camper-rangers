@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { API } from '../App';
 import { BASE_URL } from '../App';
 import { useNavigate } from 'react-router-dom';
-import { Container, Typography, Paper, Box } from '@mui/material'
-
+import { Container, Typography, Paper, Box, TextField, Button } from '@mui/material'
 
   export default function Products( {token} ) {
 
@@ -11,7 +10,44 @@ import { Container, Typography, Paper, Box } from '@mui/material'
   const [searchBar, setSearchBar ] = useState ('');
   const [ search, setSearch ] = useState([]); 
   const [ searchActive, setSearchActive ] = useState(false);
+  const [ userCart, setUserCart ] = useState([]);
   const navigate = useNavigate();
+
+  // const getUserCart = async (id) => {
+    
+  //   try{
+      
+  //     const response = await fetch (`${API}/:userId/cart`)
+
+  //     const data = await response.json();
+  //     console.log('fetch Cart success', data)
+  //     setUserCart(data);
+  //     return(data);
+  //   } catch(err) {
+  //     console.log('error getting user cart', err)
+  //   }
+
+  //   getUserCart();
+  // }
+
+  // const cartSubmit = async ( id ) => {
+  //   try{
+  //     const response = await fetch (`${API}/:orderId/items`, {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json'
+  //       },
+        
+  //     });
+
+  //     const data = await response.json();
+  //     setUserCart(data);
+  //     console.log('Updated cart', data)
+  //   } catch(err) {
+  //     console.log('error adding item to cart', err)
+  //   }
+  // }
+
 
   const handleSearch = () => {
 
@@ -96,24 +132,15 @@ import { Container, Typography, Paper, Box } from '@mui/material'
               ) : (
                 <Container>
                   <Typography sx={{textAlign:'center'}} variant='h3'>All Products</Typography>
-                  {products.map((product) => (
-                    <Paper elevation={4}>
-                      <Box sx={{display:'flex'}} onClick={() => navigate(`/products/${product.id}`)}>
-                      <Typography variant='h3' className='postTitle'> {product.title} </Typography>
-                      <Box component='img' className='productImage' sx={{width:300}} src={product.image}/>
-                      <Typography className='productDescription'> {product.description} </Typography>
-                      <Typography className= 'productPrice'> {product.price} </Typography>
-                      <Typography className='productBrand'> {product.brand} </Typography>
-                      {/* <form onSubmit={(e) = cartSubmit (e, products.id)} >
-                        <label>
-                          <input
-                          type = 'submit'
-                          id= 'addCartButton'
-                          value='Add to Cart'
-                          />
-                        </label>
-                      </form> */}
-                    </Box>
+                  {products.map((product, index) => (
+                    <Paper elevation={4} key={index} >
+                      <Box sx={{display:'flex', cursor: 'pointer'}}onClick={() => navigate(`/products/${product.id}`)}>
+                        <Typography variant='h3' className='postTitle'> {product.title} </Typography>
+                        <Box component='img' className='productImage' sx={{width:300}} src={product.image}/>
+                        <Typography className='productDescription'> {product.description} </Typography>
+                        <Typography className= 'productPrice'> {product.price} </Typography>
+                        <Typography className='productBrand'> {product.brand} </Typography>
+                      </Box>
                     </Paper>
                 ))
                 }
