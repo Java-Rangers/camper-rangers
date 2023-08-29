@@ -7,12 +7,12 @@ import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 
@@ -22,6 +22,7 @@ function RegisterUser() {
   const [fName, setfName] = useState('');
   const [lName, setlName] = useState('');
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+  const navigate = useNavigate();
 
 
   const handleEmailChange = (event) => {
@@ -52,13 +53,14 @@ function RegisterUser() {
         })
         console.log('Response:', response)
 
-        
+        navigate('/products')
         setEmail('');
         setPassword('');
     }  catch (error){
         console.error('Error:', error)
     }
   };
+ 
 
     return (
       <Container component="main" maxWidth="xs">
