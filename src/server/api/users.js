@@ -4,10 +4,13 @@ const usersRouter = express.Router();
 const {
     createUser,
     getUser,
-    getUserByEmail
+    getUserByEmail,
+    getAllUsers
 } = require('../db/users');
 
 const jwt = require('jsonwebtoken')
+
+
 
 usersRouter.get('/', async( req, res, next) => {
     console.log('getting users...')
@@ -43,7 +46,9 @@ usersRouter.post('/login', async(req, res, next) => {
 
             res.send({
                 message: 'Login successful!',
-                token
+                token,
+                id: user.id
+                
             });
         }
         else {

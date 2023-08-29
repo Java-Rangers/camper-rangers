@@ -1,14 +1,17 @@
 // import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { Container, Paper, Box, Typography } from '@mui/material'
+import { useState, useEffect } from 'react';
+
+const userID = sessionStorage.getItem('userID')
 
 export default function NavBar() {
-    // const [token, setToken] = useState(localStorage.getItem('token'));
+    const [token, setToken] = useState(localStorage.getItem('token'));
 
-    // useEffect(() => {
-    //     const storedToken = localStorage.getItem('token');
-    //     setToken(storedToken);
-    // }, []);
+    useEffect(() => {
+        const storedToken = localStorage.getItem('token');
+        setToken(storedToken);
+    }, []);
 
     return (
         <Container>
@@ -17,9 +20,9 @@ export default function NavBar() {
                         <nav>
                             <Typography variant='h2'>Java Campers</Typography>
                             <Typography variant='ul'>
-                                    <Typography variant='li' margin={2}><Link to='/products'>Home</Link></Typography>
-                                    <Typography variant='li' margin={2}><Link to='/cart'>Cart</Link></Typography>
-                                    <Typography variant='li' margin={2}><Link to='/users/login'>Login</Link></Typography>
+                                    <Typography variant='li' margin={2}><Link variant='contained' to='/products'>Home</Link></Typography>
+                                    <Typography variant='li' margin={2}><Link to={`/cart/${userID}`}>Cart</Link></Typography>
+                                    {token ? null : <Typography variant='li' margin={2}><Link to='/users/login'>Login</Link></Typography>}
                             </Typography>
                         </nav>
                     </Box>
