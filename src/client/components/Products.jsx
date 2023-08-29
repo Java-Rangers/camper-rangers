@@ -3,7 +3,7 @@ import { API } from '../App';
 import { BASE_URL } from '../App';
 import { useNavigate } from 'react-router-dom';
 import { Container, Typography, Paper, Box, ListItemSecondaryAction, TextField, Button } from '@mui/material'
-import { CenterFocusStrong } from '@mui/icons-material';
+import { BorderStyle, CenterFocusStrong } from '@mui/icons-material';
 
 
   export default function Products( {token} ) {
@@ -63,6 +63,7 @@ import { CenterFocusStrong } from '@mui/icons-material';
               e.preventDefault();
               handleSearch(); }}>  
                   <TextField
+                  sx={{backgroundColor:'text.main', boxShadow:20}}
                   type = 'text'
                   id= 'searchBar'
                   name= 'searchBar'
@@ -70,7 +71,7 @@ import { CenterFocusStrong } from '@mui/icons-material';
                   value = {searchBar}
                   onChange= {(e) => setSearchBar(e.target.value)}
                   />
-                <Button id ='searchBarButton' type='submit' value='Find it!' sx={{color:'secondary.main'}}>Find it!</Button>
+                <Button id ='searchBarButton' type='submit' value='Find it!' sx={{color:'secondary.main', backgroundColor:'text.main'}}>Find it!</Button>
               </form>
             </Box>
           </Box>
