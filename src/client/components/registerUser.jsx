@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { API } from '../App'
 import { BASE_URL } from '../App';
-import { Container, Box, Paper, Typography, FormControl } from '@mui/material'
+import { Container, Box, Paper, Typography, FormControl, Button, } from '@mui/material'
+import SendIcon from '@mui/icons-material/Send'
 
 function RegisterUser() {
   const [email, setEmail] = useState('');
@@ -19,10 +20,10 @@ function RegisterUser() {
     event.preventDefault();
 
     try {
-        const response = await fetch(`${API}/users`, {
-            method: 'POST',
+        const response = await fetch(`${API}/users/register`, {
+            method: "POST",
             headers: {
-                'Content-Type': 'application/json',
+                "Content-Type": 'application/json',
             },
             body: JSON.stringify({email, password})
         })
@@ -40,7 +41,7 @@ function RegisterUser() {
         <Container>
           <Paper elevation={10}>
             <Box sx={{textAlign:'center', padding:'30px', marginTop:'100px'}}>       
-              <Typography variant='h2' sx={{marginBottom:'10px'}}>Register User</Typography>
+              <Typography variant='h4' color="secondary.main" sx={{marginBottom:'10px'}}>Register User</Typography>
                   <form onSubmit={handleSubmit}>
                     <Box sx={{marginBottom:'10px'}}>
                       <label>Email:</label>
@@ -50,7 +51,7 @@ function RegisterUser() {
                       <label>Password:</label>
                       <input type="password" value={password} onChange={handlePasswordChange} />
                     </Box>
-                      <button type="submit">Register</button>
+                      <Button variant='contained' type="submit" endIcon={<SendIcon/>} >Register</Button>
                   </form>
             </Box>
           </Paper>
