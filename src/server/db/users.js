@@ -52,8 +52,17 @@ const getUserByEmail = async(email) => {
     }
 }
 
+const getAllUsers = async() => {
+  try{
+
+  }catch(err){
+    throw err
+  }
+}
+
 module.exports = {
     createUser,
     getUser,
-    getUserByEmail
+    getUserByEmail,
+    getAllUsers
 };
