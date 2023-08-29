@@ -66,7 +66,7 @@ export default function Login ({ setToken }) {
           
         // setEmail('');
         // setPassword('');
-        console.log('logged in', data.token)
+        console.log('logged in', data)
         // setToken(data.token);
         sessionStorage.setItem('token', data.token);
         sessionStorage.setItem('userID', data.id)

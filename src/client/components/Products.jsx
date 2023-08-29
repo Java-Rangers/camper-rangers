@@ -71,7 +71,11 @@ import { BorderStyle, CenterFocusStrong } from '@mui/icons-material';
                   value = {searchBar}
                   onChange= {(e) => setSearchBar(e.target.value)}
                   />
-                <Button id ='searchBarButton' type='submit' value='Find it!' sx={{color:'secondary.main', backgroundColor:'text.main'}}>Find it!</Button>
+                <Button id ='searchBarButton' type='submit' value='Find it!' sx={{
+                  color:'secondary.main',
+                  backgroundColor:'text.main',
+                  
+                  }}>Find it!</Button>
               </form>
             </Box>
           </Box>

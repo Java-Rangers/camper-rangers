@@ -570,6 +570,11 @@ const orderItems = [
     quantity: 21
   },
   {
+    orderID: 4,
+    productID: 1,
+    quantity: 1
+  },
+  {
     orderID: 7,
     productID: 5,
     quantity: 62
@@ -600,17 +605,17 @@ const orders = [
   {
     userID: 3,
     total: 34.99,
-    fullfilled: false
+    fullfilled: true
   },
   {
     userID: 3,
     total: 149.99,
-    fullfilled: false
+    fullfilled: true
   },
   {
     userID: 4,
     total: 359.99,
-    fullfilled: true
+    fullfilled: false
   },
   {
     userID: 5,
