@@ -6,24 +6,26 @@ import { useParams } from "react-router-dom"
 import { Container, Typography, Paper, Box, Button, SvgIcon } from "@mui/material"
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
+
 export default function SingleProduct() {
 
     const [ product, setProduct ] = useState({})
     const { id } = useParams();
-    const [userCart, setUserCart] = useState([]);
-
+    
+    const userCart = sessionStorage.getItem('userCart');
+    const userID = sessionStorage.getItem('userID');
 
     useEffect(() => {
         const getUserCart = async () => {
     
             try{
             
-            const response = await fetch (`${API}/users/${id}/cart`)
+            const response = await fetch (`${API}/users/${userID}/cart`)
         
             const data = await response.json();
-            console.log('fetch Cart success', data)
-            setUserCart(data);
-            return(data.cart.orderId);
+            console.log('fetch Cart success', data.cart[0].orderId)
+            sessionStorage.setItem('userCart', data.cart[0].orderId);
+            return(data.cart[0].orderId);
             } catch(err) {
             console.log('error getting user cart', err)
             }
@@ -35,7 +37,7 @@ export default function SingleProduct() {
 
     
 
-      const cartSubmit = async ( userCart, productId, quantity ) => {
+      const cartSubmit = async ( productId, quantity ) => {
         // e.preventDefault();
         try{
           const response = await fetch (`${API}/orders/${userCart}/items`, {
@@ -52,8 +54,9 @@ export default function SingleProduct() {
           });
     
           const data = await response.json();
-          setUserCart(data);
+        //   setUserCart(data);
           console.log('Updated cart', data)
+          alert('Item added to cart!')
           return(data)
         } catch(err) {
           console.log('error adding item to cart', err)
@@ -84,7 +87,8 @@ export default function SingleProduct() {
             brand: data.singleProduct.brand,
             image: data.singleProduct.image,
             quantity: data.singleProduct.quantity,
-            price: data.singleProduct.price
+            price: data.singleProduct.price,
+            id: data.singleProduct.id,
         }
     }
 

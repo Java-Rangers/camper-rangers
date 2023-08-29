@@ -72,7 +72,7 @@ export default function Login ({ setToken }) {
         sessionStorage.setItem('userID', data.id)
         alert('You are logged in!');
 
-        // navigate('/products');
+        navigate('/products');
 
   } catch (err) {
     console.log('Invalid user or password', err)
