@@ -8,8 +8,6 @@ import { Container, Typography, Paper, Box, Button } from '@mui/material'
 
 export default function Cart({token}){
 
-  let { id } = useParams();
-
   const [ productArray, setProductArray ] = useState([]);
   const [ products, setProducts ] = useState([]);
   const [ totalPrice, setTotalPrice ] = useState(0);
@@ -57,7 +55,7 @@ export default function Cart({token}){
 
   async function checkout(){
     try{
-      const response = await fetch(`${API}/users/${id}/cart`, {
+      const response = await fetch(`${API}/users/${userID}/cart`, {
         method: "PATCH",
         headers: {"Content-Type" : "application/json"}
       })
@@ -72,9 +70,8 @@ export default function Cart({token}){
   return(
     <>
       <Container>
-        <Typography sx={{textAlign:'center'}} variant='h3'>Shopping Cart</Typography>
+        <Typography sx={{textAlign:'center'}} variant='h3'>User {userID}'s Shopping Cart</Typography>
         <Typography sx={{textAlign:'center'}} variant='h3'>Total: ${totalPrice}</Typography>
-        <Typography sx={{textAlign:'center'}} variant='h5'>***Temporary, use params to naviagte between carts for ease of testing***</Typography>
         <Button onClick={()=>{
           checkout()
         }}>Proceed to Checkout</Button>
