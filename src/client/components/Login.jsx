@@ -9,6 +9,7 @@ export default function Login ({ setToken }) {
   const [message, setMessage] = useState('');
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const [userID, setUserID] = useState();
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -46,7 +47,7 @@ export default function Login ({ setToken }) {
   async function handleSubmit(e) {
     e.preventDefault();
     try {
-        const response = await fetch('http://localhost:3000/api/users/login', {
+        const response = await fetch('http://localhost:8080/api/users/login', {
             method: 'POST',
             headers: {
                 'Content-Type' : 'application/json'
@@ -57,14 +58,18 @@ export default function Login ({ setToken }) {
             })
         });
         const data = await response.json();
+
+        setUserID(data.id)
         setMessage(data.message);
         console.log(data)
+
           
         // setEmail('');
         // setPassword('');
         console.log('logged in', data.token)
         // setToken(data.token);
         sessionStorage.setItem('token', data.token);
+        sessionStorage.setItem('userID', data.id)
         alert('You are logged in!');
 
         navigate('/products');
@@ -79,6 +84,7 @@ export default function Login ({ setToken }) {
 //       setError ('Invalid username or password', error);
 //       alert ("Wrong email or password!")
 //   }
+
 
     
     };
@@ -109,7 +115,7 @@ export default function Login ({ setToken }) {
                     right:'272px'
 
                       }}>Login!
-                        </Button>
+                </Button>
               </form>
           </FormControl>
         </Box>
