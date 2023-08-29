@@ -21,6 +21,8 @@ function RegisterUser() {
   const [password, setPassword] = useState('');
   const [fName, setfName] = useState('');
   const [lName, setlName] = useState('');
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
@@ -30,14 +32,15 @@ function RegisterUser() {
     setPassword(event.target.value);
   };
   const handlesetfName = (event) => {
-    setPassword(event.target.value);
+    setfName(event.target.value);
   };
   const handlesetlName = (event) => {
-    setPassword(event.target.value);
+    setlName(event.target.value);
   };
 
   async function handleSubmit (event) {
     event.preventDefault();
+    setShowSuccessMessage(true);
 
     try {
         const response = await fetch(`${API}/users/register`, {
@@ -132,9 +135,10 @@ function RegisterUser() {
           >
             Sign Up
           </Button>
+          {showSuccessMessage && <p>Account created successfully!</p>}
           <Grid container justifyContent="flex-end">
             <Grid item>
-              <Link href="./Login" variant="body2">
+              <Link href='/Login' variant="body2">
                 Already have an account? Sign in
               </Link>
             </Grid>
