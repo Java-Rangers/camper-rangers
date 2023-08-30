@@ -5,6 +5,8 @@ import { API } from "../App"
 import { useParams } from "react-router-dom"
 import { Container, Typography, Paper, Box, Button, SvgIcon } from "@mui/material"
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import AdminSingleProduct from "./AdminSingleProduct"
+import SingleProductRender from "./SingleProductRender"
 
 
 export default function SingleProduct() {
@@ -14,6 +16,7 @@ export default function SingleProduct() {
     
     const userCart = sessionStorage.getItem('userCart');
     const userID = sessionStorage.getItem('userID');
+    const isAdmin = sessionStorage.getItem('isAdmin');
 
     useEffect(() => {
         const getUserCart = async () => {
@@ -94,39 +97,11 @@ export default function SingleProduct() {
         }
     }
 
-    return (
-    <Container>
-        <Paper elevation={10}>
-            <Box 
-                sx={{
-                    display:'flex',
-                    flexDirection:'column',
-                    textAlign:'center', 
-                    padding:'20px', 
-                    margin:'40px'
-                }}>
-                    <Typography variant="h1">{product.title}</Typography>
-                    <Typography variant="h3">{product.brand}</Typography>
-                    <Box component='img' margin='20px' src={product.image}/>
-                    <Typography>{product.description}</Typography>
-                    <Typography variant="h3">In Stock:{product.quantity}</Typography>
-                    <Typography variant="h3">Price:${product.price}</Typography>
-                    <form >
-                        {/* <AddShoppingCartIcon> */}
-                            <Button variant='outlined' endIcon={<AddShoppingCartIcon/>} sx={{my:3, color: 'secondary.main', zIndex: 100000 }}
-                            onClick={()=> {cartSubmit(product.id)}} 
-                            // type = 'submit'
-                            id= 'addCartButton'
-                            // value='add to cart'
-                            >
-                            Add to cart
-                            </Button>
-                            {/* </AddShoppingCartIcon> */}
-                        </form>
-                    <Button href='/products' sx={{my:1 }} variant='contained'>go back</Button> 
-            </Box>
-        </Paper>
-        
-    </Container>        
-    )
+   if(isAdmin) {
+    return <AdminSingleProduct/>
+  } 
+  else {
+    return <SingleProductRender/>
+  }
+   
 }
