@@ -19,13 +19,19 @@ cartRouter.get('/', async (req, res, next) => {
     try {
 
         const cart = await getCartByUser(userId);
-        if(cart.length > 0){
-          console.log('your cart is', cart)
-          console.log(cart[0].id)
-          cartOrderID = cart[0].orderId
-          // sends an array of orderItem objects
-          res.send ({cart})
-        }  
+        console.log(cart)
+        if(cart === undefined || cart.length <= 0 || cart.length === undefined){
+          return
+        }
+
+
+            console.log('your cart is', cart)
+  
+            cartOrderID = cart[0].orderId
+            // sends an array of orderItem objects
+            res.send ({cart})
+        
+        
     } catch(err) {
         console.error('Error while getting cart by user', err);
         throw err;

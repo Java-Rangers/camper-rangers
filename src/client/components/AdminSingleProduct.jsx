@@ -166,16 +166,10 @@ export default function AdminSingleProduct() {
                             >
                             Add to cart
                             </Button>
-<<<<<<< HEAD
-                            {/* </AddShoppingCartIcon> */}
-                        </form>
-                    <Button variant="outlined" endIcon={<EditNoteIcon/>}  sx={{my:2, color: 'secondary.main'}}> Edit Product </Button>
-=======
                         </form>    
                     <Button variant="outlined"  sx={{my:2, color: 'secondary.main'}} 
                       onClick={() => { startEdit() }}>
                       Edit Product </Button>
->>>>>>> main
                     <Button href='/products' sx={{my:1 }} variant='contained'>go back</Button> 
             </Box>
         </Paper>

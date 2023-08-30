@@ -56,6 +56,24 @@ export default function Cart(){
     }
   }, [productArray])
 
+
+  async function createNewCart(user){
+    try{
+      const response = await fetch(`${API}/orders`, {
+        method: "POST",
+        headers: {"Content-Type" : "application/json"},
+        body: JSON.stringify({
+          userID: user,
+          total: 0,
+          fullfilled: false
+        })
+      })
+      const result = await response.json()
+    }catch(err){
+      throw err
+    }
+  }
+
   async function checkout(){
     try{
       const response = await fetch(`${API}/users/${userID}/cart`, {
@@ -63,6 +81,8 @@ export default function Cart(){
         headers: {"Content-Type" : "application/json"}
       })
       const result = await response.json()
+      console.log('oiy help', result.cart[0].userID)
+      createNewCart(result.cart[0].userID)
       window.location.reload()
       alert('Thank you for shopping with us!')
     }catch(err){
@@ -80,6 +100,7 @@ export default function Cart(){
       })
       const result = await response.json()
       console.log('response result json is: ', result)
+
     }catch(err){
 
     }
