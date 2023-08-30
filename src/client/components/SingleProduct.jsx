@@ -18,6 +18,7 @@ export default function SingleProduct() {
     const userID = sessionStorage.getItem('userID');
     const isAdmin = sessionStorage.getItem('isAdmin');
 
+
     useEffect(() => {
         const getUserCart = async () => {
           
@@ -97,11 +98,11 @@ export default function SingleProduct() {
         }
     }
 
-   if(isAdmin) {
-    return <AdminSingleProduct/>
+   if (isAdmin === true) {
+    return <AdminSingleProduct />
   } 
   else {
-    return <SingleProductRender/>
+    return <SingleProductRender />
   }
    
 }
