@@ -121,7 +121,7 @@ export default function SingleProduct() {
                             </Button>
                             {/* </AddShoppingCartIcon> */}
                         </form>
-                    <Link to='/products'  className="backButton"><Button sx={{my:1 }} variant='contained'>go back</Button></Link>    
+                    <Button href='/products' sx={{my:1 }} variant='contained'>go back</Button> 
             </Box>
         </Paper>
         
