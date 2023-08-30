@@ -76,23 +76,23 @@ export default function Login ({ setToken }) {
   return (
     <Container sx={{my:3, textAlign:'center', padding:'10px'}}>
       <Paper elevation={20}>
-        <Box sx={{padding:'20px', paddingBottom:'70px'}}>
+        <Box sx={{padding:'20px', paddingBottom:'100px'}}>
           <Typography variant="h4" color="secondary.main" sx={{marginBottom:'10px'}}> Please login to your account </Typography>
             <form onSubmit={handleSubmit}>
-              <FormControl sx={{position:'relative', left:'70px'}}>
+              <FormControl sx={{position:'relative', left:'25px'}}>
+                <InputLabel htmlFor="email">Email</InputLabel>
                 <Input sx={{marginRight:'40px'}}
                   id="email"
-                  label="email"
                   value={values.email}
                   onChange={handleEmailChange("email")}
                   required
                 />
                 </FormControl>
-                <FormControl sx={{position:'relative', left:'20px'}}>
-                <Input sx={{marginLeft:'50px'}}
+                <FormControl sx={{position:'relative', left:'45px', top:'10px'}}>
+                <InputLabel htmlFor="password">Password</InputLabel>
+                <Input
                   type={values.showPassword ? "text" : "password"}
                   id="password"
-                  label="password"
                   value={values.password}
                   onChange={handlePasswordChange("password")} required
                   endAdornment={
@@ -110,17 +110,19 @@ export default function Login ({ setToken }) {
                 <Button 
                   type='submit' variant='outlined' color='success' sx={{
                     position:'relative',
-                    top:'50px',
-                    right:'272px'
-
-                      }}>Login!
+                    top:'75px',
+                    right:'120px'
+                    }}>Login!
                 </Button>
               </form>
+            <Typography variant='h6' sx={{
+              position:'relative',
+              top:'80px',
+            }}>
+              <Link to='/registerUser'>Need an account? Create one here!</Link>
+                </Typography>
         </Box>
       </Paper>
-          <Box>
-            <Typography variant='h5' sx={{marginTop: 5}}><Link to='/registerUser'>Need an account? Create one here!</Link></Typography>
-          </Box>
     </Container>
   );
 };
