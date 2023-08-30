@@ -71,9 +71,9 @@ export default function Login ({ setToken }) {
         sessionStorage.setItem('token', data.token);
         sessionStorage.setItem('userID', data.id)
         alert('You are logged in!');
-
         navigate('/products');
-
+        window.location.reload()
+        
   } catch (err) {
     console.log('Invalid user or password', err)
     alert('Incorrect email or password!')
