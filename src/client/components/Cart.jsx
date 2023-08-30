@@ -70,37 +70,65 @@ export default function Cart(){
     }
   }
 
+  async function removeFromCart(productId){
+    try{
+      console.log(productId)
+      const response = await fetch(`${API}/users/${userID}/cart`, {
+        method: "DELETE",
+        headers: {"Content-Type" : "application/json"},
+        body: JSON.stringify({productId})
+      })
+      const result = await response.json()
+      console.log('response result json is: ', result)
+    }catch(err){
+
+    }
+  }
+
   return(
     <>
       <Container>
-        <Typography sx={{textAlign:'center'}} variant='h3'>User {userID}'s Shopping Cart</Typography>
-        <Typography sx={{textAlign:'center'}} variant='h3'>Total: ${totalPrice}</Typography>
-        <Button onClick={()=>{
-          checkout()
+      <Typography variant='h4' sx={{textAlign:'center', padding:'10px', color:'secondary.main'}}>User {userID}'s Shopping Cart</Typography>
+      <Typography variant='h4' sx={{textAlign:'center', padding:'10px', color:'secondary.main'}}>Total: ${totalPrice}</Typography>
+        <Button 
+          sx={{
+            color:'trinary.main',
+            fontWeight:'bold',
+            padding:'15px',
+            backgroundColor:'text.main',
+            position:'relative',
+            left:'10px'
+            }}
+          onClick={()=>{
+            checkout()
         }}>Proceed to Checkout</Button>
-        {productArray != undefined || userID != undefined || userID != null ? (
+        {productArray != undefined || userID === undefined ? (
         // runs when cart has products
         products.map((product)=> {
           return(
-            <Paper elevation={4} key={product.id}>
-              <Box sx={{display:'flex'}} onClick={() => navigate(`/products/${product.id}`)}>
-                <Typography variant='h3' className='productTitle'>{product.title}</Typography>
-
-                <Box component='img' className='productImage' sx={{width:300}} src={product.image}/>
-
-                <Typography className='productDescription'>{product.description}</Typography>
-
-                <Typography className= 'productPrice'> ${product.price} </Typography>
-
-                <Typography className='productBrand'> {product.brand} </Typography>
+            <Paper elevation={4}>
+              <Box sx={{display:'flex',flexDirection:'column' ,margin:2, textAlign:'center'}} onClick={() => navigate(`/products/${product.id}`)}>
+                <Typography variant='h5' sx={{color:'secondary.main'}} className='postTitle'> {product.title} </Typography>
+                <Typography variant='h7' sx={{marginBottom:1}} className='productBrand'> {product.brand} </Typography>
+                <Box component='img' className='productImage' sx={{width:90, maxHeight:70, position:'relative', left:120}} src={product.image}/>
+                <Typography variant='h5' sx={{color:'trinary.main', fontWeight:'550'}} className= 'productPrice'> {product.price}$ </Typography>
+              </Box>
+              <Box sx={{display:'flex',flexDirection:'column' ,margin:2, textAlign:'center'}}>
+                <Button sx={{my:3, color: 'secondary.main', zIndex: 0 }} onClick={()=>{
+                    removeFromCart(product.id)
+                    window.location.reload()
+                  }}>Remove from cart</Button>
               </Box>
             </Paper>
           )})
         
         ) : (
         // runs when cart is empty
-        <h1>Your cart is empty</h1>
+        <Typography variant='h4' sx={{textAlign:'center', padding:'10px', color:'secondary.main'}}>Your cart is empty</Typography>
         )}
+
+        {userID === null ? <Typography variant='h4' sx={{textAlign:'center', padding:'10px', color:'secondary.main'}}>Must be logged in to view your cart</Typography> : null}
+
       </Container>
     </>
   )

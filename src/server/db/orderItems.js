@@ -60,6 +60,18 @@ const removeItemFromOrder = async (id) => {
   try{
     const item = await db.query(`
     DELETE FROM "orderItems" WHERE id=$1`, [id])
+    return item
+  }catch(err){
+    console.error('Error removing item from order', err)
+    throw err
+  }
+}
+
+const removeItemFromOrderByOrderId = async (orderId, productId) => {
+  try{
+    const item = await db.query(`
+    DELETE FROM "orderItems" WHERE "orderId"=$1 AND "productId"=$2`, [orderId, productId])
+    return item
   }catch(err){
     console.error('Error removing item from order', err)
     throw err
@@ -70,7 +82,8 @@ module.exports = {
     getItemsByOrder,
     editOrderItem,
     addItemToOrder,
-    removeItemFromOrder
+    removeItemFromOrder,
+    removeItemFromOrderByOrderId
 }
 
 // OLD CREATE ORDER ITEM FUNCTION, SPARE JUST IN CASE
