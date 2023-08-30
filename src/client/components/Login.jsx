@@ -2,48 +2,37 @@ import React, { useState } from 'react';
 import { Container, Typography, FormControl, FormLabel, FormHelperText, TextField, Box, Paper, Button } from '@mui/material'
 import { Link, useNavigate } from 'react-router-dom';
 import { BASE_URL } from '../App'
+import { Visibility } from '@mui/icons-material';
+import { VisibilityOff } from '@mui/icons-material';
+import { InputLabel, IconButton, Input, InputAdornment } from '@mui/material';
 
 export default function Login ({ setToken }) {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [values, setValues] = useState({
+    email:"",
+    password:"",
+    showPassword: false,
+});
   const [message, setMessage] = useState('');
   const [error, setError] = useState(null);
   const navigate = useNavigate();
   const [userID, setUserID] = useState();
   const isAdmin = sessionStorage.getItem('isAdmin')
 
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
+  const handleClickShowPassword = () => {
+    setValues({ ...values, showPassword: !values.showPassword })
+  }
+
+  const handleMouseDownPassword = (e) => {
+    e.preventDefault();
+  }
+
+  const handleEmailChange = (prop) => (e) => {
+    setValues({ ...values, [prop]: e.target.value})
   };
 
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
+  const handlePasswordChange = (prop) => (e) => {
+    setValues({ ...values, [prop]: e.target.value })
   };
-
-  // const login = async() => {
-//   try {
-  //       const response = await fetch('http://localhost:3000/api/users/login', {
-  //           method: 'POST',
-  //           headers: {
-  //               'Content-Type' : 'application/json'
-  //           }, 
-  //           body: JSON.stringify({
-  //               email,
-  //               password
-  //           })
-  //       });
-  //       const data = await response.json();
-  //       setMessage(data.message);
-  //       console.log(data)
-  //       if(!response.ok) {
-  //         throw(data)
-  //       }
-  //       setEmail('');
-  //       setPassword('');
-  //   } catch (err) {
-  //       console.error(`${err.name}: ${err.message}`);
-  //   }
-  // }
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -54,106 +43,84 @@ export default function Login ({ setToken }) {
                 'Content-Type' : 'application/json'
             }, 
             body: JSON.stringify({
-                email,
-                password, 
+                email: values.email,
+                password: values.password
             })
         });
-        const data = await response.json();
 
-        setUserID(data.id)
-        setMessage(data.message);
-        console.log(data)
+        if (response.ok) {
+          const data = await response.json();
 
-        // const answer = await fetch('http://locahost:8080/api') 
-          
-        // setEmail('');
-        // setPassword('');
-        console.log('logged in', data);
-        console.log('isAdmin?', data.isAdmin);
-        // setToken(data.token);
-        sessionStorage.setItem('isAdmin', data.isAdmin)
-        sessionStorage.setItem('token', data.token);
-        sessionStorage.setItem('userID', data.id)
-        alert('You are logged in!');
-        if(isAdmin){
-          navigate('/admin/products')
+          setUserID(data.id)
+          setMessage(data.message);
+          console.log(data)
+          console.log('logged in', data);
+          console.log('isAdmin?', data.isAdmin);
+          sessionStorage.setItem('isAdmin', data.isAdmin)
+          sessionStorage.setItem('token', data.token);
+          sessionStorage.setItem('userID', data.id)
+          alert('You are logged in!');
+          navigate('/products')
+          window.location.reload();
         } else {
-          navigate('/products');
+          const errorData = await response.json();
+          console.log('Login error', errorData);
+          alert('login failed' + errorData.message);
         }
-
-        window.location.reload()
-        
   } catch (err) {
     console.log('Invalid user or password', err)
     alert('Incorrect email or password!')
   }
-// } catch (err) {
-//       // console.error(`${err.name}: ${err.message}`);
-//       console.log('error logging in with email or password', err);
-//       setError ('Invalid username or password', error);
-//       alert ("Wrong email or password!")
-//   }
-
-
-    
-    };
+};
 
   return (
     <Container sx={{my:3, textAlign:'center', padding:'10px'}}>
       <Paper elevation={20}>
         <Box sx={{padding:'20px', paddingBottom:'70px'}}>
           <Typography variant="h4" color="secondary.main" sx={{marginBottom:'10px'}}> Please login to your account </Typography>
-            <FormControl sx={{position:'relative', left:'40px'}}>
-              <form onSubmit={handleSubmit}>
-                <TextField sx={{marginRight:'10px'}}
+            <form onSubmit={handleSubmit}>
+              <FormControl sx={{position:'relative', left:'70px'}}>
+                <Input sx={{marginRight:'40px'}}
                   id="email"
                   label="email"
-                  value={email}
-                  onChange={handleEmailChange} required
+                  value={values.email}
+                  onChange={handleEmailChange("email")}
+                  required
                 />
-                <TextField sx={{marginLeft:'10px'}}
+                </FormControl>
+                <FormControl sx={{position:'relative', left:'20px'}}>
+                <Input sx={{marginLeft:'50px'}}
+                  type={values.showPassword ? "text" : "password"}
                   id="password"
                   label="password"
-                  value={password}
-                  onChange={handlePasswordChange} required
+                  value={values.password}
+                  onChange={handlePasswordChange("password")} required
+                  endAdornment={
+                  <InputAdornment position="end">
+                      <IconButton
+                        onClick={handleClickShowPassword}
+                        onMouseDown={handleMouseDownPassword}
+                      >
+                        {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                      </IconButton>
+                    </InputAdornment>
+                  }  
                 />
+              </FormControl>  
                 <Button 
                   type='submit' variant='outlined' color='success' sx={{
                     position:'relative',
-                    top:'70px',
+                    top:'50px',
                     right:'272px'
 
                       }}>Login!
                 </Button>
               </form>
-          </FormControl>
         </Box>
       </Paper>
           <Box>
             <Typography variant='h5' sx={{marginTop: 5}}><Link to='/registerUser'>Need an account? Create one here!</Link></Typography>
           </Box>
-          {/* <label htmlFor='email'>Email:</label>
-          <input
-            type='email'
-            id='email'
-            value={email}
-            onChange={handleEmailChange}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor='password'>Password:</label>
-          <input
-            type='password'
-            id='password'
-            value={password}
-            onChange={handlePasswordChange}
-            required
-          />
-        </div>
-        <button type='submit'>Login</button>
-      </form>
-      <p>{message}</p> */}
     </Container>
   );
 };
