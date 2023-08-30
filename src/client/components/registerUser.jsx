@@ -12,6 +12,7 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import { Paper } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 
 
@@ -64,7 +65,6 @@ function RegisterUser() {
 
     return (
       <Container component="main" maxWidth="xs">
-      <CssBaseline />
       <Box
         sx={{
           marginTop: 8,
@@ -73,13 +73,14 @@ function RegisterUser() {
           alignItems: 'center',
         }}
       >
-        <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+        <Paper elevation={20}>
+        <Avatar sx={{ m: 0, bgcolor:'secondary.main', position:'relative', left:138, margin:3}}>
           <LockOutlinedIcon />
         </Avatar>
-        <Typography component="h1" variant="h5">
+        <Typography component="h1" variant="h5" sx={{textAlign:'center'}}>
           Sign up
         </Typography>
-        <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+        <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3, mb:3, paddingLeft:2, paddingRight:2}}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
@@ -140,12 +141,13 @@ function RegisterUser() {
           {showSuccessMessage && <p>Account created successfully!</p>}
           <Grid container justifyContent="flex-end">
             <Grid item>
-              <Link href='/Login' variant="body2">
+              <Link to='/users/login' variant="body2">
                 Already have an account? Sign in
               </Link>
             </Grid>
           </Grid>
         </Box>
+        </Paper>
       </Box>
       
     </Container>
