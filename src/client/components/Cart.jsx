@@ -4,15 +4,18 @@ import { BASE_URL } from '../App';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Container, Typography, Paper, Box, Button } from '@mui/material'
 
-// user id is hard set to params for now, need to grab user id from logged in user and inject that into the fetch request when ready
 
-export default function Cart({token}){
+export default function Cart(){
 
   const [ productArray, setProductArray ] = useState([]);
   const [ products, setProducts ] = useState([]);
   const [ totalPrice, setTotalPrice ] = useState(0);
   const navigate = useNavigate();
   const userID = sessionStorage.getItem('userID')
+
+  if (userID === null || userID === undefined){
+    return
+  }
 
   useEffect(()=>{
     const getUserCart = async () => {
@@ -75,7 +78,7 @@ export default function Cart({token}){
         <Button onClick={()=>{
           checkout()
         }}>Proceed to Checkout</Button>
-        {productArray ? (
+        {productArray != undefined || userID != undefined || userID != null ? (
         // runs when cart has products
         products.map((product)=> {
           return(
@@ -97,8 +100,7 @@ export default function Cart({token}){
         ) : (
         // runs when cart is empty
         <h1>Your cart is empty</h1>
-        )
-        }
+        )}
       </Container>
     </>
   )
