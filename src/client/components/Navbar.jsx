@@ -28,14 +28,14 @@ export default function NavBar() {
                         <Button href={`/cart/${userID}`} sx={{color:'trinary.main', fontWeight:'600'}}>Cart</Button>
                             </Typography> : null}
                     {sessionStorage.getItem('token') ? <Typography variant='li' margin={2}>
-                        <Link to='/products' onClick={()=>{
-                    // logic goes here for what happens when a user clicks logout
-                    sessionStorage.removeItem('userID')
-                    sessionStorage.removeItem('token')
-                    window.location.reload()
-                    }}>Logout</Link></Typography> : <Typography variant='li' margin={2}>
-                        <Link to='/users/login'>Login</Link>
-                            </Typography>}
+                        <Button href='/products' sx={{color:'trinary.main', fontWeight:'600'}} onClick={()=>{
+                            sessionStorage.removeItem('userID')
+                                sessionStorage.removeItem('token')
+                                    window.location.reload()
+                    }}>Logout</Button></Typography> : 
+                        <Typography variant='li' margin={2}>
+                            <Button href="/users/login" sx={{color:'trinary.main', fontWeight:'600'}}>Login</Button>
+                                </Typography>}
               </Typography>
             </nav>
           </Box>
