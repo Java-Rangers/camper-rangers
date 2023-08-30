@@ -8,8 +8,10 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
 
 export default function AdminSingleProduct() {
-  const [ product, setProduct ] = useState({})
+  const [ product, setProduct ] = useState({});
+  const [ editorActive, setEditorActive ] = useState(false);
   const { id } = useParams();
+
   
   const userCart = sessionStorage.getItem('userCart');
   const userID = sessionStorage.getItem('userID');
@@ -67,6 +69,21 @@ export default function AdminSingleProduct() {
   
    
 
+
+    useEffect (() => {
+      const startEdit = async () => {
+        
+        try {
+          setEditorActive = true;
+          console.log ('editor is active', editorActive);
+        } catch(err) {
+          console.log('failure to open editor', err)
+        }
+      }
+      startEdit();
+    }, [])
+
+
   useEffect(() => {
 
       async function fetchData() {
@@ -109,11 +126,37 @@ export default function AdminSingleProduct() {
                     <Typography variant="h1">{product.title}</Typography>
                     <Typography variant="h3">{product.brand}</Typography>
                     <Box component='img' margin='20px' src={product.image}/>
-                    <Typography>{product.description}</Typography>
-                    <Typography variant="h3">In Stock:{product.quantity}</Typography>
-                    <Typography variant="h3">Price:${product.price}</Typography>
+                    {editorActive ? 
+                      <Box>
+                        <InputLabel htmlfor='description'>  Description: </InputLabel>
+                          <Input
+                            id= 'DescriptionInput'
+                            value= {description}
+                            onChange={handleDescriptionChange('DescriptionInput')}
+                          />
+                         <InputLabel htmlfor='quantity'>  Quantity: </InputLabel>
+                          <Input
+                            id= 'QuantityInput'
+                            value= {quantity}
+                            onChange={handleQuantityChange('QuantityInput')}
+                          />
+                         <InputLabel htmlfor='price'> Price: </InputLabel>
+                          <Input
+                            id= 'PriceInput'
+                            value= {price}
+                            onChange={handlePriceChange('PriceInput')}
+                          />
+                      </Box>
+                    :
+                      <Box>
+                        <Typography>{product.description}</Typography>
+                        <Typography variant="h3">In Stock:{product.quantity}</Typography>
+                        <Typography variant="h3">Price:${product.price}</Typography> 
+                      </Box>
+                    }
+                      
+                      
                     <form >
-                        {/* <AddShoppingCartIcon> */}
                             <Button variant='outlined' endIcon={<AddShoppingCartIcon/>} sx={{my:1, color: 'secondary.main', zIndex: 100000 }}
                             onClick={()=> {cartSubmit(product.id)}} 
                             // type = 'submit'
@@ -122,9 +165,10 @@ export default function AdminSingleProduct() {
                             >
                             Add to cart
                             </Button>
-                            {/* </AddShoppingCartIcon> */}
-                        </form>
-                    <Button variant="outlined"  sx={{my:2, color: 'secondary.main'}}> Edit Product </Button>
+                        </form>    
+                    <Button variant="outlined"  sx={{my:2, color: 'secondary.main'}} 
+                      onClick={() => { startEdit() }}>
+                      Edit Product </Button>
                     <Button href='/products' sx={{my:1 }} variant='contained'>go back</Button> 
             </Box>
         </Paper>
