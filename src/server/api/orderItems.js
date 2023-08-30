@@ -53,7 +53,7 @@ orderItemsRouter.patch('/', async(req, res, next) => {
 // DELETE /api/orders/orderId/items
 orderItemsRouter.delete('/', async(req, res, next) => {
   try{
-
+    
   }catch(err){
     console.error('Error deleting item', err)
     next(err)
