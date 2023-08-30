@@ -98,7 +98,7 @@ export default function AdminProducts() {
                 <Paper elevation={10}>
                 <Box key= {product._id} className='productsContainer' sx={{margin:'20px'}}>
                   <Box className='productCard' sx={{display:'flex',flexDirection:'column' ,margin:2, textAlign:'center'}} onClick={() => navigate(`/${product.id}`)}>  
-                    <Typography variant='h5' sx={{color:'secondary.main'}} className='postTitle'> {product.title} </Typography>
+                    <Typography variant='h5' sx={{color:'secondary.main'}} className='productName'> {product.title} </Typography>
                       <Typography variant='h7' sx={{marginBottom:1}} className='productBrand'> {product.brand} </Typography>
                         <Box component='img' className='productImage' sx={{width:90, maxHeight:70, position:'relative', left:105}} src={product.image}/>
                           <Typography className='productDescription'> {product.description} </Typography>
@@ -113,7 +113,7 @@ export default function AdminProducts() {
                   {products.map((product) => (
                     <Paper elevation={4}>
                       <Box sx={{display:'flex',flexDirection:'column' ,margin:2, textAlign:'center'}} onClick={() => navigate(`/products/${product.id}`)}>
-                        <Typography variant='h5' sx={{color:'secondary.main'}} className='postTitle'> {product.title} </Typography>
+                        <Typography variant='h5' sx={{color:'secondary.main'}} className='productName'> {product.title} </Typography>
                         <Typography variant='h7' sx={{marginBottom:1}} className='productBrand'> {product.brand} </Typography>
                         <Box component='img' className='productImage' sx={{width:90, maxHeight:70, position:'relative', left:120}} src={product.image}/>
                         <Typography variant='h5' sx={{color:'trinary.main', fontWeight:'550'}} className= 'productPrice'> {product.price}$ </Typography>
