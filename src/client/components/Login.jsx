@@ -10,6 +10,7 @@ export default function Login ({ setToken }) {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
   const [userID, setUserID] = useState();
+  const isAdmin = sessionStorage.getItem('isAdmin')
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -54,7 +55,7 @@ export default function Login ({ setToken }) {
             }, 
             body: JSON.stringify({
                 email,
-                password
+                password, 
             })
         });
         const data = await response.json();
@@ -63,15 +64,23 @@ export default function Login ({ setToken }) {
         setMessage(data.message);
         console.log(data)
 
+        // const answer = await fetch('http://locahost:8080/api') 
           
         // setEmail('');
         // setPassword('');
-        console.log('logged in', data)
+        console.log('logged in', data);
+        console.log('isAdmin?', data.isAdmin);
         // setToken(data.token);
+        sessionStorage.setItem('isAdmin', data.isAdmin)
         sessionStorage.setItem('token', data.token);
         sessionStorage.setItem('userID', data.id)
         alert('You are logged in!');
-        navigate('/products');
+        if(isAdmin){
+          navigate('/admin/products')
+        } else {
+          navigate('/products');
+        }
+
         window.location.reload()
         
   } catch (err) {
