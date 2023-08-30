@@ -21,8 +21,13 @@ export default function NavBar() {
               <Typography variant='h2'>Java Campers</Typography>
               <Typography variant='ul'>
                 <Typography variant='li' margin={2}><Link variant='contained' to='/products'>Home</Link></Typography>
-                <Typography variant='li' margin={2}><Link to={`/cart/${userID}`}>Cart</Link></Typography>
-                {sessionStorage.getItem('token') ? <Typography variant='li' margin={2}><Link to='/products'>Logout</Link></Typography> : <Typography variant='li' margin={2}><Link to='/users/login'>Login</Link></Typography>}
+                {userID ? <Typography variant='li' margin={2}><Link to={`/cart/${userID}`}>Cart</Link></Typography> : null}
+                {sessionStorage.getItem('token') ? <Typography variant='li' margin={2}><Link to='/products' onClick={()=>{
+                  // logic goes here for what happens when a user clicks logout
+                  sessionStorage.removeItem('userID')
+                  sessionStorage.removeItem('token')
+                  window.location.reload()
+                }}>Logout</Link></Typography> : <Typography variant='li' margin={2}><Link to='/users/login'>Login</Link></Typography>}
               </Typography>
             </nav>
           </Box>
