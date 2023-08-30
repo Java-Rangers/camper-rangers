@@ -17,7 +17,8 @@ export default function SingleProduct() {
 
     useEffect(() => {
         const getUserCart = async () => {
-    
+          
+          if(userID !== null) {
             try{
             
             const response = await fetch (`${API}/users/${userID}/cart`)
@@ -30,10 +31,11 @@ export default function SingleProduct() {
             console.log('error getting user cart', err)
             }
         
-            
+          }  
         }
        getUserCart(); 
     }, [])
+          
 
     
 
