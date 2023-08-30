@@ -5,6 +5,7 @@ import { API } from "../App"
 import { useParams } from "react-router-dom"
 import { Container, Typography, Paper, Box, Button, SvgIcon } from "@mui/material"
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import EditNoteIcon from '@mui/icons-material/EditNote';
 
 
 export default function AdminSingleProduct() {
@@ -124,7 +125,7 @@ export default function AdminSingleProduct() {
                             </Button>
                             {/* </AddShoppingCartIcon> */}
                         </form>
-                    <Button variant="outlined"  sx={{my:2, color: 'secondary.main'}}> Edit Product </Button>
+                    <Button variant="outlined" endIcon={<EditNoteIcon/>}  sx={{my:2, color: 'secondary.main'}}> Edit Product </Button>
                     <Button href='/products' sx={{my:1 }} variant='contained'>go back</Button> 
             </Box>
         </Paper>
