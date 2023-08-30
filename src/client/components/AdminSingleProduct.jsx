@@ -3,7 +3,7 @@ import { useState, useEffect } from "react"
 import { BASE_URL } from "../App"
 import { API } from "../App"
 import { useParams } from "react-router-dom"
-import { Container, Typography, Paper, Box, Button, SvgIcon } from "@mui/material"
+import { Container, Typography, Paper, Box, Button, InputLabel, Input } from "@mui/material"
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import EditNoteIcon from '@mui/icons-material/EditNote';
 
@@ -16,7 +16,6 @@ export default function AdminSingleProduct() {
   
   const userCart = sessionStorage.getItem('userCart');
   const userID = sessionStorage.getItem('userID');
-  const isAdmin = sessionStorage.getItem('isAdmin');
 
   useEffect(() => {
       const getUserCart = async () => {
@@ -39,7 +38,7 @@ export default function AdminSingleProduct() {
      getUserCart(); 
   }, [])
         
-
+ 
   
 
     const cartSubmit = async ( productId, quantity ) => {
@@ -71,18 +70,9 @@ export default function AdminSingleProduct() {
    
 
 
-    useEffect (() => {
-      const startEdit = async () => {
-        
-        try {
-          setEditorActive = true;
-          console.log ('editor is active', editorActive);
-        } catch(err) {
-          console.log('failure to open editor', err)
-        }
-      }
-      startEdit();
-    }, [])
+   const startEdit = () => {
+    setEditorActive(true);
+  }
 
 
   useEffect(() => {
@@ -129,23 +119,23 @@ export default function AdminSingleProduct() {
                     <Box component='img' margin='20px' src={product.image}/>
                     {editorActive ? 
                       <Box>
-                        <InputLabel htmlfor='description'>  Description: </InputLabel>
+                        <InputLabel htmlFor='description'>  Description: </InputLabel>
                           <Input
                             id= 'DescriptionInput'
-                            value= {description}
-                            onChange={handleDescriptionChange('DescriptionInput')}
+                            value= {product.description}
+                            // onChange={handleDescriptionChange('DescriptionInput')}
                           />
-                         <InputLabel htmlfor='quantity'>  Quantity: </InputLabel>
+                         <InputLabel htmlFor='quantity'>  Quantity: </InputLabel>
                           <Input
                             id= 'QuantityInput'
-                            value= {quantity}
-                            onChange={handleQuantityChange('QuantityInput')}
+                            value= {product.quantity}
+                            // onChange={handleQuantityChange('QuantityInput')}
                           />
-                         <InputLabel htmlfor='price'> Price: </InputLabel>
+                         <InputLabel htmlFor='price'> Price: </InputLabel>
                           <Input
                             id= 'PriceInput'
-                            value= {price}
-                            onChange={handlePriceChange('PriceInput')}
+                            value= {product.price}
+                            // onChange={handlePriceChange('PriceInput')}
                           />
                       </Box>
                     :
@@ -166,16 +156,10 @@ export default function AdminSingleProduct() {
                             >
                             Add to cart
                             </Button>
-<<<<<<< HEAD
-                            {/* </AddShoppingCartIcon> */}
-                        </form>
-                    <Button variant="outlined" endIcon={<EditNoteIcon/>}  sx={{my:2, color: 'secondary.main'}}> Edit Product </Button>
-=======
                         </form>    
                     <Button variant="outlined"  sx={{my:2, color: 'secondary.main'}} 
                       onClick={() => { startEdit() }}>
                       Edit Product </Button>
->>>>>>> main
                     <Button href='/products' sx={{my:1 }} variant='contained'>go back</Button> 
             </Box>
         </Paper>
