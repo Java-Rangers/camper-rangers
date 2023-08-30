@@ -44,3 +44,33 @@ position: initial;
   width: 350px;
 } */
 /* Add more styling for other elements if needed */
+
+body{
+  width: 95%;
+  height: 95%;
+}
+
+
+
+@media (min-width: 600px) {
+ body {
+      width: 95% !important;
+      height: 95% !important;
+  }
+  .productImage{
+    width: 250px !important;
+    max-height: 250px !important;
+    margin-left: 0vw !important;
+    padding-left: 0vw !important;
+  }
+  .productPrice {
+    padding-bottom: 1em !important;
+  }
+  .productBrand {
+    padding-top: 1em !important;
+  }
+  .productName {
+    padding-top: 1em !important;
+    margin-top: 1em !important;
+  }
+}
