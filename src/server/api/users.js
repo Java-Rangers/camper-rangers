@@ -25,6 +25,8 @@ usersRouter.get('/', async( req, res, next) => {
     }
 });
 
+// usersRouter.get('/userEmail', async(req, res, next)
+
 usersRouter.post('/login', async(req, res, next) => {
     console.log('logging in')
     const { email, password } = req.body;
@@ -47,7 +49,8 @@ usersRouter.post('/login', async(req, res, next) => {
             res.send({
                 message: 'Login successful!',
                 token,
-                id: user.id
+                id: user.id,
+                isAdmin: user.isAdmin
                 
             });
         }
