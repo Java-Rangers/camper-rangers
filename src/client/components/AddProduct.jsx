@@ -40,6 +40,7 @@ export default function AddProduct () {
       }
       const data = await response.json()
       console.log('new product', data);
+      alert('Item Added!')
       return data;
     } catch (err) {
       console.log('error posting new product', err)
