@@ -28,7 +28,7 @@ export default function Cart(){
       }
     }
     getUserCart();
-  }, [])
+  }, [userID])
 
   console.log('productArray: ', productArray)
 

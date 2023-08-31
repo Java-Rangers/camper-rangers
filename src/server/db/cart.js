@@ -50,7 +50,7 @@ const checkoutCart = async (id) => {
       INSERT INTO "orders"("userID", total, fullfilled)
       VALUES ($1, $2, $3)
       RETURNING *;`, [id, 0, false])
-      console.log('order being returned', order)
+      console.log('order being returned', order.rows)
     }
 
     return rows;
