@@ -41,18 +41,18 @@ const checkoutCart = async (id) => {
       return null;
     }
 
-    const { _rows } = await db.query(`
+    const remainingOrders = await db.query(`
     SELECT * FROM orders WHERE "userID"=$1 AND fullfilled=false`, [id])
-    console.log(_rows)
-    if(_rows.length <= 0){
+    console.log('remaining orders', remainingOrders.rows)
+    if(remainingOrders.rows.length <= 0){
       console.log('creating new order for user')
       const order = await db.query(`
       INSERT INTO "orders"("userID", total, fullfilled)
       VALUES ($1, $2, $3)
       RETURNING *;`, [id, 0, false])
+      console.log('order being returned', order)
     }
 
-    return _rows
     return rows;
   }catch(err){
     console.log('Error during cart checkout of user id: ', id,  err);
