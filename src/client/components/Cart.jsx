@@ -28,7 +28,7 @@ export default function Cart(){
       }
     }
     getUserCart();
-  }, [userID])
+  }, [])
 
   console.log('productArray: ', productArray)
 
@@ -84,8 +84,14 @@ export default function Cart(){
       const result = await response.json()
 
       /// createNewCart()
-      window.location.reload()
+      // window.location.reload()
       alert('Thank you for shopping with us!')
+
+      const _response = await fetch(`${API}/users/${userID}/cart`);
+      const _result = await _response.json();
+      console.log('cart result', _result.cart)
+      setProductArray(_result.cart)
+
     }catch(err){
       console.log('Error checking out cart', err)
     }
