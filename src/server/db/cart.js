@@ -14,8 +14,11 @@ const getCartByUser = async(id) => {
       return;
     }   
 
-    const cartOrder = await cart.rows[0].id
-    const userCart = await getItemsByOrder(cartOrder)
+    const cartsArray = cart.rows
+    console.log('array of unfullfilled orders', cartsArray)
+
+    const cartOrderId = await cartsArray[0].id
+    const userCart = await getItemsByOrder(cartOrderId)
 
     console.log('---Received cart of user id: ', id, ' ', userCart)
     return userCart
@@ -38,6 +41,18 @@ const checkoutCart = async (id) => {
       return null;
     }
 
+    const { _rows } = await db.query(`
+    SELECT * FROM orders WHERE "userID"=$1 AND fullfilled=false`, [id])
+    console.log(_rows)
+    if(_rows.length <= 0){
+      console.log('creating new order for user')
+      const order = await db.query(`
+      INSERT INTO "orders"("userID", total, fullfilled)
+      VALUES ($1, $2, $3)
+      RETURNING *;`, [id, 0, false])
+    }
+
+    return _rows
     return rows;
   }catch(err){
     console.log('Error during cart checkout of user id: ', id,  err);

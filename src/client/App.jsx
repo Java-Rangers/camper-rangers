@@ -3,6 +3,7 @@ import reactLogo from './assets/react.svg';
 import Login from './components/Login';
 import {Routes, Route} from 'react-router-dom'
 import SingleProduct from './components/SingleProduct';
+import SingleProductRender from './components/SingleProductRender';
 import Products from './components/Products'
 import RegisterUser from './components/registerUser';
 import NavBar from './components/Navbar';
@@ -25,7 +26,7 @@ function App() {
     <Routes>
       <Route path = '/users/login' element= { <Login /> } />
       <Route path='/products' element={<Products />} />
-      <Route path='/products/:id' element={<SingleProduct />} />
+      <Route path='/products/:id' element={<SingleProductRender />} />
       <Route path='/registerUser' element={<RegisterUser />} />
       <Route path='/cart/:id' element={<Cart />} />
       {/* <Route path='/products/:id/editProduct' element={<EditProduct/> } /> */}

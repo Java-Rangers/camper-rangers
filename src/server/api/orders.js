@@ -42,7 +42,8 @@ ordersRouter.post('/', async(req, res, next) => {
   const {userID, total, fullfilled} =req.body
   try{
     const order = await createOrder({userID, total, fullfilled})
-    res.set({order})
+    console.log('api order: ', order)
+    res.send(order)
   }catch(err){
     console.error('Error creating new order', err)
     throw err

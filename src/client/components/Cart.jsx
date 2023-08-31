@@ -57,13 +57,14 @@ export default function Cart(){
   }, [productArray])
 
 
-  async function createNewCart(user){
+  async function createNewCart(){
+    
     try{
       const response = await fetch(`${API}/orders`, {
         method: "POST",
         headers: {"Content-Type" : "application/json"},
         body: JSON.stringify({
-          userID: user,
+          userID: sessionStorage.getItem('userID'),
           total: 0,
           fullfilled: false
         })
@@ -81,8 +82,8 @@ export default function Cart(){
         headers: {"Content-Type" : "application/json"}
       })
       const result = await response.json()
-      console.log('oiy help', result.cart[0].userID)
-      createNewCart(result.cart[0].userID)
+
+      /// createNewCart()
       window.location.reload()
       alert('Thank you for shopping with us!')
     }catch(err){

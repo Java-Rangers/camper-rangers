@@ -1,10 +1,11 @@
 const db = require('./client')
 
 // GETS AND RETURNS ALL ITEMS BY ORDER ID
-const getItemsByOrder = async (id) => {
+const getItemsByOrder = async (orderId) => {
   try{
     const { rows: orderItems } = await db.query(`
-    SELECT * FROM "orderItems" WHERE "orderId"=$1`, [id])
+    SELECT * FROM "orderItems" WHERE "orderId"=$1`, [orderId])
+    console.log('items in cart: ', orderItems)
     return orderItems
   }catch(err){
     console.log('Error getting items by order', err)

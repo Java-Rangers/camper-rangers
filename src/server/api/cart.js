@@ -16,11 +16,14 @@ let cartOrderID
 // GETS AND RETURNS CART BY USER ID
 cartRouter.get('/', async (req, res, next) => {
   const {userId} = req.params
+  const convertedId = parseInt(userId)
+  console.log('converted id requested', convertedId)
     try {
 
-        const cart = await getCartByUser(userId);
-        console.log(cart)
+        const cart = await getCartByUser(convertedId);
+        console.log('cart is', cart)
         if(cart === undefined || cart.length <= 0 || cart.length === undefined){
+          console.log('user has no cart')
           return
         }
 
