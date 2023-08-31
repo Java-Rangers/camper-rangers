@@ -4,22 +4,23 @@ import { BASE_URL } from "../App"
 import { API } from "../App"
 import { useParams } from "react-router-dom"
 import { Container, Typography, Paper, Box, Button, InputLabel, Checkbox, Input, FormControl, OutlinedInput, FormControlLabel, TextField, InputAdornment } from "@mui/material"
+import products from "./updateProduct"
 
 
 export default function AddProduct () {
 
-  const [title, setTitle ] = useState('');
-  const [description, setDescription] = useState('');
-  const [brand, setBrand ] = useState('');
+  const [title, setTitle ] = useState('title');
+  const [description, setDescription] = useState('description');
+  const [brand, setBrand ] = useState('brand');
   const [availability, setAvailability ] = useState(false);
-  const [image, setImage ] = useState('');
+  const [image, setImage ] = useState('image url');
   const [price, setPrice ] = useState(0);
   const [quantity, setQuantity ] = useState(0);
 
 
   const submitProduct = async () => {
     try{
-      const response = await fetch (`${API}/admin/products/newProduct`, {
+      const response = await fetch (`${API}/admin/product/newProduct`, {
         method: 'POST',
         headers: {
         'Content-Type': 'application/json'
@@ -45,7 +46,6 @@ export default function AddProduct () {
     }
   }
   
-  submitProduct();
 
 
   return(
@@ -57,8 +57,8 @@ export default function AddProduct () {
                   label='Title:' 
                   id='title'
                   InputLabelProps={{shrink: true}}
-                  // value={product.title}
-                  // onChange={e => setTitle(e.target.value)}
+                  value={products.title}
+                  onChange={e => setTitle(e.target.value)}
                 />
             </FormControl>
             <FormControl>
@@ -67,8 +67,8 @@ export default function AddProduct () {
                   label='Description:' 
                   id='description'
                   InputLabelProps={{ shrink: true}}
-                  // value={product.description}
-                  // onChange={e => setDescription(e.target.value)}
+                  value={products.description}
+                  onChange={e => setDescription(e.target.value)}
                 />
             </FormControl>
             <FormControl>
@@ -76,8 +76,8 @@ export default function AddProduct () {
                 label='Brand:'
                 id='brand'
                 InputLabelProps= {{shrink: true}}
-                // value={product.brand}
-                // onChange={e => setBrand(e.target.value)}
+                value={products.brand}
+                onChange={e => setBrand(e.target.value)}
               />
             </FormControl>
             <FormControl>
@@ -86,8 +86,8 @@ export default function AddProduct () {
                 label = 'Available?'
                 labelPlacement="top"
                 id='availability'
-                // value={product.availability}
-                // onChange={e => setAvailability(e.target.value)}
+                value={products.availability}
+                onChange={e => setAvailability(e.target.value)}
               />
             </FormControl>
             <FormControl>
@@ -95,8 +95,8 @@ export default function AddProduct () {
                 label='Image URL:'
                 id='image'
                 InputLabelProps={{shrink:true}}
-                // value={product.image}
-                // onChange={e => setImage(e.target.value)}
+                value={products.image}
+                onChange={e => setImage(e.target.value)}
               />
             </FormControl>
             <FormControl> 
@@ -110,8 +110,8 @@ export default function AddProduct () {
                     $
                   </InputAdornment>
                 }}
-                // value={product.price}
-                // onChange={e => setPrice(e.target.value)}
+                value={products.price}
+                onChange={e => setPrice(e.target.value)}
               />
             </FormControl>
             <FormControl>
@@ -119,10 +119,26 @@ export default function AddProduct () {
                 label='Quantity:' 
                 id='quantity'
                 InputLabelProps={{shrink:true}}
-                // value={product.quantity}
-                // onChange={e => setQuantity(e.target.value)}
+                value={products.quantity}
+                onChange={e => setQuantity(e.target.value)}
               />
             </FormControl>
+          </Box>
+          <Box>
+            <Button 
+              variant='outlined'
+              fullWidth
+              id='subProductBttn'
+              sx={{
+                position:'relative',
+                top:'25px',
+                bgcolor:'secondary.main',
+                color:'text.main'
+              }}
+              onClick={() => {submitProduct()}}
+            > 
+              Submit Item
+            </Button>
           </Box>
         </Paper>
       </Container> 
