@@ -3,27 +3,31 @@ const bcrypt = require('bcrypt')
 const db = require('./client');
 const { getProductById } = require('./products');
 
-const editProduct = async ( id, fields = {} ) => {
-  
-  // build set string from input field
+
+const editProduct = async (id, fields) => {
   const setString = Object.keys(fields).map(
-    (key, index) => `"${ key }" = $${index + 1 }`
-    ).join(', ');
-  
+    (key, index) => `"${key}"=$${index + 1}`
+  ).join(', ');
+
   try {
-    if (setString.length > 0) {
-      await db.query(`
-      UPDATE products
-      SET ${ setString }
-      WHERE id=$${id}
-      RETURNING *;
-      `, Object.values(fields));
-    }
-  
-    return await getProductById (id);
+    const { rows: [item] } = await db.query(`
+      UPDATE "products" SET ${setString}
+      WHERE id=$${Object.keys(fields).length + 1}
+      RETURNING *;`, [...Object.values(fields), id]);
+
+    const amountLeft = await db.query(`
+      SELECT quantity FROM "orderItems" WHERE id=$1`, [id])
+    console.log(`you have ${amountLeft.rows[0].quantity} remaining`)
+    
+    // const itemId = item.id
+
+    // if (amountLeft.rows[0].quantity <= 0){
+    //   removeItemFromOrder(itemId)
+    // }
+    return item
   } catch(err) {
-    console.log('error editing product', err)
-  } 
+    console.log('error editing product...',err)
+  }
 }
 
 async function logIn ({ username, password }) {
