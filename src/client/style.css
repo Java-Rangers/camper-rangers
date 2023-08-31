@@ -54,7 +54,7 @@ body{
 
 @media (min-width: 600px) {
  body {
-      width: 95% !important;
+      width: 100% !important;
       height: 95% !important;
   }
   .productImage{
