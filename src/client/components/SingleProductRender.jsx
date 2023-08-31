@@ -107,28 +107,32 @@ export default function SingleProductRender() {
                     padding:'20px', 
                     margin:'40px'
                 }}>
-                    <Typography variant="h1">{product.title}</Typography>
-                    <Typography variant="h3">{product.brand}</Typography>
+                    <Typography variant="h3">{product.title}</Typography>
+                    <Typography variant="h7">{product.brand}</Typography>
                     <Box component='img' margin='20px' src={product.image}/>
-                    <Typography>{product.description}</Typography>
-                    <Typography variant="h3">In Stock:{product.quantity}</Typography>
-                    <Typography variant="h3">Price:${product.price}</Typography>
+                    <Typography>Description: {product.description}</Typography>
+                    <Typography variant="h5" sx={{mt:4}}>In Stock:{product.quantity}</Typography>
+                    <Typography variant="h4">Price:${product.price}</Typography>
                     <form >
                         {/* <AddShoppingCartIcon> */}
-                            <Button variant='outlined' endIcon={<AddShoppingCartIcon/>} sx={{my:3, color: 'secondary.main', zIndex: 100000 }}
+                            <Button variant='outlined' endIcon={<AddShoppingCartIcon/>} sx={{
+                              my:3,
+                              bgcolor: 'secondary.main', 
+                              color:'text.main',
+                              zIndex: 100000 }}
+
                             onClick={()=> {cartSubmit(product.id)}} 
-                            // type = 'submit'
-                            id= 'addCartButton'
-                            // value='add to cart'
-                            >
-                            Add to cart
-                            </Button>
-                            {/* </AddShoppingCartIcon> */}
+                              // type = 'submit'
+                              id= 'addCartButton'
+                              // value='add to cart'
+                              >
+                              Add to cart
+                              </Button>
+                              {/* </AddShoppingCartIcon> */}
                         </form>
                     <Button href='/products' sx={{my:1 }} variant='contained'>go back</Button> 
             </Box>
-        </Paper>
-        
+        </Paper>  
     </Container>        
   )
 }
