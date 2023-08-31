@@ -3,10 +3,9 @@ import { useState, useEffect } from "react"
 import { BASE_URL } from "../App"
 import { API } from "../App"
 import { useParams } from "react-router-dom"
-import { Container, Typography, Paper, Box, Button, InputLabel, Input } from "@mui/material"
+import { Container, Typography, Paper, Box, Button, InputLabel, Input, OutlinedInput } from "@mui/material"
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import EditNoteIcon from '@mui/icons-material/EditNote';
-
 
 export default function AdminSingleProduct() {
   const [ product, setProduct ] = useState({});
@@ -131,7 +130,7 @@ export default function AdminSingleProduct() {
 
 
   return (  
-    <Container>
+    <Container sx={{mb:15}}>
         <Paper elevation={10}>
             <Box 
                 sx={{
@@ -141,27 +140,36 @@ export default function AdminSingleProduct() {
                     padding:'20px', 
                     margin:'40px'
                 }}>
-                    <Typography variant="h1">{product.title}</Typography>
-                    <Typography variant="h3">{product.brand}</Typography>
+                    <Typography variant="h3">{product.title}</Typography>
+                    <Typography variant="h7">{product.brand}</Typography>
                     <Box component='img' margin='20px' src={product.image}/>
                     {editorActive ? 
                       <Box>
                         <InputLabel htmlFor='description'>  Description: </InputLabel>
-                          <Input
+                          <OutlinedInput
+                            autoFocus
+                            sx={{mb:2}}
+                            fullWidth
                             id= 'DescriptionInput'
                             type='text'
                             value= {description}
                             onChange={e=> setDescription(e.target.value)}
                           />
                          <InputLabel htmlFor='quantity'>  Quantity: </InputLabel>
-                          <Input
+                          <OutlinedInput
+                            autoFocus
+                            sx={{mb:2}}
+                            fullWidth
                             id= 'QuantityInput'
                             type='number'
                             value= {quantity}
                             onChange={e => setQuantity(e.target.value)}
                           />
                          <InputLabel htmlFor='price'> Price: </InputLabel>
-                          <Input
+                          <OutlinedInput
+                            autoFocus
+                            sx={{mb:2}}
+                            fullWidth
                             id= 'PriceInput'
                             type='integer'
                             value= {price}
@@ -171,14 +179,18 @@ export default function AdminSingleProduct() {
                     :
                       <Box>
                         <Typography>{product.description}</Typography>
-                        <Typography variant="h3">In Stock:{product.quantity}</Typography>
-                        <Typography variant="h3">Price:${product.price}</Typography> 
+                        <Typography variant="h5" sx={{mt:4}}>In Stock:{product.quantity}</Typography>
+                        <Typography variant="h4">Price:${product.price}</Typography> 
                       </Box>
                     }
                       
                       
                     <form >
-                            <Button variant='outlined' endIcon={<AddShoppingCartIcon/>} sx={{my:1, color: 'secondary.main', zIndex: 100000 }}
+                            <Button variant='outlined' endIcon={<AddShoppingCartIcon/>} sx={{
+                              my:1,
+                              color: 'secondary.main', 
+                              zIndex: 100000 }}
+
                             onClick={()=> {cartSubmit(product.id)}} 
                             // type = 'submit'
                             id= 'addCartButton'
