@@ -3,7 +3,7 @@ import { useState, useEffect } from "react"
 import { BASE_URL } from "../App"
 import { API } from "../App"
 import { useParams } from "react-router-dom"
-import { Container, Typography, Paper, Box, Button, InputLabel, Checkbox, Input, FormControl, OutlinedInput, FormControlLabel } from "@mui/material"
+import { Container, Typography, Paper, Box, Button, InputLabel, Checkbox, Input, FormControl, OutlinedInput, FormControlLabel, TextField, InputAdornment } from "@mui/material"
 
 
 export default function AddProduct () {
@@ -45,6 +45,7 @@ export default function AddProduct () {
     }
   }
   
+  submitProduct();
 
 
   return(
@@ -52,25 +53,29 @@ export default function AddProduct () {
         <Paper elevation={20}>
           <Box sx={{padding:'20px', paddingBottom:'100px'}}>
             <FormControl sx={{width:330}}>
-              <InputLabel htmlFor='title'> Title: </InputLabel>
-                <OutlinedInput 
+                <TextField
+                  label='Title:' 
                   id='title'
+                  InputLabelProps={{shrink: true}}
                   // value={product.title}
                   // onChange={e => setTitle(e.target.value)}
                 />
             </FormControl>
             <FormControl>
-              <InputLabel htmlFor='description'> Description:</InputLabel>
-                <OutlinedInput 
+              {/* <InputLabel htmlFor='description'> Description:</InputLabel> */}
+                <TextField
+                  label='Description:' 
                   id='description'
+                  InputLabelProps={{ shrink: true}}
                   // value={product.description}
                   // onChange={e => setDescription(e.target.value)}
                 />
             </FormControl>
             <FormControl>
-              <InputLabel htmlFor='brand'> Brand: </InputLabel>
-              <OutlinedInput 
+              <TextField 
+                label='Brand:'
                 id='brand'
+                InputLabelProps= {{shrink: true}}
                 // value={product.brand}
                 // onChange={e => setBrand(e.target.value)}
               />
@@ -78,32 +83,42 @@ export default function AddProduct () {
             <FormControl>
               <FormControlLabel
                 control = {<Checkbox defaultChecked />} 
-                label = {availability}
+                label = 'Available?'
+                labelPlacement="top"
                 id='availability'
                 // value={product.availability}
                 // onChange={e => setAvailability(e.target.value)}
               />
             </FormControl>
             <FormControl>
-              <InputLabel htmlFor='image'> Image URL:</InputLabel>
-              <OutlinedInput 
+              <TextField 
+                label='Image URL:'
                 id='image'
+                InputLabelProps={{shrink:true}}
                 // value={product.image}
                 // onChange={e => setImage(e.target.value)}
               />
             </FormControl>
             <FormControl> 
-              <InputLabel htmlFor='price'> Price:</InputLabel>
-              <OutlinedInput 
+              <TextField 
+                label='Price:'
                 id='price'
+                InputLabelProps={{shrink:true}}
+                InputProps={{
+                    startAdornment:
+                  <InputAdornment position="start">
+                    $
+                  </InputAdornment>
+                }}
                 // value={product.price}
                 // onChange={e => setPrice(e.target.value)}
               />
             </FormControl>
             <FormControl>
-              <InputLabel htmlFor='quantity'> Quantity: </InputLabel>
-              <OutlinedInput 
+              <TextField
+                label='Quantity:' 
                 id='quantity'
+                InputLabelProps={{shrink:true}}
                 // value={product.quantity}
                 // onChange={e => setQuantity(e.target.value)}
               />
