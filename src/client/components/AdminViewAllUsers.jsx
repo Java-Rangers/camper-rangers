@@ -7,6 +7,8 @@ import { Container, Typography, Paper, Box } from "@mui/material";
 export default function AdminViewAllUsers() {
   const [users, setUsers] = useState([]);
   const [addresses, setAddresses] = useState([]);
+  const isAdmin = sessionStorage.getItem('isAdmin')
+  
 
   useEffect(() => {
     const fetchData = async () => {
@@ -35,6 +37,7 @@ export default function AdminViewAllUsers() {
         break;
       }
     }
+    
 
     return (
       <Paper key={user.id} elevation={3} style={{ padding: "20px", marginBottom: "20px" }}>

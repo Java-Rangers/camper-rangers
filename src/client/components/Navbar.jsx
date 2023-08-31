@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { fontWeight } from '@mui/system';
 
 const userID = sessionStorage.getItem('userID')
+const isAdmin = sessionStorage.getItem('isAdmin') == 'true'
 
 export default function NavBar() {
     const [token, setToken] = useState(localStorage.getItem('token'));
@@ -13,6 +14,8 @@ export default function NavBar() {
         const storedToken = localStorage.getItem('token');
         setToken(storedToken);
     }, []);
+
+    console.log("isAdmin:", isAdmin);
 
     return (
       <Container>
@@ -31,18 +34,26 @@ export default function NavBar() {
                         <Button href='/products' sx={{color:'trinary.main', fontWeight:'600'}} onClick={()=>{
                             sessionStorage.removeItem('userID')
                                 sessionStorage.removeItem('token')
+                                sessionStorage.removeItem('isAdmin')
                                     window.location.reload()
-                    }}>Logout</Button></Typography> : 
+                                    }}>Logout</Button></Typography> : 
                         <Typography variant='li' margin={2}>
                             <Button href="/users/login" sx={{color:'trinary.main', fontWeight:'600'}}>Login</Button>
                                 </Typography>}
                                 <Typography variant='li' margin={2}>
-                                  <Button
-                                    component={Link}
-                                    to="/AdminViewAllUsers" // Corrected path based on your file name
-                                    sx={{ color: 'trinary.main', fontWeight: '600' }}>All Users
-                                  </Button>
-                                </Typography>
+                                      {console.log("Rendering All Users button. isAdmin:", isAdmin)}
+                                      {isAdmin && (
+                                        <Button
+                                          component={Link}
+                                          to="/AdminViewAllUsers"
+                                          sx={{ color: 'trinary.main', fontWeight: '600' }}
+                                          
+                                        >
+                                          All Users
+                                        </Button>
+                                      )}
+                                    </Typography>
+                          
 
                         
               </Typography>
