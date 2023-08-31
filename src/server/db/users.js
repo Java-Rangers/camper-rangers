@@ -52,13 +52,15 @@ const getUserByEmail = async(email) => {
     }
 }
 
-const getAllUsers = async() => {
-  try{
-
-  }catch(err){
-    throw err
-  }
-}
+const getAllUsers = async () => {
+    try {
+      const query = 'SELECT * FROM users';
+      const result = await db.query(query);
+      return result.rows;
+    } catch (error) {
+      throw error;
+    }
+  };
 
 const getUserById = async(userId) => {
     try{
