@@ -58,6 +58,7 @@ export default function Login ({ setToken }) {
           console.log(data)
           console.log('logged in', data);
           console.log('isAdmin?', data.isAdmin);
+          console.log('userID', data.id)
           //token handling
           sessionStorage.setItem('isAdmin', data.isAdmin)
           sessionStorage.setItem('token', data.token);

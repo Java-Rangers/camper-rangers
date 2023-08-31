@@ -5,7 +5,8 @@ const {
     createUser,
     getUser,
     getUserByEmail,
-    getAllUsers
+    getAllUsers,
+    getUserById
 } = require('../db/users');
 
 const jwt = require('jsonwebtoken')
@@ -25,7 +26,27 @@ usersRouter.get('/', async( req, res, next) => {
     }
 });
 
-// usersRouter.get('/userEmail', async(req, res, next)
+usersRouter.get('/:userId', async(req, res, next) => {
+
+    console.log('getting user by id');
+    try {
+        
+        const userId = req.params.userId;
+        const id = parseInt (userId, 10);
+        // const id = parseInt(userID, 10);
+        const user = await getUserById(id);
+
+
+        res.send({
+            message: 'User:',
+            id: user.id,
+            isAdmin: user.isAdmin
+        })
+    } catch (err) {
+        console.log('error getting user by id', err)
+    }
+
+});
 
 usersRouter.post('/login', async(req, res, next) => {
     console.log('logging in')
