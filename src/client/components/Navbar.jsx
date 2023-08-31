@@ -36,6 +36,15 @@ export default function NavBar() {
                         <Typography variant='li' margin={2}>
                             <Button href="/users/login" sx={{color:'trinary.main', fontWeight:'600'}}>Login</Button>
                                 </Typography>}
+                                <Typography variant='li' margin={2}>
+                                  <Button
+                                    component={Link}
+                                    to="/AdminViewAllUsers" // Corrected path based on your file name
+                                    sx={{ color: 'trinary.main', fontWeight: '600' }}>All Users
+                                  </Button>
+                                </Typography>
+
+                        
               </Typography>
             </nav>
           </Box>
