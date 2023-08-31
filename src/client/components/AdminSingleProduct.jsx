@@ -10,6 +10,9 @@ import EditNoteIcon from '@mui/icons-material/EditNote';
 
 export default function AdminSingleProduct() {
   const [ product, setProduct ] = useState({});
+  const [ description, setDescription ] = useState('');
+  const [ quantity, setQuantity ] = useState (0);
+  const [ price, setPrice ] = useState (0);
   const [ editorActive, setEditorActive ] = useState(false);
   const { id } = useParams();
 
@@ -90,6 +93,30 @@ export default function AdminSingleProduct() {
 
   }, [])
 
+  const handleEdit = async (e) => {
+    try{
+      const response = await fetch (`${API}/admin/edit/${id}`,{
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          description: description,
+          quantity: quantity,
+          price: price,
+        })
+      });
+      if(!response.ok) {
+        throw new Error (`HTTP error! Status: ${response.status}`)
+      }
+      const data = await response.json();
+      console.log(data)
+      return data
+    } catch(err) {
+      console.log ('error editing your product', err)
+    }
+  }
+
   function cleanProduct(data) {
       return {
           title: data.singleProduct.title,
@@ -122,20 +149,23 @@ export default function AdminSingleProduct() {
                         <InputLabel htmlFor='description'>  Description: </InputLabel>
                           <Input
                             id= 'DescriptionInput'
-                            value= {product.description}
-                            // onChange={handleDescriptionChange('DescriptionInput')}
+                            type='text'
+                            value= {description}
+                            onChange={e=> setDescription(e.target.value)}
                           />
                          <InputLabel htmlFor='quantity'>  Quantity: </InputLabel>
                           <Input
                             id= 'QuantityInput'
-                            value= {product.quantity}
-                            // onChange={handleQuantityChange('QuantityInput')}
+                            type='number'
+                            value= {quantity}
+                            onChange={e => setQuantity(e.target.value)}
                           />
                          <InputLabel htmlFor='price'> Price: </InputLabel>
                           <Input
                             id= 'PriceInput'
-                            value= {product.price}
-                            // onChange={handlePriceChange('PriceInput')}
+                            type='integer'
+                            value= {price}
+                            onChange={e => setPrice(e.target.value)}
                           />
                       </Box>
                     :
@@ -157,9 +187,15 @@ export default function AdminSingleProduct() {
                             Add to cart
                             </Button>
                         </form>    
-                    <Button variant="outlined"  sx={{my:2, color: 'secondary.main'}} 
-                      onClick={() => { startEdit() }}>
-                      Edit Product </Button>
+                    {editorActive ? (
+                      <Button variant='outlined' sx={{my:2, color: 'secondary.main'}} onClick={() => { handleEdit() } }>
+                      Save Edit
+                    </Button>
+                    ) : (
+                      <Button variant="outlined"  sx={{my:2, color: 'secondary.main'}} 
+                        onClick={() => { startEdit() }}>
+                        Edit Product </Button>  
+                    )}
                     <Button href='/products' sx={{my:1 }} variant='contained'>go back</Button> 
             </Box>
         </Paper>
