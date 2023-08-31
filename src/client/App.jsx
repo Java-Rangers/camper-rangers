@@ -9,6 +9,7 @@ import RegisterUser from './components/registerUser';
 import NavBar from './components/Navbar';
 import Cart from './components/Cart';
 import AdminSingleProduct from './components/AdminSingleProduct';
+import AddProduct from './components/AddProduct';
 // import EditProduct from './components/EditProduct';
 
 const API = 'http://localhost:8080/api'
@@ -29,6 +30,7 @@ function App() {
       <Route path='/products/:id' element={<SingleProductRender />} />
       <Route path='/registerUser' element={<RegisterUser />} />
       <Route path='/cart/:id' element={<Cart />} />
+      <Route path='/admin/products/newProduct' element={<AddProduct/>} />
       {/* <Route path='/products/:id/editProduct' element={<EditProduct/> } /> */}
     </Routes>
     
