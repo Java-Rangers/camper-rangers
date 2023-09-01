@@ -85,15 +85,17 @@ export default function Cart(){
         headers: {"Content-Type" : "application/json"}
       })
       const result = await response.json()
-
+      if (result.cart[0].fullfilled === true){
+        setProductArray([])
+        setProducts([])
+        setTotalPrice(0)
+      }
+      console.log('line 87 result', result)
       /// createNewCart()
       // window.location.reload()
       alert('Thank you for shopping with us!')
 
-      const _response = await fetch(`${API}/users/${userID}/cart`);
-      const _result = await _response.json();
-      console.log('cart result', _result.cart)
-      setProductArray(_result.cart)
+
 
     }catch(err){
       console.log('Error checking out cart', err)
