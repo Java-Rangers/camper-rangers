@@ -8,8 +8,11 @@ import RegisterUser from './components/registerUser';
 import NavBar from './components/Navbar';
 import Cart from './components/Cart';
 import AdminSingleProduct from './components/AdminSingleProduct';
+import Footer from './components/footer';
+import { Box } from '@mui/material';
 import AdminViewAllUsers from './components/AdminViewAllUsers';
 import AddProduct from './components/AddProduct';
+
 // import EditProduct from './components/EditProduct';
 
 const API = 'http://localhost:8080/api'
@@ -20,10 +23,10 @@ function App() {
 
   return (
     <>
-    <div className='App'>
+      <div className='App'>
         <NavBar />
-    </div>
-    
+      </div>
+      
     <Routes>
       <Route path = '/users/login' element= { <Login /> } />
       <Route path='/products' element={<Products />} />
@@ -34,7 +37,10 @@ function App() {
       <Route path='/admin/products/newProduct' element={<AddProduct/>} />
       {/* <Route path='/products/:id/editProduct' element={<EditProduct/> } /> */}
     </Routes>
-    
+
+    <Box>
+      <Footer />
+    </Box>
     </>
   );
 }

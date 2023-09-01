@@ -20,6 +20,7 @@ export default function AdminViewAllUsers() {
         const addressesResponse = await fetch(`${API}/address`);
         const addressesData = await addressesResponse.json();
         setAddresses(addressesData.addresses);
+        console.log(addressesData.addresses)
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -29,28 +30,22 @@ export default function AdminViewAllUsers() {
   }, []);
 
   function renderUserWithAddress(user) {
-    let address = null;
+    // Find the address associated with the user
+    const address = addresses.find((addr) => addr.userID === user.id);
   
-    for (const addr of addresses) {
-      if (addr.userId === user.id) {
-        address = addr;
-        break;
-      }
-    }
-    
-
     return (
       <Paper key={user.id} elevation={3} style={{ padding: "20px", marginBottom: "20px" }}>
         <Typography variant="h6">Name: {user.fName} {user.lName}</Typography>
         <Typography>Email: {user.email}</Typography>
-        {address && (
+        {address ? (
           <div>
-            <Typography>Address:</Typography>
             <Typography>Street: {address.street}</Typography>
             <Typography>City: {address.city}</Typography>
             <Typography>State: {address.state}</Typography>
             <Typography>Zip: {address.zip}</Typography>
           </div>
+        ) : (
+          <Typography>No Address Found</Typography>
         )}
       </Paper>
     );

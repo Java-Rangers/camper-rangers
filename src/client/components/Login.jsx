@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container, Typography, FormControl, FormLabel, FormHelperText, TextField, Box, Paper, Button, OutlinedInput } from '@mui/material'
+import { Container, Typography, FormControl, FormLabel, FormHelperText, TextField, Box, Paper, Button} from '@mui/material'
 import { Link, useNavigate } from 'react-router-dom';
 import { BASE_URL } from '../App'
 import { Visibility } from '@mui/icons-material';
@@ -85,23 +85,25 @@ export default function Login ({ setToken }) {
           <Typography variant="h5" color="primary.main" sx={{marginBottom:'20px'}}>Login</Typography>
             <Box component='form' onSubmit={handleSubmit}>
               <FormControl sx={{width:330}}>
-                <InputLabel htmlFor="email">Email</InputLabel>
-                  <OutlinedInput
+                  <TextField
                     id="email"
+                    label="Email"
                     value={values.email}
                     onChange={handleEmailChange("email")}
                     required
                     autoFocus
                     autoComplete='email'
+                    InputLabelProps={{ shrink: true }}
                   />
               </FormControl>
               <FormControl sx={{position:'relative', top:'10px', width:330}}>
-                <InputLabel htmlFor="password">Password</InputLabel>
-                  <OutlinedInput
+                  <TextField
                     type={values.showPassword ? "text" : "password"}
                     id="password"
+                    label='Password'
                     autoFocus
                     autoComplete='password'
+                    InputLabelProps={{ shrink: true }}
                     value={values.password}
                     onChange={handlePasswordChange("password")} required
                     endAdornment={
