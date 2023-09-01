@@ -69,9 +69,10 @@ body{
   }
   .productImage{
     width: 250px !important;
-    max-height: 250px !important;
+    max-height: 200px !important;
     margin-left: 0vw !important;
     padding-left: 0vw !important;
+    margin-bottom: 2em;
   }
   .productPrice {
     padding-bottom: 1em !important;
@@ -101,7 +102,53 @@ body{
     left: 155px !important;
   }
   /* End of Register User CSS----------------------------- */
-  .credits {
-    left: 100px;
+
+  /* All products page css ------------------------------- */
+  #clearBttn {
+    margin-top: 0px !important;
+    margin-left: 2em !important;
   }
+  #searchBarButton {
+    margin-left: 1em !important;
+    width: 12em !important;
+  }
+  #searchBar {
+    width: 20em !important;
+  }
+  .productsCards {
+    max-height: 20em !important;
+
+  }
+  .productCard {
+    max-height: 20em !important;
+    display: grid !important;
+    grid-template-columns: repeat(4, auto) !important;
+    gap: 0em !important;
+    grid-template-rows: 0.5fr, 1fr !important ;
+    
+  }
+  .productName {
+    grid-column: 3/4 !important;
+    grid-row: 1 !important;
+  }
+  .productBrand{ 
+    grid-column: 3/4 !important;
+    grid-row: 2 !important;
+  }
+  .productImage{
+    grid-column: 1/4 !important;
+    grid-row: 2/3 !important;
+    max-width: 200px !important;
+    max-height: 170px !important;
+    /* min-width: 200px !important;
+    min-height: 200px !important; */
+  }
+  .productPrice {
+    grid-column: 3/4 !important;
+    grid-row: 3 !important;
+  } 
+  /* End of all products css --------------------------------- */
+  /* .credits {
+    
+  } */
 }
