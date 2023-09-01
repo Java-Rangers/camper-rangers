@@ -83,4 +83,7 @@ body{
     padding-top: 1em !important;
     margin-top: 1em !important;
   }
+  .credits {
+    left: 100px;
+  }
 }
