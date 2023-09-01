@@ -84,11 +84,32 @@ async function getUserById(id) {
   }
 }
 
+const deleteProduct = async (productId) => {
+  console.log(`Deleting product ${productId}`)
+  try{
+    await db.query (
+      `
+      DELETE FROM "orderItems"
+      WHERE "orderItems"."productId" = $1
+      RETURNING *;`,
+      [productId]);
+    await db.query(
+      `
+      DELETE FROM products WHERE id=$1
+      RETURNING *;`, 
+      [productId]);
+    console.log('product removed from db')
+  }catch(err){
+    console.error('Error deleting product from table', err)
+    throw err
+  }
+}
 
 module.exports = {
   editProduct,
   getAllUsers,
   deleteUser,
   getUserById,
-  logIn
+  logIn,
+  deleteProduct,
 }

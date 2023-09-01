@@ -9,8 +9,8 @@ const {
   getAllUsers,
   deleteUser,
   getUserById,
-  logIn
-
+  logIn,
+  deleteProduct,
 } =require('../db/admin');
 
 const {
@@ -78,6 +78,16 @@ adminRouter.get('/:id', async (req, res, next) => {
     res.send(user);
   } catch (error){
     next(error)
+  }
+})
+
+adminRouter.delete('/product/delete/:productId', async (req,res,next) => {
+  try{
+    const product = await deleteProduct (req.params.productId);
+    res.send(product)
+    console.log('routing delete success')
+  } catch(err) {
+    console.log('error routing delete', err)
   }
 })
 
