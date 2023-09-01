@@ -4,7 +4,6 @@ import { BASE_URL } from "../App"
 import { API } from "../App"
 import { useParams } from "react-router-dom"
 import { Container, Typography, Paper, Box, Button, InputLabel, Checkbox, Input, FormControl, OutlinedInput, FormControlLabel, TextField, InputAdornment } from "@mui/material"
-// import products from "./updateProduct"
 
 
 export default function AddProduct () {
@@ -16,6 +15,15 @@ export default function AddProduct () {
   const [image, setImage ] = useState('image url');
   const [price, setPrice ] = useState(0);
   const [quantity, setQuantity ] = useState(0);
+  const [product, setProduct ] = useState ({
+    title: '',
+    description: '',
+    brand: '',
+    availability: '',
+    image: '',
+    price:  '',
+    quantity: '',
+  })
 
 
   const submitProduct = async () => {
@@ -41,6 +49,7 @@ export default function AddProduct () {
       const data = await response.json()
       console.log('new product', data);
       alert('Item Added!')
+      setProduct(data);
       return data;
     } catch (err) {
       console.log('error posting new product', err)
@@ -58,7 +67,7 @@ export default function AddProduct () {
                   label='Title:' 
                   id='title'
                   InputLabelProps={{shrink: true}}
-                  value={products.title}
+                  value={title}
                   onChange={e => setTitle(e.target.value)}
                 />
             </FormControl>
@@ -68,7 +77,7 @@ export default function AddProduct () {
                   label='Description:' 
                   id='description'
                   InputLabelProps={{ shrink: true}}
-                  value={products.description}
+                  value={description}
                   onChange={e => setDescription(e.target.value)}
                 />
             </FormControl>
@@ -77,7 +86,7 @@ export default function AddProduct () {
                 label='Brand:'
                 id='brand'
                 InputLabelProps= {{shrink: true}}
-                value={products.brand}
+                value={brand}
                 onChange={e => setBrand(e.target.value)}
               />
             </FormControl>
@@ -87,7 +96,7 @@ export default function AddProduct () {
                 label = 'Available?'
                 labelPlacement="top"
                 id='availability'
-                value={products.availability}
+                value={availability}
                 onChange={e => setAvailability(e.target.value)}
               />
             </FormControl>
@@ -96,7 +105,7 @@ export default function AddProduct () {
                 label='Image URL:'
                 id='image'
                 InputLabelProps={{shrink:true}}
-                value={products.image}
+                value={image}
                 onChange={e => setImage(e.target.value)}
               />
             </FormControl>
@@ -111,7 +120,7 @@ export default function AddProduct () {
                     $
                   </InputAdornment>
                 }}
-                value={products.price}
+                value={price}
                 onChange={e => setPrice(e.target.value)}
               />
             </FormControl>
@@ -120,7 +129,7 @@ export default function AddProduct () {
                 label='Quantity:' 
                 id='quantity'
                 InputLabelProps={{shrink:true}}
-                value={products.quantity}
+                value={quantity}
                 onChange={e => setQuantity(e.target.value)}
               />
             </FormControl>

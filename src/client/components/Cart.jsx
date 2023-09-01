@@ -12,12 +12,14 @@ export default function Cart(){
   const [ totalPrice, setTotalPrice ] = useState(0);
   const navigate = useNavigate();
   const userID = sessionStorage.getItem('userID')
+  let changeTrigger = 0
 
   if (userID === null || userID === undefined){
     return
   }
 
   useEffect(()=>{
+    console.log('getting user cart')
     const getUserCart = async () => {
       try{
         const response = await fetch(`${API}/users/${userID}/cart`);
@@ -28,11 +30,12 @@ export default function Cart(){
       }
     }
     getUserCart();
-  }, [])
+  }, [changeTrigger])
 
   console.log('productArray: ', productArray)
 
   useEffect(()=>{
+    console.log('getting cart products')
     const getCartProducts = async () => {
       try{
         let workingTotal = 0
@@ -99,7 +102,7 @@ export default function Cart(){
 
   async function removeFromCart(productId){
     try{
-      console.log(productId)
+      console.log('product id: ', productId)
       const response = await fetch(`${API}/users/${userID}/cart`, {
         method: "DELETE",
         headers: {"Content-Type" : "application/json"},
@@ -107,7 +110,8 @@ export default function Cart(){
       })
       const result = await response.json()
       console.log('response result json is: ', result)
-
+      changeTrigger++
+      console.log(changeTrigger)
     }catch(err){
 
     }
@@ -144,7 +148,7 @@ export default function Cart(){
               <Box sx={{display:'flex',flexDirection:'column' ,margin:2, textAlign:'center'}}>
                 <Button sx={{my:3, color: 'secondary.main', zIndex: 0 }} onClick={()=>{
                     removeFromCart(product.id)
-                    window.location.reload()
+                    // window.location.reload()
                   }}>Remove from cart</Button>
               </Box>
             </Paper>
