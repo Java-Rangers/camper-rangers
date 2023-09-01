@@ -68,15 +68,16 @@ export default function Cart(){
         headers: {"Content-Type" : "application/json"}
       })
       const result = await response.json()
-      if (result.cart[0].fullfilled === true){
-      }
-      console.log('line 87 result', result)
-      /// createNewCart()
-      // window.location.reload()
+      // if (result.cart[0].fullfilled === true){
+        console.log('line 87 result', result)
+        setProductArray([])
+        setProducts([])
+        setTotalPrice(0)
+      // }
+    
       alert('Thank you for shopping with us!')
-      setProductArray([])
-      setProducts([])
-      setTotalPrice(0)
+      
+      // sessionStorage.setItem('userCart')
 
 
     }catch(err){
@@ -91,7 +92,7 @@ export default function Cart(){
       const result = await response.json();
       setProductArray(result.cart)
       console.log(productArray)
-      if(productArray.length === 0){
+      if(productArray.length <= 1){
         console.log('last item in cart removed')
         setProductArray([])
         setProducts([])
@@ -127,7 +128,7 @@ export default function Cart(){
   return(
     <>
       <Container>
-      <Typography variant='h4' sx={{textAlign:'center', padding:'10px', color:'secondary.main'}}>User {userID}'s Shopping Cart</Typography>
+      <Typography variant='h4' sx={{textAlign:'center', padding:'10px', color:'secondary.main'}}>User {userID}'s Shopping Cart id {sessionStorage.getItem('userCart')}</Typography>
       <Typography variant='h4' sx={{textAlign:'center', padding:'10px', color:'secondary.main'}}>Total: ${totalPrice}</Typography>
         <Button 
           sx={{

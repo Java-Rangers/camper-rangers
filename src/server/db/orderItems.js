@@ -3,6 +3,7 @@ const db = require('./client')
 // GETS AND RETURNS ALL ITEMS BY ORDER ID
 const getItemsByOrder = async (orderId) => {
   try{
+    console.log('order items order id', orderId)
     const { rows: orderItems } = await db.query(`
     SELECT * FROM "orderItems" WHERE "orderId"=$1`, [orderId])
     console.log('items in cart: ', orderItems)
@@ -21,7 +22,6 @@ const addItemToOrder = async ({orderId, productId, quantity}) => {
             VALUES ($1, $2, $3)
             RETURNING *;
         `, [orderId, productId, quantity])
-        console.log(orderItem)
         return orderItem
     } catch(error) {
         console.error('error creating order items...', error)

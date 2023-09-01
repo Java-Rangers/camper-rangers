@@ -7,21 +7,21 @@ import { Container, Typography, Paper, Box, Button, SvgIcon } from "@mui/materia
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
 
-export default function SingleProductRender() {
+export default function SingleProductRender({userId, setUserId}) {
 
   const [ product, setProduct ] = useState({})
+  const [ userCart, setUserCart] = useState({})
   const { id } = useParams();
   
-  const userCart = parseInt(sessionStorage.getItem('userCart'));
+  
   const userID = sessionStorage.getItem('userID');
   const isAdmin = sessionStorage.getItem('isAdmin');
-
 
     const getUserCart = async () => {
       
       if(userID != null) {
         try{
-        console.log('starting to get user cart, id: ', userID)
+        console.log('starting to get user cart, id: ', userId)
         const response = await fetch (`${API}/users/${userID}/cart`)
         const data = await response.json();
         const userCartId = data.cart[0].orderId;
@@ -43,14 +43,14 @@ export default function SingleProductRender() {
       try{
         console.log('id of product being added: ', productId)
         const userCartId = await getUserCart()
-        console.log('userCart in storage: ', userCartId)
-        const response = await fetch (`${API}/orders/${userCart}/items`, {
+        console.log('userCart id from get user cart: ', userCartId)
+        const response = await fetch (`${API}/orders/${userCartId}/items`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-              orderId: userCart,
+              orderId: userCartId,
               productId: productId,
               quantity: 1    
           })

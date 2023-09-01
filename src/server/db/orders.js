@@ -61,14 +61,12 @@ const getOrderByUser = async (id) => {
 }
 
 const createOrder = async ({userID, total, fullfilled}) => {
-  console.log('order data is: ', userID, total, fullfilled)
     try {
         const { rows: [orders] } = await db.query(`
             INSERT INTO orders("userID", total, fullfilled)
             VALUES ($1, $2, $3)
             RETURNING *;
         `, [userID, total, fullfilled])
-        console.log('db orders: ', orders)
         return orders
     } catch(error) {
         console.error('Error creating order', error)

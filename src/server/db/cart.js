@@ -20,7 +20,7 @@ const getCartByUser = async(id) => {
     const cartOrderId = await cartsArray[0].id
     const userCart = await getItemsByOrder(cartOrderId)
 
-    console.log('---Received cart of user id: ', id, ' ', userCart)
+    console.log(`---Received cart of user id: ${id} order id: ${cartOrderId} cart: ${userCart}`)
     return userCart
   }catch(err){
     console.error('Error while getting cart by user id', err);
@@ -51,6 +51,7 @@ const checkoutCart = async (id) => {
       VALUES ($1, $2, $3)
       RETURNING *;`, [id, 0, false])
       console.log('order being returned', order.rows)
+      sessionStorage.setItem('userCart') = order.rows[0].id
     }
 
     return rows;
