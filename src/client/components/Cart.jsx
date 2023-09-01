@@ -12,7 +12,7 @@ export default function Cart(){
   const [ totalPrice, setTotalPrice ] = useState(0);
   const navigate = useNavigate();
   const userID = sessionStorage.getItem('userID')
-  let changeTrigger = 0
+
 
   if (userID === null || userID === undefined){
     return
@@ -30,7 +30,7 @@ export default function Cart(){
       }
     }
     getUserCart();
-  }, [changeTrigger])
+  }, [])
 
   console.log('productArray: ', productArray)
 
@@ -110,8 +110,7 @@ export default function Cart(){
       })
       const result = await response.json()
       console.log('response result json is: ', result)
-      changeTrigger++
-      console.log(changeTrigger)
+
     }catch(err){
 
     }
