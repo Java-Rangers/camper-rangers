@@ -86,7 +86,7 @@ export default function Login ({userId, setUserId}) {
         <Box sx={{padding:'20px', paddingBottom:'100px'}}>
           <Typography variant="h5" color="primary.main" sx={{marginBottom:'20px'}}>Login</Typography>
             <Box component='form' onSubmit={handleSubmit}>
-              <FormControl sx={{width:330}}>
+              <FormControl id='email' sx={{my:1, width:320}}>
                   <TextField
                     id="email"
                     label="Email"
@@ -98,7 +98,7 @@ export default function Login ({userId, setUserId}) {
                     InputLabelProps={{ shrink: true }}
                   />
               </FormControl>
-              <FormControl sx={{position:'relative', top:'10px', width:330}}>
+              <FormControl id='password' sx={{my: 1, width:320}}>
                   <TextField
                     type={values.showPassword ? "text" : "password"}
                     id="password"
