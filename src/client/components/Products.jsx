@@ -77,16 +77,18 @@ import { BorderStyle, CenterFocusStrong } from '@mui/icons-material';
                   padding:'15px',
                   backgroundColor:'text.main',
                   position:'relative',
-                  left:'10px'
+                  left:'10px',
+                  boxShadow: 20,
                   }}>Find it!</Button>
-                <Button type='button' onClick={clearSearch} sx={{
+                <Button type='button' id='clearBttn' onClick={clearSearch} sx={{
                   color:'trinary.main',
                   fontWeight:'bold',
                   padding:'15px',
                   backgroundColor:'text.main',
                   paddingLeft:'50px',
                   paddingRight:'50px',
-                  marginTop:'10px'
+                  marginTop:'10px',
+                  boxShadow: 20,
                   }}>
                 Clear</Button>
               </form>
@@ -96,14 +98,13 @@ import { BorderStyle, CenterFocusStrong } from '@mui/icons-material';
           {searchActive ? (
             search.map(product => (
               <Container sx={{textAlign:'center', padding:'10px'}} key={product.id}>
-                <Paper elevation={10} >
+                <Paper elevation={10} className='productsCards' >
                 <Box  className='productsContainer' sx={{margin:'20px'}}>
                   <Box className='productCard' sx={{display:'flex',flexDirection:'column' ,margin:2, textAlign:'center'}} onClick={() => navigate(`/${product.id}`)}>  
                     <Typography variant='h5' sx={{color:'secondary.main'}} className='productName'> {product.title} </Typography>
                       <Typography variant='h7' sx={{marginBottom:1}} className='productBrand'> {product.brand} </Typography>
-                        <Box component='img' className='productImage' sx={{width:90, maxHeight:70, position:'relative', left:105}} src={product.image}/>
-                          <Typography className='productDescription'> {product.description} </Typography>
-                            <Typography variant='h5' sx={{color:'trinary.main', fontWeight:'550'}} className= 'productPrice'> {product.price}$ </Typography>
+                        <Box component='img' className='productImage' sx={{maxwidth:70, maxHeight:70, position:'relative', left:105}} src={product.image}/>
+                            <Typography variant='h5' sx={{color:'trinary.main', fontWeight:'550'}} className= 'productPrice'> ${product.price} </Typography>
                   </Box>
                 </Box>
                 </Paper>
@@ -112,12 +113,12 @@ import { BorderStyle, CenterFocusStrong } from '@mui/icons-material';
               ) : (
                 <Container>
                   {products.map((product, index) => (
-                    <Paper elevation={4} key={index}>
-                      <Box sx={{display:'flex',flexDirection:'column' ,margin:2, textAlign:'center'}}  onClick={() => navigate(`/products/${product.id}`)}>
+                    <Paper elevation={4} key={index} className='productsCards'>
+                      <Box className='productCard' sx={{display:'flex', flexDirection:'column' ,margin:2, textAlign:'center'}}  onClick={() => navigate(`/products/${product.id}`)}>
                         <Typography variant='h5' sx={{color:'secondary.main'}} className='productName'> {product.title} </Typography>
                         <Typography variant='h7' sx={{marginBottom:1}} className='productBrand'> {product.brand} </Typography>
-                        <Box component='img' className='productImage' sx={{width:90, maxHeight:70, position:'relative', left:120}} src={product.image}/>
-                        <Typography variant='h5' sx={{color:'trinary.main', fontWeight:'550'}} className= 'productPrice'> {product.price}$ </Typography>
+                        <Box component='img' className='productImage' sx={{width:75, maxHeight:70, position:'relative', left:120}} src={product.image}/>
+                        <Typography variant='h5' sx={{color:'trinary.main', fontWeight:'550'}} className='productPrice'> ${product.price} </Typography>
                       </Box>
                     </Paper>
                 ))
