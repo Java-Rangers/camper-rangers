@@ -45,6 +45,7 @@ const getProductById = async(productId) => {
   }
 }
 
+
 module.exports = {
   createProduct,
   getProductById,
