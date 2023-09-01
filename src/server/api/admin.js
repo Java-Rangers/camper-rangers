@@ -13,6 +13,10 @@ const {
 
 } =require('../db/admin');
 
+const {
+  createProduct
+} =require ('../db/products')
+
 adminRouter.post( '/login', async (req, res) => {
   try {
     const { username, password, isAdmin } = req.body
@@ -37,6 +41,16 @@ adminRouter.patch('/edit/:id', async(req, res, next)  => {
     // }
   } catch(err) {
     console.log('error route to edit product', err)
+  }
+})
+
+adminRouter.post('/product/newProduct', async(req, res, next) => {
+  try{
+    const newProduct = await createProduct ( req.body )
+    console.log(newProduct);
+    res.send(newProduct);
+  } catch (err) {
+    console.log('error routing to create new product', err)
   }
 })
 
