@@ -4,7 +4,7 @@ import { BASE_URL } from "../App"
 import { API } from "../App"
 import { useParams } from "react-router-dom"
 import { Container, Typography, Paper, Box, Button, InputLabel, Checkbox, Input, FormControl, OutlinedInput, FormControlLabel, TextField, InputAdornment } from "@mui/material"
-import products from "./updateProduct"
+
 
 
 export default function AddProduct () {
