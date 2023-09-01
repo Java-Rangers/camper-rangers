@@ -53,6 +53,19 @@ export default function NavBar() {
                                         </Button>
                                       )}
                                     </Typography>
+                                    <Typography variant='li' margin={2}>
+                                      
+                                      {isAdmin && (
+                                        <Button
+                                          component={Link}
+                                          to="/admin/products/newProduct"
+                                          sx={{ color: 'trinary.main', fontWeight: '600' }}
+                                          
+                                        >
+                                          Add New product
+                                        </Button>
+                                      )}
+                                    </Typography>
                           
 
                         
