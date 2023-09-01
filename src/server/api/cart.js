@@ -22,15 +22,16 @@ cartRouter.get('/', async (req, res, next) => {
 
         const cart = await getCartByUser(convertedId);
         console.log('cart is', cart)
-        if(cart === undefined || cart.length <= 0 || cart.length === undefined){
-          console.log('user has no cart')
-          return
+        console.log('cart length', cart.length)
+        if(cart.length > 0){
+          console.log(cart)
+          cartOrderID = cart[0].orderId
         }
 
 
             console.log('your cart is', cart)
   
-            cartOrderID = cart[0].orderId
+            
             // sends an array of orderItem objects
             res.send ({cart})
         

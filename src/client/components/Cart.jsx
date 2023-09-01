@@ -60,24 +60,6 @@ export default function Cart(){
   }, [productArray])
 
 
-  async function createNewCart(){
-    
-    try{
-      const response = await fetch(`${API}/orders`, {
-        method: "POST",
-        headers: {"Content-Type" : "application/json"},
-        body: JSON.stringify({
-          userID: sessionStorage.getItem('userID'),
-          total: 0,
-          fullfilled: false
-        })
-      })
-      const result = await response.json()
-    }catch(err){
-      throw err
-    }
-  }
-
   async function checkout(){
     try{
       const response = await fetch(`${API}/users/${userID}/cart`, {
@@ -86,15 +68,14 @@ export default function Cart(){
       })
       const result = await response.json()
       if (result.cart[0].fullfilled === true){
-        setProductArray([])
-        setProducts([])
-        setTotalPrice(0)
       }
       console.log('line 87 result', result)
       /// createNewCart()
       // window.location.reload()
       alert('Thank you for shopping with us!')
-
+      setProductArray([])
+      setProducts([])
+      setTotalPrice(0)
 
 
     }catch(err){
@@ -112,6 +93,7 @@ export default function Cart(){
       })
       const result = await response.json()
       console.log('response result json is: ', result)
+
 
     }catch(err){
 
@@ -137,9 +119,9 @@ export default function Cart(){
         }}>Proceed to Checkout</Button>
         {productArray != undefined || userID === undefined ? (
         // runs when cart has products
-        products.map((product)=> {
+        products.map((product, index)=> {
           return(
-            <Paper elevation={4}>
+            <Paper elevation={4} key={index}>
               <Box sx={{display:'flex',flexDirection:'column' ,margin:2, textAlign:'center'}} onClick={() => navigate(`/products/${product.id}`)}>
                 <Typography variant='h5' sx={{color:'secondary.main'}} className='postTitle'> {product.title} </Typography>
                 <Typography variant='h7' sx={{marginBottom:1}} className='productBrand'> {product.brand} </Typography>
