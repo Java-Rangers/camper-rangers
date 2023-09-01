@@ -38,7 +38,7 @@ export default function AddProduct () {
             title: title,
             description: description,
             brand: brand,
-            availability, availability,
+            availability: availability,
             image: image,
             price:  price,
             quantity: quantity,

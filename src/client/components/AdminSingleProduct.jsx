@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import { Link, Navigate, useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react"
 import { BASE_URL } from "../App"
 import { API } from "../App"
@@ -14,6 +14,10 @@ export default function AdminSingleProduct() {
   const [ price, setPrice ] = useState (0);
   const [ editorActive, setEditorActive ] = useState(false);
   const { id } = useParams();
+  const { productId } = useParams();
+  const [prodId, setProdId ]= useState('')
+
+  const navigate = useNavigate();
 
   
   const userCart = sessionStorage.getItem('userCart');
@@ -85,6 +89,7 @@ export default function AdminSingleProduct() {
 
           console.log(data)
           setProduct(cleanProduct(data))
+          setProdId(data.singleProduct.id)
       }
       
       fetchData();
@@ -113,6 +118,28 @@ export default function AdminSingleProduct() {
       return data
     } catch(err) {
       console.log ('error editing your product', err)
+    }
+  }
+
+  const deleteThisProduct = async () => {
+    try{
+      const productId = parseInt(id, 10)
+      const response = await fetch (`${API}/admin/product/delete/${productId}`, {
+        method: "DELETE",
+        headers: {
+        'Content-Type': 'application/json'
+        },
+      });
+      if(!response.ok) {
+        throw new Error (`HTTP error! Status: ${response.status}`)
+      }
+      // const data = await response.json();
+      console.log('product deleted');
+      alert('Product Deleted')
+      navigate('/products');
+      // return data;
+    }catch(err) {
+      console.log('error deleting this product', err)
     }
   }
 
@@ -208,6 +235,8 @@ export default function AdminSingleProduct() {
                         onClick={() => { startEdit() }}>
                         Edit Product </Button>  
                     )}
+                    <Button variant= 'outlined' sx={{my:2, color: 'secondary.main'}}
+                      onClick={() => { deleteThisProduct()} }> Delete Product </Button>
                     <Button href='/products' sx={{my:1 }} variant='contained'>go back</Button> 
             </Box>
         </Paper>
