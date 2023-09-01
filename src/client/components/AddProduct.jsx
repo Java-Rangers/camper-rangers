@@ -6,7 +6,6 @@ import { useParams } from "react-router-dom"
 import { Container, Typography, Paper, Box, Button, InputLabel, Checkbox, Input, FormControl, OutlinedInput, FormControlLabel, TextField, InputAdornment } from "@mui/material"
 
 
-
 export default function AddProduct () {
 
   const [title, setTitle ] = useState('title');

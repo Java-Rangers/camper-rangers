@@ -7,51 +7,52 @@ import { Container, Typography, Paper, Box, Button, SvgIcon } from "@mui/materia
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
 
-export default function SingleProductRender() {
+export default function SingleProductRender({userId, setUserId}) {
 
   const [ product, setProduct ] = useState({})
+  const [ userCart, setUserCart] = useState({})
   const { id } = useParams();
   
-  const userCart = sessionStorage.getItem('userCart');
+  
   const userID = sessionStorage.getItem('userID');
   const isAdmin = sessionStorage.getItem('isAdmin');
 
-  useEffect(() => {
-      const getUserCart = async () => {
-        
-        if(userID !== null) {
-          try{
-          
-          const response = await fetch (`${API}/users/${userID}/cart`)
+    const getUserCart = async () => {
       
-          const data = await response.json();
-          console.log('fetch Cart success', data.cart[0].orderId)
-          sessionStorage.setItem('userCart', data.cart[0].orderId);
-          return(data.cart[0].orderId);
-          } catch(err) {
-          console.log('error getting user cart', err)
-          }
-      
-        }  
-      }
-     getUserCart(); 
-  }, [])
+      if(userID != null) {
+        try{
+        console.log('starting to get user cart, id: ', userId)
+        const response = await fetch (`${API}/users/${userID}/cart`)
+        const data = await response.json();
+        const userCartId = data.cart[0].orderId;
+        console.log('fetch success, user cart order id: ', userCartId)
+        return(userCartId);
+        } catch(err) {
+        console.log('error getting user cart', err)
+        }
+    
+      }  
+    }
+
         
 
   
 
-    const cartSubmit = async ( productId, quantity ) => {
+    const cartSubmit = async ( productId ) => {
       // e.preventDefault();
       try{
-        const response = await fetch (`${API}/orders/${userCart}/items`, {
+        console.log('id of product being added: ', productId)
+        const userCartId = await getUserCart()
+        console.log('userCart id from get user cart: ', userCartId)
+        const response = await fetch (`${API}/orders/${userCartId}/items`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-              orderId: `${userCart}`,
+              orderId: userCartId,
               productId: productId,
-              quantity: quantity = 1,    
+              quantity: 1    
           })
               
         });

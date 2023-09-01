@@ -3,6 +3,7 @@ import reactLogo from './assets/react.svg';
 import Login from './components/Login';
 import {Routes, Route} from 'react-router-dom'
 import SingleProduct from './components/SingleProduct';
+import SingleProductRender from './components/SingleProductRender';
 import Products from './components/Products'
 import RegisterUser from './components/registerUser';
 import NavBar from './components/Navbar';
@@ -20,6 +21,7 @@ const BASE_URL = 'http://localhost:8080'
 
 function App() {
   const [count, setCount] = useState(0);
+  const [userId, setUserId] = useState();
 
   return (
     <>
@@ -28,9 +30,9 @@ function App() {
       </div>
       
     <Routes>
-      <Route path = '/users/login' element= { <Login /> } />
+      <Route path = '/users/login' element= { <Login userId={userId} setUserId={setUserId} /> } />
       <Route path='/products' element={<Products />} />
-      <Route path='/products/:id' element={<SingleProduct />} />
+      <Route path='/products/:id' element={<SingleProductRender userId={userId} setUserId={setUserId} />} />
       <Route path='/registerUser' element={<RegisterUser />} />
       <Route path='/cart/:id' element={<Cart />} />
       <Route path="/AdminViewAllUsers" element={<AdminViewAllUsers />} />
