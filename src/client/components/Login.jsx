@@ -6,7 +6,7 @@ import { Visibility } from '@mui/icons-material';
 import { VisibilityOff } from '@mui/icons-material';
 import { InputLabel, IconButton, Input, InputAdornment } from '@mui/material';
 
-export default function Login ({ setToken }) {
+export default function Login ({userId, setUserId}) {
   const [values, setValues] = useState({
     email:"",
     password:"",
@@ -62,7 +62,9 @@ export default function Login ({ setToken }) {
           //token handling
           sessionStorage.setItem('isAdmin', data.isAdmin)
           sessionStorage.setItem('token', data.token);
-          sessionStorage.setItem('userID', data.id)
+          sessionStorage.setItem('userID', data.id);
+          let user_id = data.id
+          setUserId(user_id)
           
           alert('You are logged in!');
           navigate('/products')

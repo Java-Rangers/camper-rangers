@@ -13,16 +13,19 @@ export default function Cart(){
   const navigate = useNavigate();
   const userID = sessionStorage.getItem('userID')
 
+
   if (userID === null || userID === undefined){
     return
   }
 
   useEffect(()=>{
+    console.log('getting user cart')
     const getUserCart = async () => {
       try{
         const response = await fetch(`${API}/users/${userID}/cart`);
         const result = await response.json();
         setProductArray(result.cart)
+        console.log(productArray)
       }catch(err){
         console.log('Error getting users cart', err)
       }
@@ -33,6 +36,7 @@ export default function Cart(){
   console.log('productArray: ', productArray)
 
   useEffect(()=>{
+    console.log('getting cart products')
     const getCartProducts = async () => {
       try{
         let workingTotal = 0
@@ -57,23 +61,6 @@ export default function Cart(){
   }, [productArray])
 
 
-  async function createNewCart(user){
-    try{
-      const response = await fetch(`${API}/orders`, {
-        method: "POST",
-        headers: {"Content-Type" : "application/json"},
-        body: JSON.stringify({
-          userID: user,
-          total: 0,
-          fullfilled: false
-        })
-      })
-      const result = await response.json()
-    }catch(err){
-      throw err
-    }
-  }
-
   async function checkout(){
     try{
       const response = await fetch(`${API}/users/${userID}/cart`, {
@@ -81,18 +68,46 @@ export default function Cart(){
         headers: {"Content-Type" : "application/json"}
       })
       const result = await response.json()
-      console.log('oiy help', result.cart[0].userID)
-      createNewCart(result.cart[0].userID)
-      window.location.reload()
+      // if (result.cart[0].fullfilled === true){
+        console.log('line 87 result', result)
+        setProductArray([])
+        setProducts([])
+        setTotalPrice(0)
+      // }
+    
       alert('Thank you for shopping with us!')
+      
+      // sessionStorage.setItem('userCart')
+
+
     }catch(err){
       console.log('Error checking out cart', err)
     }
   }
 
+
+  const updateUserCart = async () => {
+    try{
+      const response = await fetch(`${API}/users/${userID}/cart`);
+      const result = await response.json();
+      setProductArray(result.cart)
+      console.log(productArray)
+      if(productArray.length <= 1){
+        console.log('last item in cart removed')
+        setProductArray([])
+        setProducts([])
+        setTotalPrice(0)
+      }
+    }catch(err){
+      console.log('Error updating users cart', err)
+    }
+  }
+
+
+
   async function removeFromCart(productId){
     try{
-      console.log(productId)
+      console.log('product id: ', productId)
       const response = await fetch(`${API}/users/${userID}/cart`, {
         method: "DELETE",
         headers: {"Content-Type" : "application/json"},
@@ -100,16 +115,20 @@ export default function Cart(){
       })
       const result = await response.json()
       console.log('response result json is: ', result)
+      updateUserCart()
 
     }catch(err){
 
     }
   }
 
+
+
+
   return(
     <>
       <Container>
-      <Typography variant='h4' sx={{textAlign:'center', padding:'10px', color:'secondary.main'}}>User {userID}'s Shopping Cart</Typography>
+      <Typography variant='h4' sx={{textAlign:'center', padding:'10px', color:'secondary.main'}}>User {userID}'s Shopping Cart id {sessionStorage.getItem('userCart')}</Typography>
       <Typography variant='h4' sx={{textAlign:'center', padding:'10px', color:'secondary.main'}}>Total: ${totalPrice}</Typography>
         <Button 
           sx={{
@@ -125,9 +144,9 @@ export default function Cart(){
         }}>Proceed to Checkout</Button>
         {productArray != undefined || userID === undefined ? (
         // runs when cart has products
-        products.map((product)=> {
+        products.map((product, index)=> {
           return(
-            <Paper elevation={4}>
+            <Paper elevation={4} key={index}>
               <Box sx={{display:'flex',flexDirection:'column' ,margin:2, textAlign:'center'}} onClick={() => navigate(`/products/${product.id}`)}>
                 <Typography variant='h5' sx={{color:'secondary.main'}} className='postTitle'> {product.title} </Typography>
                 <Typography variant='h7' sx={{marginBottom:1}} className='productBrand'> {product.brand} </Typography>
@@ -137,7 +156,7 @@ export default function Cart(){
               <Box sx={{display:'flex',flexDirection:'column' ,margin:2, textAlign:'center'}}>
                 <Button sx={{my:3, color: 'secondary.main', zIndex: 0 }} onClick={()=>{
                     removeFromCart(product.id)
-                    window.location.reload()
+                    // window.location.reload()
                   }}>Remove from cart</Button>
               </Box>
             </Paper>
