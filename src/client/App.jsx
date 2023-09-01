@@ -25,23 +25,8 @@ function App() {
     <>
       <div className='App'>
         <NavBar />
-
       </div>
       
-      <Routes>
-        <Route path = '/users/login' element= { <Login /> } />
-        <Route path='/products' element={<Products />} />
-        <Route path='/products/:id' element={<SingleProduct />} />
-        <Route path='/registerUser' element={<RegisterUser />} />
-        <Route path='/cart/:id' element={<Cart />} />
-        {/* <Route path='/products/:id/editProduct' element={<EditProduct/> } /> */}
-      </Routes>
-
-      <Box>
-        <Footer />
-      </Box>
-    </div>
-    
     <Routes>
       <Route path = '/users/login' element= { <Login /> } />
       <Route path='/products' element={<Products />} />
@@ -52,6 +37,10 @@ function App() {
       <Route path='/admin/products/newProduct' element={<AddProduct/>} />
       {/* <Route path='/products/:id/editProduct' element={<EditProduct/> } /> */}
     </Routes>
+
+    <Box>
+      <Footer />
+    </Box>
     </>
   );
 }
