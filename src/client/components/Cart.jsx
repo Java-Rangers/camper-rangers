@@ -25,6 +25,7 @@ export default function Cart(){
         const response = await fetch(`${API}/users/${userID}/cart`);
         const result = await response.json();
         setProductArray(result.cart)
+        console.log(productArray)
       }catch(err){
         console.log('Error getting users cart', err)
       }
@@ -83,6 +84,26 @@ export default function Cart(){
     }
   }
 
+
+  const updateUserCart = async () => {
+    try{
+      const response = await fetch(`${API}/users/${userID}/cart`);
+      const result = await response.json();
+      setProductArray(result.cart)
+      console.log(productArray)
+      if(productArray.length === 0){
+        console.log('last item in cart removed')
+        setProductArray([])
+        setProducts([])
+        setTotalPrice(0)
+      }
+    }catch(err){
+      console.log('Error updating users cart', err)
+    }
+  }
+
+
+
   async function removeFromCart(productId){
     try{
       console.log('product id: ', productId)
@@ -93,12 +114,15 @@ export default function Cart(){
       })
       const result = await response.json()
       console.log('response result json is: ', result)
-
+      updateUserCart()
 
     }catch(err){
 
     }
   }
+
+
+
 
   return(
     <>
