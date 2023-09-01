@@ -74,7 +74,7 @@ function RegisterUser() {
         }}
       >
         <Paper elevation={20}>
-        <Avatar sx={{ m: 0, bgcolor:'secondary.main', position:'relative', left:138, margin:3}}>
+        <Avatar id='lockIcon' sx={{ m: 0, bgcolor:'secondary.main', position:'relative', left:130, margin:3}}>
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5" sx={{textAlign:'center'}}>

@@ -83,6 +83,24 @@ body{
     padding-top: 1em !important;
     margin-top: 1em !important;
   }
+  a{
+    color:#3F8F29;
+  }
+
+  /* Login CSS -------------------------------------- */
+  #email {
+    padding-right: 1em !important;
+    margin-left: 0.75em !important;
+  }
+  #password {
+    margin-left: 1em !important;
+  }
+  /* End of Login CSS --------------------------------- */
+  /* Register User CSS----------------------------------- */
+  #lockIcon{
+    left: 155px !important;
+  }
+  /* End of Register User CSS----------------------------- */
   .credits {
     left: 100px;
   }
