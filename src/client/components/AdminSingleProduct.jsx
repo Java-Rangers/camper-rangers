@@ -3,7 +3,7 @@ import { useState, useEffect } from "react"
 import { BASE_URL } from "../App"
 import { API } from "../App"
 import { useParams } from "react-router-dom"
-import { Container, Typography, Paper, Box, Button, InputLabel, Input, OutlinedInput } from "@mui/material"
+import { Container, Typography, Paper, Box, Button, TextField, InputLabel, InputAdornment, OutlinedInput } from "@mui/material"
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import EditNoteIcon from '@mui/icons-material/EditNote';
 
@@ -159,7 +159,7 @@ export default function AdminSingleProduct() {
   return (  
     <Container sx={{mb:15}}>
         <Paper elevation={10}>
-            <Box 
+            <Box id='singleProductContainer'
                 sx={{
                     display:'flex',
                     flexDirection:'column',
@@ -169,21 +169,22 @@ export default function AdminSingleProduct() {
                 }}>
                     <Typography variant="h3">{product.title}</Typography>
                     <Typography variant="h7">{product.brand}</Typography>
-                    <Box component='img' margin='20px' src={product.image}/>
+                    <Box component='img' id='singleProductImg' margin='20px' src={product.image}/>
                     {editorActive ? 
                       <Box>
-                        <InputLabel htmlFor='description'>  Description: </InputLabel>
-                          <OutlinedInput
+                          <TextField
+                            label= 'Description:'
                             autoFocus
                             sx={{mb:2}}
                             fullWidth
+                            InputLabelProps={{shrink:true}}
                             id= 'DescriptionInput'
                             type='text'
                             value= {description}
                             onChange={e=> setDescription(e.target.value)}
                           />
-                         <InputLabel htmlFor='quantity'>  Quantity: </InputLabel>
-                          <OutlinedInput
+                          <TextField
+                            label='Quantity:'
                             autoFocus
                             sx={{mb:2}}
                             fullWidth
@@ -192,13 +193,19 @@ export default function AdminSingleProduct() {
                             value= {quantity}
                             onChange={e => setQuantity(e.target.value)}
                           />
-                         <InputLabel htmlFor='price'> Price: </InputLabel>
-                          <OutlinedInput
+                          <TextField
+                            label='Price:'
                             autoFocus
                             sx={{mb:2}}
                             fullWidth
                             id= 'PriceInput'
                             type='integer'
+                            InputProps={{
+                              startAdornment:
+                            <InputAdornment position="start">
+                              $
+                            </InputAdornment>
+                          }}
                             value= {price}
                             onChange={e => setPrice(e.target.value)}
                           />
