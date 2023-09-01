@@ -9,7 +9,17 @@ body {
   justify-content: center; 
 }
 
+#footer {
+  background-color: #3F8F29;
+  margin-top: 100px;
+}
 
+#logo {
+  width: 300px;
+  position: relative;
+  left: 50px;
+  bottom: 20px;
+}
 /* .App-header {
   margin-bottom: 20px;
   font-size: 24px;
@@ -54,7 +64,7 @@ body{
 
 @media (min-width: 600px) {
  body {
-      width: 95% !important;
+      width: 100% !important;
       height: 95% !important;
   }
   .productImage{
