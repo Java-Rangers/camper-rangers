@@ -99,7 +99,7 @@ export default function SingleProductRender({userId, setUserId}) {
   return (  
     <Container>
         <Paper elevation={10}>
-            <Box 
+            <Box id='singleProductContainer'
                 sx={{
                     display:'flex',
                     flexDirection:'column',
@@ -109,7 +109,7 @@ export default function SingleProductRender({userId, setUserId}) {
                 }}>
                     <Typography variant="h3">{product.title}</Typography>
                     <Typography variant="h7">{product.brand}</Typography>
-                    <Box component='img' margin='20px' src={product.image}/>
+                    <Box component='img' id='singleProductImg' margin='20px' src={product.image}/>
                     <Typography>Description: {product.description}</Typography>
                     <Typography variant="h5" sx={{mt:4}}>In Stock:{product.quantity}</Typography>
                     <Typography variant="h4">Price:${product.price}</Typography>

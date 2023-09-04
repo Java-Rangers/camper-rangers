@@ -40,9 +40,9 @@ function App() {
       {/* <Route path='/products/:id/editProduct' element={<EditProduct/> } /> */}
     </Routes>
 
-    <Box>
+    {/* <Box>
       <Footer />
-    </Box>
+    </Box> */}
     </>
   );
 }

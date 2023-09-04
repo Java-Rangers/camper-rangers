@@ -25,13 +25,13 @@ export default function NavBar() {
               <Typography variant='h2'>Java Campers</Typography>
                 <Typography variant='ul'>
                     <Typography variant='li' margin={2}>
-                        <Button href="/products" sx={{color:'trinary.main', fontWeight:'600'}}>Home</Button>
+                        <Button href="/products" id='homeLink' sx={{color:'trinary.main', fontWeight:'600'}}>Home</Button>
                             </Typography>
                     {userID ? <Typography variant='li' margin={2}>
                         <Button href={`/cart/${userID}`} sx={{color:'trinary.main', fontWeight:'600'}}>Cart</Button>
                             </Typography> : null}
                     {sessionStorage.getItem('token') ? <Typography variant='li' margin={2}>
-                        <Button href='/products' sx={{color:'trinary.main', fontWeight:'600'}} onClick={()=>{
+                        <Button href='/products' id='logoutLink' sx={{color:'trinary.main', fontWeight:'600', mx:12}} onClick={()=>{
                             sessionStorage.removeItem('userID')
                                 sessionStorage.removeItem('token')
                                 sessionStorage.removeItem('isAdmin')

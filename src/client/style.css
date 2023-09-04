@@ -161,7 +161,14 @@ body{
       margin-right: auto;
     }
   /* END of single Product CSS ------------------------------- */
-  
+  /* NAVBAR CSS----------------------------------------------- */
+  #logoutLink{
+    margin: auto !important;
+  }
+  #homeLink{
+    margin-left: 5em;
+  }
+  /* END OF NAVBAR CSS --------------------------------------- */
   /* .credits {
     
   } */
