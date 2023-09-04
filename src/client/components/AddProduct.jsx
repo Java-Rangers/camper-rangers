@@ -59,10 +59,10 @@ export default function AddProduct () {
 
 
   return(
-      <Container sx={{my:3, textAlign:'center', padding:'10px'}}>
+      <Container sx={{my:3, textAlign:'center', padding:'10px', width:'100%'}}>
         <Paper elevation={20}>
-          <Box sx={{padding:'20px', paddingBottom:'100px'}}>
-            <FormControl sx={{width:330}}>
+          <Box sx={{padding:'20px', paddingBottom:'100px', width:'90%'}}>
+            <FormControl sx={{width:300, my:2}}>
                 <TextField
                   label='Title:' 
                   id='title'
@@ -71,7 +71,7 @@ export default function AddProduct () {
                   onChange={e => setTitle(e.target.value)}
                 />
             </FormControl>
-            <FormControl>
+            <FormControl sx={{width:300, my:2}}>
               {/* <InputLabel htmlFor='description'> Description:</InputLabel> */}
                 <TextField
                   label='Description:' 
@@ -81,7 +81,7 @@ export default function AddProduct () {
                   onChange={e => setDescription(e.target.value)}
                 />
             </FormControl>
-            <FormControl>
+            <FormControl sx={{width:300, my:2}}>
               <TextField 
                 label='Brand:'
                 id='brand'
@@ -90,17 +90,7 @@ export default function AddProduct () {
                 onChange={e => setBrand(e.target.value)}
               />
             </FormControl>
-            <FormControl>
-              <FormControlLabel
-                control = {<Checkbox defaultChecked />} 
-                label = 'Available?'
-                labelPlacement="top"
-                id='availability'
-                value={availability}
-                onChange={e => setAvailability(e.target.value)}
-              />
-            </FormControl>
-            <FormControl>
+            <FormControl sx={{width:300, my:2}}>
               <TextField 
                 label='Image URL:'
                 id='image'
@@ -109,7 +99,7 @@ export default function AddProduct () {
                 onChange={e => setImage(e.target.value)}
               />
             </FormControl>
-            <FormControl> 
+            <FormControl sx={{width:300, my:2}}> 
               <TextField 
                 label='Price:'
                 id='price'
@@ -124,13 +114,23 @@ export default function AddProduct () {
                 onChange={e => setPrice(e.target.value)}
               />
             </FormControl>
-            <FormControl>
+            <FormControl sx={{width:300, my:2}}>
               <TextField
                 label='Quantity:' 
                 id='quantity'
                 InputLabelProps={{shrink:true}}
                 value={quantity}
                 onChange={e => setQuantity(e.target.value)}
+              />
+            </FormControl>
+            <FormControl sx={{width:300, my:2}}>
+              <FormControlLabel
+                control = {<Checkbox defaultChecked />} 
+                label = 'Available?'
+                labelPlacement="top"
+                id='availability'
+                value={availability}
+                onChange={e => setAvailability(e.target.value)}
               />
             </FormControl>
           </Box>
