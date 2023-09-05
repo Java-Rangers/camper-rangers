@@ -6,6 +6,8 @@ const { addItemToOrder } = require ('./orderItems');
 const { createOrder } = require ('./orders')
 const { createAddress } = require('./address');
 
+
+// created dummy datat for users and admin using an array of objects
 const users = [
   {
     username: 'Xpre55ranger',

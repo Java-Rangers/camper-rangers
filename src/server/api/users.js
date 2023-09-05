@@ -12,7 +12,7 @@ const {
 const jwt = require('jsonwebtoken')
 
 
-
+// get all user function to grab user data
 usersRouter.get('/', async( req, res, next) => {
     console.log('getting users...')
     try {
@@ -26,6 +26,8 @@ usersRouter.get('/', async( req, res, next) => {
     }
 });
 
+
+// grabbing user by userID
 usersRouter.get('/:userId', async(req, res, next) => {
 
     console.log('getting user by id');
@@ -48,6 +50,7 @@ usersRouter.get('/:userId', async(req, res, next) => {
 
 });
 
+//Check user by email and password if not right hit with a error 
 usersRouter.post('/login', async(req, res, next) => {
     console.log('logging in')
     const { email, password } = req.body;
@@ -87,6 +90,7 @@ usersRouter.post('/login', async(req, res, next) => {
     }
 });
 
+//register function to add new users to the backend 
 usersRouter.post('/register', async(req, res, next) => {
     const { name, email, password } = req.body;
 
