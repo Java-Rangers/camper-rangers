@@ -54,7 +54,7 @@ function RegisterUser() {
         })
         console.log('Response:', response)
 
-        navigate('/products')
+        navigate('/users/login')
         setEmail('');
         setPassword('');
         setfName('');
