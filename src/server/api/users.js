@@ -92,7 +92,7 @@ usersRouter.post('/login', async(req, res, next) => {
 
 //register function to add new users to the backend 
 usersRouter.post('/register', async(req, res, next) => {
-    const { name, email, password } = req.body;
+    const { fName, lName, email, password } = req.body;
 
     try {
         const _user = await getUserByEmail(email);
@@ -105,7 +105,8 @@ usersRouter.post('/register', async(req, res, next) => {
         }
 
         const user = await createUser({
-            name,
+            fName,
+            lName,
             email,
             password
         });

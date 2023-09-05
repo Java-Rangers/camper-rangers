@@ -33,10 +33,10 @@ function RegisterUser() {
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
   };
-  const handlesetfName = (event) => {
+  const handlefName = (event) => {
     setfName(event.target.value);
   };
-  const handlesetlName = (event) => {
+  const handlelName = (event) => {
     setlName(event.target.value);
   };
 
@@ -57,6 +57,8 @@ function RegisterUser() {
         navigate('/products')
         setEmail('');
         setPassword('');
+        setfName('');
+        setlName('');
     }  catch (error){
         console.error('Error:', error)
     }
@@ -90,7 +92,7 @@ function RegisterUser() {
                 fullWidth
                 id="firstName"
                 label="First Name"
-                onChange={handlesetfName}
+                onChange={handlefName}
                 autoFocus
               />
               
@@ -103,7 +105,7 @@ function RegisterUser() {
                 label="Last Name"
                 name="lastName"
                 autoComplete="family-name"
-                onChange={handlesetlName}
+                onChange={handlelName}
               />
             </Grid>
             <Grid item xs={12}>
