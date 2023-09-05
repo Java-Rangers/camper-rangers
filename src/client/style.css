@@ -148,6 +148,27 @@ body{
     grid-row: 3 !important;
   } 
   /* End of all products css --------------------------------- */
+  /* SINGLE PRODUCT CSS--------------------------------------- */
+    #singleProductContainer {
+      height: 110vh !important;
+    }
+    #singleProductImg {
+      max-height: 300px !important;
+      max-width: 300px !important;
+      position: relative !important;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  /* END of single Product CSS ------------------------------- */
+  /* NAVBAR CSS----------------------------------------------- */
+  #logoutLink{
+    margin: auto !important;
+  }
+  #homeLink{
+    margin-left: 5em;
+  }
+  /* END OF NAVBAR CSS --------------------------------------- */
   /* .credits {
     
   } */

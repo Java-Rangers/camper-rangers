@@ -59,7 +59,7 @@ export default function AddProduct () {
 
 
   return(
-      <Container sx={{my:3, textAlign:'center', padding:'10px'}}>
+      <Container sx={{my:3, textAlign:'center', padding:'10px', width:'100%'}}>
         <Paper elevation={20}>
           <Box sx={{padding:'20px', paddingBottom:'100px'}}>
             <Grid container spacing={2}>
