@@ -3,7 +3,7 @@ import { useState, useEffect } from "react"
 import { BASE_URL } from "../App"
 import { API } from "../App"
 import { useParams } from "react-router-dom"
-import { Container, Typography, Paper, Box, Button, InputLabel, Checkbox, Input, FormControl, OutlinedInput, FormControlLabel, TextField, InputAdornment } from "@mui/material"
+import { Container, Typography, Paper, Box, Button, InputLabel, Checkbox, Input, FormControl, OutlinedInput, FormControlLabel, TextField, InputAdornment, Grid } from "@mui/material"
 
 
 export default function AddProduct () {
@@ -61,78 +61,94 @@ export default function AddProduct () {
   return(
       <Container sx={{my:3, textAlign:'center', padding:'10px', width:'100%'}}>
         <Paper elevation={20}>
-          <Box sx={{padding:'20px', paddingBottom:'100px', width:'90%'}}>
-            <FormControl sx={{width:300, my:2}}>
-                <TextField
-                  label='Title:' 
-                  id='title'
-                  InputLabelProps={{shrink: true}}
-                  value={title}
-                  onChange={e => setTitle(e.target.value)}
+          <Box sx={{padding:'20px', paddingBottom:'100px'}}>
+            <Grid container spacing={2}>
+              <Grid item>
+              <FormControl sx={{width:330}}>
+                  <TextField
+                    label='Title:' 
+                    id='title'
+                    InputLabelProps={{shrink: true}}
+                    value={title}
+                    onChange={e => setTitle(e.target.value)}
+                  />
+              </FormControl>
+              </Grid>
+              <Grid item>
+              <FormControl>
+                {/* <InputLabel htmlFor='description'> Description:</InputLabel> */}
+                  <TextField
+                    label='Description:' 
+                    id='description'
+                    InputLabelProps={{ shrink: true}}
+                    value={description}
+                    onChange={e => setDescription(e.target.value)}
+                  />
+              </FormControl>
+              </Grid>
+              <Grid item xs={7}>
+              <FormControl>
+                <TextField 
+                  label='Brand:'
+                  id='brand'
+                  InputLabelProps= {{shrink: true}}
+                  value={brand}
+                  onChange={e => setBrand(e.target.value)}
                 />
-            </FormControl>
-            <FormControl sx={{width:300, my:2}}>
-              {/* <InputLabel htmlFor='description'> Description:</InputLabel> */}
-                <TextField
-                  label='Description:' 
-                  id='description'
-                  InputLabelProps={{ shrink: true}}
-                  value={description}
-                  onChange={e => setDescription(e.target.value)}
+              </FormControl>
+              </Grid>
+              <Grid item xs={5}>
+              <FormControl>
+                <FormControlLabel
+                  control = {<Checkbox defaultChecked />} 
+                  label = 'Available?'
+                  labelPlacement="top"
+                  id='availability'
+                  value={availability}
+                  onChange={e => setAvailability(e.target.value)}
                 />
-            </FormControl>
-            <FormControl sx={{width:300, my:2}}>
-              <TextField 
-                label='Brand:'
-                id='brand'
-                InputLabelProps= {{shrink: true}}
-                value={brand}
-                onChange={e => setBrand(e.target.value)}
-              />
-            </FormControl>
-            <FormControl sx={{width:300, my:2}}>
-              <TextField 
-                label='Image URL:'
-                id='image'
-                InputLabelProps={{shrink:true}}
-                value={image}
-                onChange={e => setImage(e.target.value)}
-              />
-            </FormControl>
-            <FormControl sx={{width:300, my:2}}> 
-              <TextField 
-                label='Price:'
-                id='price'
-                InputLabelProps={{shrink:true}}
-                InputProps={{
-                    startAdornment:
-                  <InputAdornment position="start">
-                    $
-                  </InputAdornment>
-                }}
-                value={price}
-                onChange={e => setPrice(e.target.value)}
-              />
-            </FormControl>
-            <FormControl sx={{width:300, my:2}}>
-              <TextField
-                label='Quantity:' 
-                id='quantity'
-                InputLabelProps={{shrink:true}}
-                value={quantity}
-                onChange={e => setQuantity(e.target.value)}
-              />
-            </FormControl>
-            <FormControl sx={{width:300, my:2}}>
-              <FormControlLabel
-                control = {<Checkbox defaultChecked />} 
-                label = 'Available?'
-                labelPlacement="top"
-                id='availability'
-                value={availability}
-                onChange={e => setAvailability(e.target.value)}
-              />
-            </FormControl>
+              </FormControl>
+              </Grid>
+              <Grid item>
+              <FormControl>
+                <TextField 
+                  label='Image URL:'
+                  id='image'
+                  InputLabelProps={{shrink:true}}
+                  value={image}
+                  onChange={e => setImage(e.target.value)}
+                />
+              </FormControl>
+              </Grid>
+              <Grid item>
+              <FormControl> 
+                <TextField 
+                  label='Price:'
+                  id='price'
+                  InputLabelProps={{shrink:true}}
+                  InputProps={{
+                      startAdornment:
+                    <InputAdornment position="start">
+                      $
+                    </InputAdornment>
+                  }}
+                  value={price}
+                  onChange={e => setPrice(e.target.value)}
+                />
+              </FormControl>
+              </Grid>
+              <Grid item>
+              <FormControl>
+                <TextField
+                  label='Quantity:' 
+                  id='quantity'
+                  InputLabelProps={{shrink:true}}
+                  value={quantity}
+                  onChange={e => setQuantity(e.target.value)}
+                />
+              </FormControl>
+              </Grid>
+            </Grid>
           </Box>
           <Box>
             <Button 
