@@ -34,6 +34,23 @@ export default function Login ({userId, setUserId}) {
     setValues({ ...values, [prop]: e.target.value })
   };
 
+  async function createNewOrder(id){
+    try{
+      const response = await fetch('http://localhost:8080/api/orders', {
+        method: 'POST',
+        headers: {'Content-Type' : 'application/json'},
+        body: JSON.stringify({
+          userID: id,
+          total: 0,
+          fullfilled: false
+        })
+      })
+      const result = await response.json()
+    }catch(err){
+      console.error('Error creating new order', err)
+    }
+  }
+
   async function handleSubmit(e) {
     e.preventDefault();
     try {
@@ -48,12 +65,15 @@ export default function Login ({userId, setUserId}) {
             })
         });
 
+        
+
         if (response.ok) {
           
           const data = await response.json();
 
           setUserID(data.id)
           setMessage(data.message);
+          createNewOrder(data.id)
           //logs
           console.log(data)
           console.log('logged in', data);

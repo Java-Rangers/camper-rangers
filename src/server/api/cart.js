@@ -22,6 +22,9 @@ cartRouter.get('/', async (req, res, next) => {
 
         const cart = await getCartByUser(convertedId);
         console.log('cart is', cart)
+        if(cart === undefined){
+          return null
+        }
         console.log('cart length', cart.length)
         if(cart.length > 0){
           console.log(cart)
