@@ -14,6 +14,7 @@ const {
 orderItemsRouter.post('/', async(req, res, next) => {
   const { orderId } = req.params
   const { productId, quantity } = req.body
+  console.log('check out this: ', req.params, productId, quantity)
   try{
     const orderItem = await addItemToOrder({orderId, productId, quantity})
     res.send({orderItem})

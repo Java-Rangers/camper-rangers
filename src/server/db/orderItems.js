@@ -17,6 +17,7 @@ const getItemsByOrder = async (orderId) => {
 // CREATES AND RETURNS A NEW ORDER ITEM
 const addItemToOrder = async ({orderId, productId, quantity}) => {
     try {
+      console.log(orderId, productId, quantity)
         const { rows: [orderItem] } = await db.query(`
             INSERT INTO "orderItems"("orderId", "productId", quantity)
             VALUES ($1, $2, $3)

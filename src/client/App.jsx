@@ -28,7 +28,7 @@ function App() {
       <div className='App'>
         <NavBar />
       </div>
-      
+
     <Routes>
       <Route path = '/users/login' element= { <Login userId={userId} setUserId={setUserId} /> } />
       <Route path='/products' element={<Products />} />
