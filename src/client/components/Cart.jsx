@@ -118,7 +118,7 @@ export default function Cart(){
       updateUserCart()
 
     }catch(err){
-
+      console.log('Error removing item from users cart', err)
     }
   }
 
@@ -128,7 +128,7 @@ export default function Cart(){
   return(
     <>
       <Container>
-      <Typography variant='h4' sx={{textAlign:'center', padding:'10px', color:'secondary.main'}}>User {userID}'s Shopping Cart id {sessionStorage.getItem('userCart')}</Typography>
+      <Typography variant='h4' sx={{textAlign:'center', padding:'10px', color:'secondary.main'}}>Shopping Cart</Typography>
       <Typography variant='h4' sx={{textAlign:'center', padding:'10px', color:'secondary.main'}}>Total: ${totalPrice}</Typography>
         <Button 
           sx={{
@@ -148,10 +148,10 @@ export default function Cart(){
           return(
             <Paper elevation={4} key={index}>
               <Box sx={{display:'flex',flexDirection:'column' ,margin:2, textAlign:'center'}} onClick={() => navigate(`/products/${product.id}`)}>
-                <Typography variant='h5' sx={{color:'secondary.main'}} className='postTitle'> {product.title} </Typography>
+                <Typography variant='h5' sx={{color:'secondary.main'}} className='productName'> {product.title} </Typography>
                 <Typography variant='h7' sx={{marginBottom:1}} className='productBrand'> {product.brand} </Typography>
-                <Box component='img' className='productImage' sx={{width:90, maxHeight:70, position:'relative', left:120}} src={product.image}/>
-                <Typography variant='h5' sx={{color:'trinary.main', fontWeight:'550'}} className= 'productPrice'> {product.price}$ </Typography>
+                <Box component='img' className='productImage' sx={{width:75, maxHeight:70, position:'relative', left:120}} src={product.image}/>
+                <Typography variant='h5' sx={{color:'trinary.main', fontWeight:'550'}} className='productPrice'> ${product.price} </Typography>
               </Box>
               <Box sx={{display:'flex',flexDirection:'column' ,margin:2, textAlign:'center'}}>
                 <Button sx={{my:3, color: 'secondary.main', zIndex: 0 }} onClick={()=>{
