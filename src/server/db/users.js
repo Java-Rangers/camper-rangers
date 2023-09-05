@@ -62,6 +62,8 @@ const getAllUsers = async () => {
     }
   };
 
+
+  //getting user by id for use in establishing a usestate for admin status
 const getUserById = async(userId) => {
     try{
         const id = parseInt (userId, 10)
