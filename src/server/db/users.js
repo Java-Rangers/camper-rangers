@@ -2,6 +2,8 @@ const db = require('./client')
 const bcrypt = require('bcrypt');
 const SALT_COUNT = 10;
 
+
+// create user data following the same format we have in seed data for the dummy user data. password is hashed for securtiy reasons. SALT COUNT is for the length to be when the password is hashed.
 const createUser = async({ username, fName, lName, isAdmin, email, password }) => {
     const hashedPassword = await bcrypt.hash(password, SALT_COUNT);
     try {
@@ -17,6 +19,7 @@ const createUser = async({ username, fName, lName, isAdmin, email, password }) =
     }
 }
 
+// grabbing the user by email and password if not grabbed properly error occurs
 const getUser = async({email, password}) => {
     if(!email || !password) {
         return;
@@ -34,6 +37,7 @@ const getUser = async({email, password}) => {
     }
 }
 
+// getting user by just email 
 const getUserByEmail = async(email) => {
     console.log('getting user by email')
     try {
@@ -52,6 +56,7 @@ const getUserByEmail = async(email) => {
     }
 }
 
+// getting all users for admin function to display all current users 
 const getAllUsers = async () => {
     try {
       const query = 'SELECT * FROM users';

@@ -34,8 +34,8 @@ export default function AdminViewAllUsers() {
     const address = addresses.find((addr) => addr.userID === user.id);
   
     return (
-      <Paper key={user.id} elevation={3} style={{ padding: "20px", marginBottom: "20px" }}>
-        <Typography variant="h6">Name: {user.fName} {user.lName}</Typography>
+      <Paper key={user.id} elevation={10} style={{ padding: "30px", marginBottom: "60px" , width: "auto", margin: "0 auto"}}>
+        <Typography  variant="h6">Name: {user.fName} {user.lName}</Typography>
         <Typography>Email: {user.email}</Typography>
         {address ? (
           <div>
@@ -52,12 +52,15 @@ export default function AdminViewAllUsers() {
   }
 
   return (
-    <Container maxWidth="lg">
-      <Typography variant="h4" gutterBottom>
+    <Container >
+      <Typography variant="h4" sx={{my: 2, color: "secondary.main"}} gutterBottom>
         All Users
       </Typography>
-      <Box display="flex" flexDirection="column" alignItems="center">
+      <Box classname="allusers" display="flex" flexDirection="column" alignItems="center">
+        <Paper className="allusers">
+
         {users.map((user) => renderUserWithAddress(user))}
+        </Paper>
       </Box>
     </Container>
   );
