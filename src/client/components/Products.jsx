@@ -37,7 +37,7 @@ import { BorderStyle, CenterFocusStrong } from '@mui/icons-material';
       
       try{
         
-        const response = await fetch (`/products`)
+        const response = await fetch (`api/products`)
 
         const data = await response.json();
 
