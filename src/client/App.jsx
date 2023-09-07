@@ -16,7 +16,7 @@ import AddProduct from './components/AddProduct';
 
 // import EditProduct from './components/EditProduct';
 
-const API = 'http://localhost:8080/api'
+const API = '/api'
 const BASE_URL = 'https://camper-rangers.onrender.com/'
 
 function App() {
