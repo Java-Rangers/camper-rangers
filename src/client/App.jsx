@@ -16,8 +16,8 @@ import AddProduct from './components/AddProduct';
 
 // import EditProduct from './components/EditProduct';
 
-const API = 'http://localhost:8080/api'
-const BASE_URL = 'http://localhost:8080'
+const API = 'postgres://camperrangers_user:p1xcXB4EfiTMLyh0iAomFGsZ1P1Icyld@dpg-cjsua736fquc73b4p630-a/camperrangers/api'
+const BASE_URL = 'https://camper-rangers.onrender.com/'
 
 function App() {
   const [count, setCount] = useState(0);
